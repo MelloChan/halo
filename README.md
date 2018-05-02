@@ -1,6 +1,8 @@
-## halo手机商城服务端
+## Halo手机商城服务端
 
-### 技术选型  
+Halo手机商城前端:[Halo](https://github.com/tozlam/Halo.)
+
+### 服务端技术选型  
 
 框架: Spring Boot、Mybatis  
 数据库: MySQL5.7  
