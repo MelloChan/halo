@@ -14,6 +14,7 @@ public class Product {
   private Long stock;
   private Long cateId;
   private Long typeId;
+  private Long brandId;
   private Date gmtCreate;
   private Date gmtUpdated;
 
@@ -79,6 +80,14 @@ public class Product {
 
   public void setTypeId(Long typeId) {
     this.typeId = typeId;
+  }
+
+  public Long getBrandId() {
+    return brandId;
+  }
+
+  public void setBrandId(Long brandId) {
+    this.brandId = brandId;
   }
 
   public Date getGmtCreate() {
