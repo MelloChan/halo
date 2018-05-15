@@ -6,103 +6,94 @@ import java.util.Date;
  * @author MelloChan
  */
 public class Product {
-  private Long id;
-  private String title;
-  private String description;
-  private Long price;
-  private String image;
-  private Long stock;
-  private Long cateId;
-  private Long typeId;
-  private Long brandId;
-  private Date gmtCreate;
-  private Date gmtUpdated;
+    private Long id;
+    private String title;
+    private String description;
+    private Long price;
+    private String image;
+    private Long stock;
+    private Long typeId;
+    private Long brandId;
+    private Date gmtCreate;
+    private Date gmtUpdated;
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public Long getPrice() {
-    return price;
-  }
+    public Long getPrice() {
+        return price;
+    }
 
-  public void setPrice(Long price) {
-    this.price = price;
-  }
+    public void setPrice(Long price) {
+        this.price = price;
+    }
 
-  public String getImage() {
-    return image;
-  }
+    public String getImage() {
+        return image;
+    }
 
-  public void setImage(String image) {
-    this.image = image;
-  }
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-  public Long getStock() {
-    return stock;
-  }
+    public Long getStock() {
+        return stock;
+    }
 
-  public void setStock(Long stock) {
-    this.stock = stock;
-  }
+    public void setStock(Long stock) {
+        this.stock = stock;
+    }
 
-  public Long getCateId() {
-    return cateId;
-  }
+    public Long getTypeId() {
+        return typeId;
+    }
 
-  public void setCateId(Long cateId) {
-    this.cateId = cateId;
-  }
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
 
-  public Long getTypeId() {
-    return typeId;
-  }
+    public Long getBrandId() {
+        return brandId;
+    }
 
-  public void setTypeId(Long typeId) {
-    this.typeId = typeId;
-  }
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
 
-  public Long getBrandId() {
-    return brandId;
-  }
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
 
-  public void setBrandId(Long brandId) {
-    this.brandId = brandId;
-  }
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
 
-  public Date getGmtCreate() {
-    return gmtCreate;
-  }
+    public Date getGmtUpdated() {
+        return gmtUpdated;
+    }
 
-  public void setGmtCreate(Date gmtCreate) {
-    this.gmtCreate = gmtCreate;
-  }
-
-  public Date getGmtUpdated() {
-    return gmtUpdated;
-  }
-
-  public void setGmtUpdated(Date gmtUpdated) {
-    this.gmtUpdated = gmtUpdated;
-  }
+    public void setGmtUpdated(Date gmtUpdated) {
+        this.gmtUpdated = gmtUpdated;
+    }
 }
