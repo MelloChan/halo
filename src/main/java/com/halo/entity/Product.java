@@ -7,8 +7,8 @@ import java.util.Date;
  */
 public class Product {
     private Long id;
+    private String name;
     private String title;
-    private String description;
     private Long price;
     private String image;
     private Long stock;
@@ -34,12 +34,12 @@ public class Product {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getPrice() {
