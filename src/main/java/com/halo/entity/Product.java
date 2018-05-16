@@ -12,6 +12,7 @@ public class Product {
     private Long price;
     private String image;
     private Long stock;
+    private Long cateId;
     private Long typeId;
     private Long brandId;
     private Date gmtCreate;
@@ -63,6 +64,14 @@ public class Product {
 
     public void setStock(Long stock) {
         this.stock = stock;
+    }
+
+    public Long getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(Long cateId) {
+        this.cateId = cateId;
     }
 
     public Long getTypeId() {
