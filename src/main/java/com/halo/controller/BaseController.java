@@ -8,13 +8,15 @@ import java.util.Map;
 
 /**
  * 基础控制器 返回json数据
+ *
  * @author MelloChan
  * @date 2017/7/1
  */
 @Component
 public abstract class BaseController {
     @Autowired
-    private ImmutableMap<String,String>errorCodeMap;
+    private ImmutableMap<String, String> errorCodeMap;
+
     /**
      * 接口数据返回
      *
@@ -27,7 +29,7 @@ public abstract class BaseController {
         if (0 == errorCode) {
             return ImmutableMap.of("errorCode", errorCode, "data", (data == null) ? new Object() : data);
         } else {
-            return ImmutableMap.of("errorCode", errorCode, "msg",errorCodeMap.get(String.valueOf(errorCode)));
+            return ImmutableMap.of("errorCode", errorCode, "msg", errorCodeMap.get(String.valueOf(errorCode)));
         }
     }
 }

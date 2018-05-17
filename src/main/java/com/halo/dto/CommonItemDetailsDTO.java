@@ -5,17 +5,29 @@ import java.util.List;
 
 /**
  * 通用商品详情页面传输对象
+ *
  * @author MelloChan
  * @date 2018/5/17
  */
 public class CommonItemDetailsDTO implements Serializable {
     private static final long serialVersionUID = 8571547474636928465L;
 
-    protected String name;
-    protected String title;
-    protected Long price;
-    protected List<String> color;
-    protected List<String> imgUrl;
+    private String name;
+    private String title;
+    private Long price;
+    private List<String> color;
+    private List<String> imgUrl;
+
+    public CommonItemDetailsDTO() {
+    }
+
+    public CommonItemDetailsDTO(String name, String title, Long price, List<String> color, List<String> imgUrl) {
+        this.name = name;
+        this.title = title;
+        this.price = price;
+        this.color = color;
+        this.imgUrl = imgUrl;
+    }
 
     public String getName() {
         return name;

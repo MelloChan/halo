@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 用户个人中心信息传输对象
+ *
  * @author MelloChan
  * @date 2018/5/17
  */

@@ -4,23 +4,24 @@ import java.io.Serializable;
 
 /**
  * 展示页面商品信息
+ *
  * @author MelloChan
  * @date 2018/5/16
  */
-public class Item implements Serializable{
+public class Item implements Serializable {
 
     private static final long serialVersionUID = -3486758677948381701L;
-    private String img;
+    private String imgUrl;
     private String name;
     private String title;
     private Long price;
 
     public String getImg() {
-        return img;
+        return imgUrl;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImg(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getName() {
@@ -50,7 +51,7 @@ public class Item implements Serializable{
     @Override
     public String toString() {
         return "Item{" +
-                "img='" + img + '\'' +
+                "imgUrl='" + imgUrl + '\'' +
                 ", name='" + name + '\'' +
                 ", title='" + title + '\'' +
                 ", price=" + price +
