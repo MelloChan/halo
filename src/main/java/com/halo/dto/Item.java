@@ -11,10 +11,27 @@ import java.io.Serializable;
 public class Item implements Serializable {
 
     private static final long serialVersionUID = -3486758677948381701L;
+    private Long id;
     private String imgUrl;
     private String name;
     private String title;
     private Long price;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public String getImg() {
         return imgUrl;
@@ -51,7 +68,8 @@ public class Item implements Serializable {
     @Override
     public String toString() {
         return "Item{" +
-                "imgUrl='" + imgUrl + '\'' +
+                "id=" + id +
+                ", imgUrl='" + imgUrl + '\'' +
                 ", name='" + name + '\'' +
                 ", title='" + title + '\'' +
                 ", price=" + price +
