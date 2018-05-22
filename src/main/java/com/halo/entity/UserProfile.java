@@ -9,7 +9,7 @@ public class UserProfile {
   private Long id;
   private String username;
   private String avatar;
-  private Long securityLevel;
+  private Short securityLevel;
   private String email;
   private String phone;
   private String pwdProtection;
@@ -41,11 +41,11 @@ public class UserProfile {
     this.avatar = avatar;
   }
 
-  public Long getSecurityLevel() {
+  public Short getSecurityLevel() {
     return securityLevel;
   }
 
-  public void setSecurityLevel(Long securityLevel) {
+  public void setSecurityLevel(Short securityLevel) {
     this.securityLevel = securityLevel;
   }
 
