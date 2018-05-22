@@ -6,13 +6,17 @@ import java.io.Serializable;
  * @author MelloChan
  * @date 2018/5/22
  */
-public class ItemDetailsDTO implements Serializable {
+public class ItemDetailDTO implements Serializable {
     private static final long serialVersionUID = 5604644590202148848L;
 
     private String specification;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 
     @Override
