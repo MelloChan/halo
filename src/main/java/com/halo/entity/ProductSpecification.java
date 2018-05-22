@@ -5,11 +5,10 @@ import java.util.Date;
 /**
  * @author MelloChan
  */
-public class SpecificationValue {
+public class ProductSpecification {
   private Long id;
-  private String valueName;
   private Long proId;
-  private Long attrId;
+  private String specification;
   private Date gmtCreate;
   private Date gmtUpdated;
 
@@ -21,14 +20,6 @@ public class SpecificationValue {
     this.id = id;
   }
 
-  public String getValueName() {
-    return valueName;
-  }
-
-  public void setValueName(String valueName) {
-    this.valueName = valueName;
-  }
-
   public Long getProId() {
     return proId;
   }
@@ -37,12 +28,12 @@ public class SpecificationValue {
     this.proId = proId;
   }
 
-  public Long getAttrId() {
-    return attrId;
+  public String getSpecification() {
+    return specification;
   }
 
-  public void setAttrId(Long attrId) {
-    this.attrId = attrId;
+  public void setSpecification(String specification) {
+    this.specification = specification;
   }
 
   public Date getGmtCreate() {
