@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
  * @author MelloChan
  * @date 2018/5/14
  */
+@Service
 public class RedisUtil {
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
