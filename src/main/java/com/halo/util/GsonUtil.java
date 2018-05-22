@@ -8,17 +8,23 @@ import com.qiniu.util.StringUtils;
  * @date 2018/5/16
  */
 public class GsonUtil {
-    private static final Gson gson=new Gson();
-    private GsonUtil(){}
+    private static Gson gson;
 
-    public static String toJsonString(Object object){
-        return object==null?null:gson.toJson(object);
+    private GsonUtil() {
     }
 
-    public static Object jsonToObject(String jStr,Class clazz){
-        Object o=null;
-        if(!StringUtils.isNullOrEmpty(jStr)){
-            o=gson.fromJson(jStr,clazz);
+    static {
+        gson = new Gson();
+    }
+
+    public static String toJsonString(Object object) {
+        return object == null ? null : gson.toJson(object);
+    }
+
+    public static Object jsonToObject(String jStr, Class clazz) {
+        Object o = null;
+        if (!StringUtils.isNullOrEmpty(jStr)) {
+            o = gson.fromJson(jStr, clazz);
         }
         return o;
     }
