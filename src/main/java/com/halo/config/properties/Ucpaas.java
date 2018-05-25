@@ -22,19 +22,6 @@ public class Ucpaas {
     private String mobile;
     private String url;
 
-    public Ucpaas() {
-    }
-
-    public Ucpaas(String sid, String token, String appid, String templateid, String param, String mobile, String url) {
-        this.sid = sid;
-        this.token = token;
-        this.appid = appid;
-        this.templateid = templateid;
-        this.param = param;
-        this.mobile = mobile;
-        this.url = url;
-    }
-
     public String getSid() {
         return sid;
     }
