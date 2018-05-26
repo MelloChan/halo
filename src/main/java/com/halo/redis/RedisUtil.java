@@ -20,6 +20,9 @@ public class RedisUtil {
 
     /**
      * 添加对象
+     * @param key 键
+     * @param value 值
+     * @return 成功与否
      */
     public boolean add(final String key, final String value) {
         redisTemplate.execute((RedisCallback<Object>) connection -> {
@@ -30,8 +33,13 @@ public class RedisUtil {
         });
         return false;
     }
+
     /**
-     * 添加对象
+     * 添加对象 加入过期时间
+     * @param key 键
+     * @param expires 过期时间 单位秒
+     * @param value 值
+     * @return 成功与否
      */
     public boolean add(final String key, final Long expires, final String value) {
         redisTemplate.execute((RedisCallback<Object>) connection -> {
@@ -61,14 +69,18 @@ public class RedisUtil {
     }
 
     /**
-     * 删除对象 ,依赖key
+     * 删除键值对
+     * @param key 键
      */
     public void delete(String key) {
         redisTemplate.delete(key);
     }
 
     /**
-     * 修改对象
+     * 修改键值对
+     * @param key 键
+     * @param value 值
+     * @return 成功与否
      */
     public boolean update(final String key,final String value) {
         if (get(key) == null) {
@@ -83,7 +95,9 @@ public class RedisUtil {
     }
 
     /**
-     * 根据key获取对象
+     * 获取值
+     * @param keyId 键
+     * @return 值对象
      */
     public Object get(final String keyId) {
         return redisTemplate.execute((RedisCallback<Object>) connection -> {
