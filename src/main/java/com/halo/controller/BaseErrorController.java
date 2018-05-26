@@ -25,6 +25,6 @@ public class BaseErrorController extends BaseController implements ErrorControll
     @RequestMapping
     @ResponseBody
     public Map<String, Object> doHandleError() {
-        return rtnParam(40003, null);
+        return rtnParam(50001, null);
     }
 }
