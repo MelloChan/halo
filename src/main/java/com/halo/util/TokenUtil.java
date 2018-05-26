@@ -29,7 +29,7 @@ public class TokenUtil {
      * @param uid 用户唯一id
      * @return jwt
      */
-    public static String createToken(int uid) throws UnsupportedEncodingException {
+    public static String createToken(Long uid) throws UnsupportedEncodingException {
         Date iatDate = new Date();
         Calendar nowTime = Calendar.getInstance();
         nowTime.add(Calendar.HOUR, 1);
