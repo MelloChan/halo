@@ -30,7 +30,7 @@ public class TokenRestApi extends BaseController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @GetMapping("/phone")
+    @GetMapping("/verifyPhone")
     public Map<String, Object> verifyPhone(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
         if (authService.verifyPhone(phone)) {
             return rtnParam(0, ImmutableMap.of("msg", "success"));
