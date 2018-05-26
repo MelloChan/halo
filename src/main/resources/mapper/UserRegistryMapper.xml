@@ -12,7 +12,7 @@
     </resultMap>
     <parameterMap id="UserRegistryMap" type="com.halo.entity.UserRegistry"/>
 
-    <select id="getIdByPhone" resultType="java.lang.Long">
+    <select id="getIdByPhone" resultType="java.lang.Integer">
         SELECT id
         FROM hl_user_registry
         WHERE phone = #{phone}
