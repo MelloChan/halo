@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 @Configuration
 @ConfigurationProperties(prefix = "spring.datasource")
 public class DataSourceConfig {
-    private String dbUrl;
+    private String url;
     private String username;
     private String password;
     private String driverClassName;
@@ -34,12 +34,12 @@ public class DataSourceConfig {
     private int maxPoolPreparedStatementPerConnectionSize;
     private String connectionProperties;
 
-    public String getDbUrl() {
-        return dbUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDbUrl(String dbUrl) {
-        this.dbUrl = dbUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getUsername() {
@@ -174,7 +174,7 @@ public class DataSourceConfig {
     @Primary
     public DataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(dbUrl);
+        dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         dataSource.setDriverClassName(driverClassName);
