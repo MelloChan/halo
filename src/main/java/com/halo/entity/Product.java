@@ -1,11 +1,13 @@
 package com.halo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author MelloChan
  */
-public class Product {
+public class Product implements Serializable {
+    private static final long serialVersionUID = 2665988846170227009L;
     private Integer id;
     private String name;
     private String title;

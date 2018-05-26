@@ -1,11 +1,13 @@
 package com.halo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author MelloChan
  */
-public class Brand {
+public class Brand implements Serializable {
+    private static final long serialVersionUID = -3215377580260838299L;
     private Integer id;
     private Integer cateId;
     private String brandName;
@@ -33,7 +35,7 @@ public class Brand {
     }
 
     public void setBrandName(String brandName) {
-        this.brandName = this.brandName;
+        this.brandName = brandName;
     }
 
     public Date getGmtCreate() {

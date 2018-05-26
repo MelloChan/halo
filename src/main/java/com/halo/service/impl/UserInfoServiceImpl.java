@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author MelloChan
  * @date 2018/5/26
@@ -26,11 +28,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public Integer verifyLoginInfo(@Param("phone") String phone, String password) {
         UserRegistry userRegistry = userRegistryDao.getByPhone(phone);
-        boolean flag = DigestUtil.verify(password, userRegistry.getSalt(), userRegistry.getPwd());
-        if (flag) {
+        if (userRegistry != null && DigestUtil.verify(password, userRegistry.getSalt(), userRegistry.getPwd())) {
             return userRegistry.getId();
-        } else {
-            return null;
         }
+        return -1;
     }
 }

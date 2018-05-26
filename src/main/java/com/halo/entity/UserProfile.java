@@ -1,11 +1,13 @@
 package com.halo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author MelloChan
  */
-public class UserProfile {
+public class UserProfile implements Serializable {
+    private static final long serialVersionUID = -3530204100472162294L;
     private Integer id;
     private Integer userId;
     private String username;

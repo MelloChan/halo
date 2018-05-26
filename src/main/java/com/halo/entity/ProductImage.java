@@ -1,11 +1,13 @@
 package com.halo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author MelloChan
  */
-public class ProductImage {
+public class ProductImage implements Serializable {
+    private static final long serialVersionUID = -6192233338153999299L;
     private Integer id;
     private String imgUrl;
     private Integer proId;
@@ -33,7 +35,7 @@ public class ProductImage {
         return imgUrl;
     }
 
-    public void setImgUrl(String imgurl) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 

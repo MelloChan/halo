@@ -21,36 +21,40 @@ public class AuthService {
     private RedisUtil redisUtil;
 
     /**
-     * 发送短信验证码 验证码60s内过期
+     * 发送短信验证码 本地验证码存入缓存 60s内过期
+     *
      * @param phone 用户手机号
      * @return 发送成功否
      */
     public boolean sendSmsCode(String phone) {
         ucpaas.setMobile(phone);
         ucpaas.setTemplateid(ucpaas.getTemplateid().substring(0, 6));
-        String code=VerifyCodeGenerator.getFourVerifyCode();
-        redisUtil.add(phone,60L,code);
+        String code = VerifyCodeGenerator.getFourVerifyCode();
+        redisUtil.add(phone, 60L, code);
         ucpaas.setParam(code);
         String json = SmsUtil.sendSms(ucpaas);
-        return "OK".equals(json.substring(json.indexOf("OK"), json.indexOf("OK") + 2));
+        int okIdx = json.indexOf("OK");
+        return "OK".equals(json.substring(okIdx, okIdx + 2));
     }
 
     /**
-     * 验证手机号码是否注册
+     * 验证手机号码是否注册过
+     *
      * @param phone 用户手机号
      * @return 是否注册
      */
     public boolean verifyPhone(String phone) {
-        return userInfoService.getIdByPhone(phone) !=null;
+        return userInfoService.getIdByPhone(phone) != null;
     }
 
     /**
      * 验证手机验证码是否正确
+     *
      * @param phone 用户手机号
      * @param code  用户发来的验证码
      * @return 是否正确
      */
-    public boolean verifyCode(String phone,String code){
+    public boolean verifyCode(String phone, String code) {
         return code.equals(redisUtil.get(phone));
     }
 }

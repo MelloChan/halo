@@ -41,18 +41,17 @@ public class TokenRestApi extends BaseController {
 
     @PostMapping("/loginByPwd")
     public Map<String, Object> loginByPwd(@RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("password") @Size(min = 8, max = 16) String password) throws UnsupportedEncodingException {
-        Integer uid = userInfoService.verifyLoginInfo(phone, password);
-        if (uid != null) {
+        int uid = userInfoService.verifyLoginInfo(phone, password);
+        if (uid > 0) {
             String token = TokenUtil.createToken(uid);
             return rtnParam(0, ImmutableMap.of("access_token", token));
         } else {
             return rtnParam(40015, null);
         }
-
     }
 
     @GetMapping("/requestSmsCode")
-    public Map<String, Object> requestSmsCode(@RequestParam("phone") String phone) {
+    public Map<String, Object> requestSmsCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
         if (authService.sendSmsCode(phone)) {
             return rtnParam(0, ImmutableMap.of("msg", "success"));
         } else {
@@ -61,7 +60,7 @@ public class TokenRestApi extends BaseController {
     }
 
     @PostMapping("/loginByCode")
-    public Map<String, Object> loginByCode(@RequestParam String phone, @RequestParam String code) throws UnsupportedEncodingException {
+    public Map<String, Object> loginByCode(@RequestParam @Size(min = 11, max = 11) String phone, @RequestParam @Size(min = 4, max = 4) String code) throws UnsupportedEncodingException {
         if (authService.verifyCode(phone, code)) {
             int uid = userInfoService.getIdByPhone(phone);
             String token = TokenUtil.createToken(uid);
