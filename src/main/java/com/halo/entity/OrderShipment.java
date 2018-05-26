@@ -6,7 +6,7 @@ import java.util.Date;
  * @author MelloChan
  */
 public class OrderShipment {
-  private Long id;
+  private Integer id;
   private String orderId;
   private String receiverName;
   private String receiverPhone;
@@ -14,11 +14,11 @@ public class OrderShipment {
   private Date gmtCreate;
   private Date gmtUpdated;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

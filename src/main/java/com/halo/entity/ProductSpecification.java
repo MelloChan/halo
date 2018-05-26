@@ -6,25 +6,25 @@ import java.util.Date;
  * @author MelloChan
  */
 public class ProductSpecification {
-  private Long id;
-  private Long proId;
+  private Integer id;
+  private Integer proId;
   private String specification;
   private Date gmtCreate;
   private Date gmtUpdated;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public Long getProId() {
+  public Integer getProId() {
     return proId;
   }
 
-  public void setProId(Long proId) {
+  public void setProId(Integer proId) {
     this.proId = proId;
   }
 

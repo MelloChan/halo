@@ -6,94 +6,103 @@ import java.util.Date;
  * @author MelloChan
  */
 public class UserProfile {
-  private Long id;
-  private String username;
-  private String avatar;
-  private Short securityLevel;
-  private String email;
-  private String phone;
-  private String pwdProtection;
-  private Long hlCoin;
-  private Date gmtCreate;
-  private Date gmtUpdated;
+    private Integer id;
+    private Integer userId;
+    private String username;
+    private String avatar;
+    private Short securityLevel;
+    private String email;
+    private String phone;
+    private String pwdProtection;
+    private Integer hlCoin;
+    private Date gmtCreate;
+    private Date gmtUpdated;
 
-  public Long getId() {
-    return id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public String getUsername() {
-    return username;
-  }
+    public Integer getUserId() {
+        return userId;
+    }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-  public String getAvatar() {
-    return avatar;
-  }
+    public String getUsername() {
+        return username;
+    }
 
-  public void setAvatar(String avatar) {
-    this.avatar = avatar;
-  }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-  public Short getSecurityLevel() {
-    return securityLevel;
-  }
+    public String getAvatar() {
+        return avatar;
+    }
 
-  public void setSecurityLevel(Short securityLevel) {
-    this.securityLevel = securityLevel;
-  }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public Short getSecurityLevel() {
+        return securityLevel;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setSecurityLevel(Short securityLevel) {
+        this.securityLevel = securityLevel;
+    }
 
-  public String getPhone() {
-    return phone;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public String getPwdProtection() {
-    return pwdProtection;
-  }
+    public String getPhone() {
+        return phone;
+    }
 
-  public void setPwdProtection(String pwdProtection) {
-    this.pwdProtection = pwdProtection;
-  }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-  public Long getHlCoin() {
-    return hlCoin;
-  }
+    public String getPwdProtection() {
+        return pwdProtection;
+    }
 
-  public void setHlCoin(Long hlCoin) {
-    this.hlCoin = hlCoin;
-  }
+    public void setPwdProtection(String pwdProtection) {
+        this.pwdProtection = pwdProtection;
+    }
 
-  public Date getGmtCreate() {
-    return gmtCreate;
-  }
+    public Integer getHlCoin() {
+        return hlCoin;
+    }
 
-  public void setGmtCreate(Date gmtCreate) {
-    this.gmtCreate = gmtCreate;
-  }
+    public void setHlCoin(Integer hlCoin) {
+        this.hlCoin = hlCoin;
+    }
 
-  public Date getGmtUpdated() {
-    return gmtUpdated;
-  }
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
 
-  public void setGmtUpdated(Date gmtUpdated) {
-    this.gmtUpdated = gmtUpdated;
-  }
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtUpdated() {
+        return gmtUpdated;
+    }
+
+    public void setGmtUpdated(Date gmtUpdated) {
+        this.gmtUpdated = gmtUpdated;
+    }
 }

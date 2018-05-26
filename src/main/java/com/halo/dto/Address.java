@@ -9,16 +9,16 @@ import java.io.Serializable;
 public class Address implements Serializable {
     private static final long serialVersionUID = 1004962297417618775L;
 
-    private Long userId;
+    private Integer userId;
     private String userName;
     private String userPhone;
     private String userAddress;
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

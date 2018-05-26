@@ -6,18 +6,18 @@ import java.util.Date;
  * @author MelloChan
  */
 public class UserRegistry {
-  private Long id;
+  private Integer id;
   private String phone;
   private String pwd;
   private String salt;
   private Date gmtCreate;
   private Date gmtUpdated;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

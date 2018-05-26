@@ -7,14 +7,14 @@ import java.util.Date;
  */
 public class Order {
   private String id;
-  private Long userId;
-  private Long payType;
-  private Long shipmentTime;
-  private Long shipmentType;
-  private Long shipmentAmount;
-  private Long orderStatus;
-  private Long orderAmount;
-  private Long payAmount;
+  private Integer userId;
+  private Short payType;
+  private Short shipmentTime;
+  private Short shipmentType;
+  private Integer shipmentAmount;
+  private Short orderStatus;
+  private Integer orderAmount;
+  private Integer payAmount;
   private Date gmtCreate;
   private Date gmtUpdated;
 
@@ -26,67 +26,67 @@ public class Order {
     this.id = id;
   }
 
-  public Long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(Long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
-  public Long getPayType() {
+  public Short getPayType() {
     return payType;
   }
 
-  public void setPayType(Long payType) {
+  public void setPayType(Short payType) {
     this.payType = payType;
   }
 
-  public Long getShipmentTime() {
+  public Short getShipmentTime() {
     return shipmentTime;
   }
 
-  public void setShipmentTime(Long shipmentTime) {
+  public void setShipmentTime(Short shipmentTime) {
     this.shipmentTime = shipmentTime;
   }
 
-  public Long getShipmentType() {
+  public Short getShipmentType() {
     return shipmentType;
   }
 
-  public void setShipmentType(Long shipmentType) {
+  public void setShipmentType(Short shipmentType) {
     this.shipmentType = shipmentType;
   }
 
-  public Long getShipmentAmount() {
+  public Integer getShipmentAmount() {
     return shipmentAmount;
   }
 
-  public void setShipmentAmount(Long shipmentAmount) {
+  public void setShipmentAmount(Integer shipmentAmount) {
     this.shipmentAmount = shipmentAmount;
   }
 
-  public Long getOrderStatus() {
+  public Short getOrderStatus() {
     return orderStatus;
   }
 
-  public void setOrderStatus(Long orderStatus) {
+  public void setOrderStatus(Short orderStatus) {
     this.orderStatus = orderStatus;
   }
 
-  public Long getOrderAmount() {
+  public Integer getOrderAmount() {
     return orderAmount;
   }
 
-  public void setOrderAmount(Long orderAmount) {
+  public void setOrderAmount(Integer orderAmount) {
     this.orderAmount = orderAmount;
   }
 
-  public Long getPayAmount() {
+  public Integer getPayAmount() {
     return payAmount;
   }
 
-  public void setPayAmount(Long payAmount) {
+  public void setPayAmount(Integer payAmount) {
     this.payAmount = payAmount;
   }
 

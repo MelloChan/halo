@@ -6,25 +6,25 @@ import java.util.Date;
  * @author MelloChan
  */
 public class Type {
-    private Long id;
-    private Long cateId;
+    private Integer id;
+    private Integer cateId;
     private String typeName;
     private Date gmtCreate;
     private Date gmtUpdated;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getCateId() {
+    public Integer getCateId() {
         return cateId;
     }
 
-    public void setCateId(Long cateId) {
+    public void setCateId(Integer cateId) {
         this.cateId = cateId;
     }
 

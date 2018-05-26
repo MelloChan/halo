@@ -6,32 +6,24 @@ import java.util.Date;
  * @author MelloChan
  */
 public class Product {
-    private Long id;
+    private Integer id;
     private String name;
     private String title;
-    private Long price;
+    private Integer price;
     private String image;
-    private Long stock;
-    private Long cateId;
-    private Long typeId;
-    private Long brandId;
+    private Integer stock;
+    private Integer cateId;
+    private Integer typeId;
+    private Integer brandId;
     private Date gmtCreate;
     private Date gmtUpdated;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getName() {
@@ -42,11 +34,19 @@ public class Product {
         this.name = name;
     }
 
-    public Long getPrice() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -58,35 +58,35 @@ public class Product {
         this.image = image;
     }
 
-    public Long getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public Long getCateId() {
+    public Integer getCateId() {
         return cateId;
     }
 
-    public void setCateId(Long cateId) {
+    public void setCateId(Integer cateId) {
         this.cateId = cateId;
     }
 
-    public Long getTypeId() {
+    public Integer getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Long typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 
-    public Long getBrandId() {
+    public Integer getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Long brandId) {
+    public void setBrandId(Integer brandId) {
         this.brandId = brandId;
     }
 

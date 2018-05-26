@@ -6,31 +6,23 @@ import java.util.Date;
  * @author MelloChan
  */
 public class OrderProduct {
-  private Long id;
-  private Long proId;
+  private Integer id;
+  private Integer proId;
   private String orderId;
   private String image;
   private String title;
-  private Long price;
-  private Long totalFee;
-  private Long number;
+  private Integer price;
+  private Integer totalFee;
+  private Short number;
   private Date gmtCreate;
   private Date gmtUpdated;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
-  }
-
-  public Long getProId() {
-    return proId;
-  }
-
-  public void setProId(Long proId) {
-    this.proId = proId;
   }
 
   public String getOrderId() {
@@ -57,27 +49,35 @@ public class OrderProduct {
     this.title = title;
   }
 
-  public Long getPrice() {
+  public Integer getProId() {
+    return proId;
+  }
+
+  public void setProId(Integer proId) {
+    this.proId = proId;
+  }
+
+  public Integer getPrice() {
     return price;
   }
 
-  public void setPrice(Long price) {
+  public void setPrice(Integer price) {
     this.price = price;
   }
 
-  public Long getTotalFee() {
+  public Integer getTotalFee() {
     return totalFee;
   }
 
-  public void setTotalFee(Long totalFee) {
+  public void setTotalFee(Integer totalFee) {
     this.totalFee = totalFee;
   }
 
-  public Long getNumber() {
+  public Short getNumber() {
     return number;
   }
 
-  public void setNumber(Long number) {
+  public void setNumber(Short number) {
     this.number = number;
   }
 

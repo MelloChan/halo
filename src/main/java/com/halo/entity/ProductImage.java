@@ -6,18 +6,27 @@ import java.util.Date;
  * @author MelloChan
  */
 public class ProductImage {
-    private Long id;
+    private Integer id;
     private String imgUrl;
-    private Long proId;
+    private Integer proId;
     private Date gmtCreate;
     private Date gmtUpdated;
 
-    public Long getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getProId() {
+        return proId;
+    }
+
+    public void setProId(Integer proId) {
+        this.proId = proId;
     }
 
     public String getImgUrl() {
@@ -28,13 +37,6 @@ public class ProductImage {
         this.imgUrl = imgUrl;
     }
 
-    public Long getProId() {
-        return proId;
-    }
-
-    public void setProId(Long proId) {
-        this.proId = this.proId;
-    }
 
     public Date getGmtCreate() {
         return gmtCreate;

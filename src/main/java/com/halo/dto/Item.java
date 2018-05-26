@@ -11,17 +11,17 @@ import java.io.Serializable;
 public class Item implements Serializable {
 
     private static final long serialVersionUID = -3486758677948381701L;
-    private Long proId;
+    private Integer proId;
     private String imgUrl;
     private String name;
     private String title;
-    private Long price;
+    private Integer price;
 
-    public Long getProId() {
+    public Integer getProId() {
         return proId;
     }
 
-    public void setProId(Long proId) {
+    public void setProId(Integer proId) {
         this.proId = proId;
     }
 
@@ -57,11 +57,11 @@ public class Item implements Serializable {
         this.title = title;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
