@@ -34,8 +34,8 @@ public class RegisterRestApi extends BaseController {
      *
      * @param phone 用户手机号
      */
-    @GetMapping("/verifyPhone")
-    public Map<String, Object> verifyPhone(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
+    @GetMapping("/verifyPhone/{phone}")
+    public Map<String, Object> verifyPhone(@PathVariable("phone") @Size(min = 11, max = 11) String phone) {
         if (!authService.verifyPhone(phone)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
         } else {
@@ -50,9 +50,9 @@ public class RegisterRestApi extends BaseController {
      *
      * @param phone 用户手机号
      */
-    @GetMapping("/requestSmsCode")
-    public Map<String, Object> requestSmsCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
-        if (!authService.verifyPhone(phone)&&authService.sendSmsCode(phone, TEMP_ID)) {
+    @GetMapping("/requestSmsCode/{phone}")
+    public Map<String, Object> requestSmsCode(@PathVariable("phone") @Size(min = 11, max = 11) String phone) {
+        if (!authService.verifyPhone(phone) && authService.sendSmsCode(phone, TEMP_ID)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
         } else {
             return rtnParam(50002, null);
@@ -65,7 +65,7 @@ public class RegisterRestApi extends BaseController {
      * @param phone 手机号
      * @param code  短信验证码
      */
-    @GetMapping("/verifyCode")
+    @PostMapping("/verifyCode")
     public Map<String, Object> verifyCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 4, max = 4) String code) {
         if (authService.verifyCode(phone, code)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
@@ -85,8 +85,12 @@ public class RegisterRestApi extends BaseController {
         if (bindingResult.hasErrors()) {
             return rtnParam(40013, null);
         }
-        int uid = userInfoService.insertUserInfo(userRegisterInfoDTO);
-        String token = TokenUtil.createToken(uid);
-        return rtnParam(0, ImmutableMap.of("access_token", token));
+        String phone = userRegisterInfoDTO.getPhone();
+        if (!authService.verifyPhone(phone)) {
+            int uid = userInfoService.insertUserInfo(userRegisterInfoDTO);
+            String token = TokenUtil.createToken(uid);
+            return rtnParam(0, ImmutableMap.of("access_token", token));
+        }
+        return rtnParam(40018, null);
     }
 }

@@ -35,8 +35,8 @@ public class TokenRestApi extends BaseController {
      *
      * @param phone 用户手机号
      */
-    @GetMapping("/verifyPhone")
-    public Map<String, Object> verifyPhone(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
+    @GetMapping("/verifyPhone/{phone}")
+    public Map<String, Object> verifyPhone(@PathVariable("phone") @Size(min = 11, max = 11) String phone) {
         if (authService.verifyPhone(phone)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
         } else {
@@ -68,8 +68,8 @@ public class TokenRestApi extends BaseController {
      *
      * @param phone 用户手机号
      */
-    @GetMapping("/requestSmsCode")
-    public Map<String, Object> requestSmsCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
+    @GetMapping("/requestSmsCode/{phone}")
+    public Map<String, Object> requestSmsCode(@PathVariable("phone") @Size(min = 11, max = 11) String phone) {
         if (authService.verifyPhone(phone) && authService.sendSmsCode(phone, TEMP_ID)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
         } else {
