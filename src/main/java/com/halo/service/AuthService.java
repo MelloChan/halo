@@ -24,20 +24,16 @@ public class AuthService {
      * 发送短信验证码 本地验证码存入缓存 60s内过期
      *
      * @param phone 用户手机号
-     * @param tempId 发送的短信模板id
+     * @param tempId 短信模板Id
      * @return 发送成功否
      */
     public boolean sendSmsCode(String phone,String tempId) {
-        if(verifyPhone(phone)){
-            String code = VerifyCodeGenerator.getFourVerifyCode();
-            redisUtil.add(phone, 60L, code);
-            ucpaas=new Ucpaas(ucpaas.getSid(),ucpaas.getToken(),ucpaas.getAppid(),tempId,code,phone,ucpaas.getUrl());
-            String json = SmsUtil.sendSms(ucpaas);
-            int okIdx = json.indexOf("OK");
-            return "OK".equals(json.substring(okIdx, okIdx + 2));
-        }else{
-            return false;
-        }
+        String code = VerifyCodeGenerator.getFourVerifyCode();
+        redisUtil.add(phone, 60L, code);
+        ucpaas=new Ucpaas(ucpaas.getSid(),ucpaas.getToken(),ucpaas.getAppid(),tempId,code,phone,ucpaas.getUrl());
+        String json = SmsUtil.sendSms(ucpaas);
+        int okIdx = json.indexOf("OK");
+        return "OK".equals(json.substring(okIdx, okIdx + 2));
     }
 
     /**

@@ -52,7 +52,7 @@ public class RegisterRestApi extends BaseController {
      */
     @GetMapping("/requestSmsCode")
     public Map<String, Object> requestSmsCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
-        if (authService.sendSmsCode(phone, TEMP_ID)) {
+        if (!authService.verifyPhone(phone)&&authService.sendSmsCode(phone, TEMP_ID)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
         } else {
             return rtnParam(50002, null);

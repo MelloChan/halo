@@ -47,8 +47,8 @@ public class TokenRestApi extends BaseController {
     /**
      * 通过手机号+密码形式登录
      *
-     * @param phone    手机号
-     * @param pwd 密码
+     * @param phone 手机号
+     * @param pwd   密码
      */
     @PostMapping("/loginByPwd")
     public Map<String, Object> loginByPwd(@RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("pwd") @Size(min = 8, max = 16) String pwd) throws UnsupportedEncodingException {
@@ -70,7 +70,7 @@ public class TokenRestApi extends BaseController {
      */
     @GetMapping("/requestSmsCode")
     public Map<String, Object> requestSmsCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
-        if (authService.sendSmsCode(phone, TEMP_ID)) {
+        if (authService.verifyPhone(phone) && authService.sendSmsCode(phone, TEMP_ID)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
         } else {
             return rtnParam(50002, null);
