@@ -42,7 +42,9 @@ public class RegisterRestApi extends BaseController {
             return rtnParam(40018, null);
         }
     }
-    private static final String TEMP_ID="318814";
+
+    private static final String TEMP_ID = "318814";
+
     /**
      * 请求发送短信验证码(注册)
      *
@@ -50,12 +52,13 @@ public class RegisterRestApi extends BaseController {
      */
     @GetMapping("/requestSmsCode")
     public Map<String, Object> requestSmsCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone) {
-        if (authService.sendSmsCode(phone,TEMP_ID)) {
+        if (authService.sendSmsCode(phone, TEMP_ID)) {
             return rtnParam(0, ImmutableMap.of("phone", phone));
         } else {
             return rtnParam(50002, null);
         }
     }
+
     /**
      * 验证短信验证码是否正确
      *
@@ -78,11 +81,10 @@ public class RegisterRestApi extends BaseController {
      * @param bindingResult       绑定结果
      */
     @PostMapping("/registerByPhone")
-    public Map<String, Object> register(@RequestBody @Valid UserRegisterInfoDTO userRegisterInfoDTO, BindingResult bindingResult) throws UnsupportedEncodingException {
+    public Map<String, Object> register(@Valid @RequestBody UserRegisterInfoDTO userRegisterInfoDTO, BindingResult bindingResult) throws UnsupportedEncodingException {
         if (bindingResult.hasErrors()) {
             return rtnParam(40013, null);
         }
-        System.out.println(userRegisterInfoDTO);
         int uid = userInfoService.insertUserInfo(userRegisterInfoDTO);
         String token = TokenUtil.createToken(uid);
         return rtnParam(0, ImmutableMap.of("access_token", token));
