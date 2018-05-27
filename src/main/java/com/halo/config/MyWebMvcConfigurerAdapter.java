@@ -4,7 +4,6 @@ import com.halo.interceptor.TokenVerifyInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -29,9 +28,9 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(tokenVerifyInterceptor())
                 .addPathPatterns("/api/halo/**")
-                .excludePathPatterns("/api/halo/auth/**")
-                .excludePathPatterns("/api/halo/register")
-                .excludePathPatterns("/api/halo/product");
+                .excludePathPatterns("/api/halo/auths/**")
+                .excludePathPatterns("/api/halo/registers/**")
+                .excludePathPatterns("/api/halo/products");
         super.addInterceptors(registry);
     }
 }

@@ -48,4 +48,14 @@ public class QiNiu {
     public void setCname(String cname) {
         this.cname = cname;
     }
+
+    @Override
+    public String toString() {
+        return "QiNiu{" +
+                "accessKey='" + accessKey + '\'' +
+                ", secretKey='" + secretKey + '\'' +
+                ", bucket='" + bucket + '\'' +
+                ", cname='" + cname + '\'' +
+                '}';
+    }
 }
