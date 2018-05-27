@@ -4,8 +4,6 @@ import com.halo.config.properties.Ucpaas;
 import com.halo.redis.RedisUtil;
 import com.halo.util.SmsUtil;
 import com.halo.util.VerifyCodeGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,12 +28,16 @@ public class AuthService {
      * @return 发送成功否
      */
     public boolean sendSmsCode(String phone,String tempId) {
-        String code = VerifyCodeGenerator.getFourVerifyCode();
-        redisUtil.add(phone, 60L, code);
-        ucpaas=new Ucpaas(ucpaas.getSid(),ucpaas.getToken(),ucpaas.getAppid(),tempId,code,phone,ucpaas.getUrl());
-        String json = SmsUtil.sendSms(ucpaas);
-        int okIdx = json.indexOf("OK");
-        return "OK".equals(json.substring(okIdx, okIdx + 2));
+        if(verifyPhone(phone)){
+            String code = VerifyCodeGenerator.getFourVerifyCode();
+            redisUtil.add(phone, 60L, code);
+            ucpaas=new Ucpaas(ucpaas.getSid(),ucpaas.getToken(),ucpaas.getAppid(),tempId,code,phone,ucpaas.getUrl());
+            String json = SmsUtil.sendSms(ucpaas);
+            int okIdx = json.indexOf("OK");
+            return "OK".equals(json.substring(okIdx, okIdx + 2));
+        }else{
+            return false;
+        }
     }
 
     /**
