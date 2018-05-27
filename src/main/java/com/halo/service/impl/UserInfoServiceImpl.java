@@ -1,14 +1,16 @@
 package com.halo.service.impl;
 
+import com.halo.dao.UserProfileDao;
 import com.halo.dao.UserRegistryDao;
+import com.halo.dto.UserRegisterInfoDTO;
+import com.halo.entity.UserProfile;
 import com.halo.entity.UserRegistry;
 import com.halo.service.UserInfoService;
 import com.halo.util.DigestUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author MelloChan
@@ -16,9 +18,10 @@ import java.util.Optional;
  */
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
-
     @Autowired
     private UserRegistryDao userRegistryDao;
+    @Autowired
+    private UserProfileDao userProfileDao;
 
     @Override
     public Integer getIdByPhone(@Param("phone") String phone) {
@@ -32,5 +35,27 @@ public class UserInfoServiceImpl implements UserInfoService {
             return userRegistry.getId();
         }
         return -1;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Integer insertUserInfo(UserRegisterInfoDTO userRegisterInfoDTO) {
+        // 插入注册信息
+        UserRegistry userRegistry = new UserRegistry();
+        userRegistry.setPhone(userRegisterInfoDTO.getPhone());
+        String salt = DigestUtil.generateSalt();
+        String pwd = DigestUtil.sha256(userRegisterInfoDTO.getPwd() + salt);
+        userRegistry.setPwd(pwd);
+        userRegistry.setSalt(salt);
+        Integer uid = userRegistryDao.insertUserRegistryInfo(userRegistry);
+
+        // 插入个人信息
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUserId(uid);
+        userProfile.setUsername(userRegisterInfoDTO.getUsername());
+        userProfile.setPhone(userRegisterInfoDTO.getPhone());
+        userProfileDao.insertUserProfileInfo(userProfile);
+
+        return uid;
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.halo.dao.UserProfileDao">
+    <cache/>
+    <resultMap id="UserProfileResultMap" type="com.halo.entity.UserProfile">
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="avatar" property="avatar"/>
+        <result column="security_level" property="securityLevel"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="pwd_protection" property="pwdProtection"/>
+        <result column="hl_coin" property="hlCoin"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_updated" property="gmtUpdated"/>
+    </resultMap>
+    <parameterMap id="UserProfile" type="com.halo.entity.UserProfile"/>
+
+    <insert id="insertUserProfileInfo">
+        INSERT INTO hl_user_profile (user_id, username, phone)
+        VALUES (#{userId}, #{username}, #{phone})
+    </insert>
+</mapper>

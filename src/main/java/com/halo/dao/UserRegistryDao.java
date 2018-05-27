@@ -12,14 +12,25 @@ import org.apache.ibatis.annotations.Param;
 public interface UserRegistryDao {
     /**
      * 通过手机号查找用户id
+     *
      * @param phone 用户手机号
      * @return 用户id
      */
-    Integer getIdByPhone(@Param("phone")String phone);
+    Integer getIdByPhone(@Param("phone") String phone);
+
     /**
      * 通过手机号获取用户注册信息
+     *
      * @param phone 用户手机号
      * @return 用户注册信息类
      */
-    UserRegistry getByPhone(@Param("phone")String phone);
+    UserRegistry getByPhone(@Param("phone") String phone);
+
+    /**
+     * 插入用户注册信息
+     *
+     * @param userRegistry 用户注册信息类
+     * @return 返回用户id
+     */
+    Integer insertUserRegistryInfo(UserRegistry userRegistry);
 }

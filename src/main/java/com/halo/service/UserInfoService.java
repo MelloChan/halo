@@ -1,5 +1,7 @@
 package com.halo.service;
 
+import com.halo.dto.UserRegisterInfoDTO;
+
 /**
  * @author MelloChan
  * @date 2018/5/26
@@ -18,4 +20,11 @@ public interface UserInfoService {
      * @return 用户id
      */
     Integer verifyLoginInfo(String phone,String password);
+
+    /**
+     * 用户注册
+     * @param userRegisterInfoDTO 用户注册信息 手机号+密码+用户名
+     * @return 用户id
+     */
+    Integer insertUserInfo(UserRegisterInfoDTO userRegisterInfoDTO);
 }
