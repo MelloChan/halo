@@ -2,6 +2,7 @@ package com.halo.service.impl;
 
 import com.halo.dao.UserProfileDao;
 import com.halo.dao.UserRegistryDao;
+import com.halo.dto.UserProfileInfoDTO;
 import com.halo.dto.UserRegisterInfoDTO;
 import com.halo.entity.UserProfile;
 import com.halo.entity.UserRegistry;
@@ -57,5 +58,18 @@ public class UserInfoServiceImpl implements UserInfoService {
         userProfileDao.insertUserProfileInfo(userProfile);
 
         return uid;
+    }
+
+    @Override
+    public UserProfileInfoDTO getUserProfileInfoByUId(@Param("userId") String userId) {
+        UserProfile userProfile = userProfileDao.getUserProfileInfoByUId(userId);
+        return new UserProfileInfoDTO(
+                userProfile.getUsername(), userProfile.getAvatar(), userProfile.getSecurityLevel(), userProfile.getEmail(),
+                userProfile.getPhone(), userProfile.getPwdProtection());
+    }
+
+    @Override
+    public Integer getHaloCoinByUId(@Param("userId") String userId) {
+        return userProfileDao.getHaloCoinByUId(userId);
     }
 }

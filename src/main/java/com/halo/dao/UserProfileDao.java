@@ -2,6 +2,7 @@ package com.halo.dao;
 
 import com.halo.entity.UserProfile;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author MelloChan
@@ -15,4 +16,19 @@ public interface UserProfileDao {
      * @param userProfile 用户个人信息类
      */
     void insertUserProfileInfo(UserProfile userProfile);
+
+    /**
+     * 通过用户Id获取用户信息
+     *
+     * @param userId 用户注册时赋值的唯一id
+     * @return 用户个人信息
+     */
+    UserProfile getUserProfileInfoByUId(@Param("userId") String userId);
+
+    /**
+     * 通过用户id获取用户哈币数值
+     * @param userId 用户id
+     * @return 哈币
+     */
+    Integer getHaloCoinByUId(@Param("userId") String userId);
 }

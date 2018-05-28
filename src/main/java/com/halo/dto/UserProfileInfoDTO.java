@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author MelloChan
  * @date 2018/5/17
  */
-public class UserInfoDTO implements Serializable {
+public class UserProfileInfoDTO implements Serializable {
     private static final long serialVersionUID = -3679318423202185947L;
 
     private String username;
@@ -17,7 +17,16 @@ public class UserInfoDTO implements Serializable {
     private String email;
     private String phone;
     private String pwdProtection;
-    private Long hlCoin;
+    public UserProfileInfoDTO(){}
+
+    public UserProfileInfoDTO(String username, String avatar, Short securityLevel, String email, String phone, String pwdProtection) {
+        this.username = username;
+        this.avatar = avatar;
+        this.securityLevel = securityLevel;
+        this.email = email;
+        this.phone = phone;
+        this.pwdProtection = pwdProtection;
+    }
 
     public String getUsername() {
         return username;
@@ -67,24 +76,15 @@ public class UserInfoDTO implements Serializable {
         this.pwdProtection = pwdProtection;
     }
 
-    public Long getHlCoin() {
-        return hlCoin;
-    }
-
-    public void setHlCoin(Long hlCoin) {
-        this.hlCoin = hlCoin;
-    }
-
     @Override
     public String toString() {
-        return "UserInfoDTO{" +
+        return "UserProfileInfoDTO{" +
                 "username='" + username + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", securityLevel=" + securityLevel +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", pwdProtection='" + pwdProtection + '\'' +
-                ", hlCoin=" + hlCoin +
                 '}';
     }
 }
