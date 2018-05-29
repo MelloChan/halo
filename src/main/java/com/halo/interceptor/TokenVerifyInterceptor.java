@@ -27,7 +27,7 @@ public class TokenVerifyInterceptor implements HandlerInterceptor {
                 String newToken = TokenUtil.createToken(claims.get("uid").asInt());
                 httpServletResponse.addHeader("access_token", newToken);
             } else {
-                httpServletRequest.setAttribute("uid",claims.get("uid"));
+                httpServletRequest.setAttribute("uid", String.valueOf(claims.get("uid").asInt()));
                 flag = true;
             }
         } else {

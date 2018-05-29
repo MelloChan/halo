@@ -24,6 +24,7 @@ public class UserRestApi extends BaseController {
 
     @GetMapping("/{id}")
     public Map<String, Object> getById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid) {
+        System.out.println("id:" + id + " uid:" + uid);
         if (id.equals(uid)) {
             return rtnParam(0, ImmutableMap.of("userinfo", userInfoService.getUserProfileInfoByUId(uid)));
         }
@@ -34,6 +35,14 @@ public class UserRestApi extends BaseController {
     public Map<String, Object> getCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid) {
         if (id.equals(uid)) {
             return rtnParam(0, ImmutableMap.of("coin", userInfoService.getHaloCoinByUId(uid)));
+        }
+        return rtnParam(40006, null);
+    }
+
+    @PutMapping("{id}/updatePwd")
+    public Map<String, Object> updatePwdById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid) {
+        if (id.equals(uid)) {
+
         }
         return rtnParam(40006, null);
     }

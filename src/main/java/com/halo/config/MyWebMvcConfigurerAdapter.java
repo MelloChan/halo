@@ -30,7 +30,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/api/halo/**")
                 .excludePathPatterns("/api/halo/auths/**")
                 .excludePathPatterns("/api/halo/registers/**")
-                .excludePathPatterns("/api/halo/products");
+                .excludePathPatterns("/api/halo/products/**");
         super.addInterceptors(registry);
     }
 }
