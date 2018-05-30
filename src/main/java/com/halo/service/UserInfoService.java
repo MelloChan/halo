@@ -47,4 +47,12 @@ public interface UserInfoService {
      * @return 哈币
      */
     Integer getHaloCoinByUId(String userId);
+
+    /**
+     * 更新哈币
+     * @param number 更新的数值
+     * @param userId 用户ID
+     * @return 返回影响条数
+     */
+    Integer updateCoinByUId(Integer number,String userId);
 }

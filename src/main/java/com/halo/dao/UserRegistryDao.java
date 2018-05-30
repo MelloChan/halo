@@ -33,4 +33,6 @@ public interface UserRegistryDao {
      * @return 返回用户id
      */
     Integer insertUserRegistryInfo(UserRegistry userRegistry);
+
+
 }

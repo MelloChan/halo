@@ -31,4 +31,12 @@ public interface UserProfileDao {
      * @return 哈币
      */
     Integer getHaloCoinByUId(@Param("userId") String userId);
+
+    /**
+     * 更新哈币
+     * @param number 更新的数值
+     * @param userId 用户ID
+     * @return 返回影响条数
+     */
+    Integer updateCoinByUId(@Param("number")Integer number,@Param("userId")String userId);
 }

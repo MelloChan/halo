@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Size;
 import java.util.Map;
 
 
@@ -39,11 +40,46 @@ public class UserRestApi extends BaseController {
         return rtnParam(40006, null);
     }
 
-    @PutMapping("{id}/updatePwd")
+    @PatchMapping("/{id}/coin")
+    public Map<String, Object> updateCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,@RequestParam @Size(min = 1, max = 100) Integer number) {
+        if(id.equals(uid)){
+            return rtnParam(0,ImmutableMap.of("msg",userInfoService.updateCoinByUId(number,uid)));
+        }
+        return rtnParam(40006, null);
+    }
+
+    @PatchMapping("/{id}/updateAvatar")
+    public Map<String, Object> updateAvatarById() {
+        return rtnParam(40006, null);
+    }
+
+    @PatchMapping("/{id}/updatePwd")
     public Map<String, Object> updatePwdById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid) {
         if (id.equals(uid)) {
 
         }
         return rtnParam(40006, null);
     }
+
+    @PatchMapping("/{id}/updateEmail")
+    public Map<String, Object> updateEmailById() {
+        return rtnParam(40006, null);
+    }
+
+    @PatchMapping("/{id}/updatePhone")
+    public Map<String, Object> updatePhoneById() {
+        return rtnParam(40006, null);
+    }
+
+    @PatchMapping("/{id}/updatePwdPro")
+    public Map<String, Object> updatePwdProById() {
+        return rtnParam(40006, null);
+    }
+
+    @PatchMapping("/{id}/resetPwd")
+    public Map<String, Object> resetPwdById() {
+        return rtnParam(40006, null);
+    }
+
+
 }

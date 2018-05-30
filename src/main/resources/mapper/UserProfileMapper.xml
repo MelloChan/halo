@@ -16,9 +16,32 @@
         <result column="gmt_updated" property="gmtUpdated"/>
     </resultMap>
     <parameterMap id="UserProfile" type="com.halo.entity.UserProfile"/>
+    <select id="getUserProfileInfoByUId" resultMap="UserProfileResultMap">
+        SELECT
+            username,
+            avatar,
+            security_level,
+            email,
+            phone,
+            pwd_protection
+        FROM hl_user_profile
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getHaloCoinByUId" resultType="java.lang.Integer">
+        SELECT hl_coin
+        FROM hl_user_profile
+        WHERE user_id = #{userId}
+    </select>
 
     <insert id="insertUserProfileInfo">
         INSERT INTO hl_user_profile (user_id, username, phone)
         VALUES (#{userId}, #{username}, #{phone})
     </insert>
+
+    <update id="updateCoinByUId">
+        UPDATE hl_user_profile
+        SET hl_coin=#{number}
+        WHERE user_id=#{userId}
+    </update>
 </mapper>

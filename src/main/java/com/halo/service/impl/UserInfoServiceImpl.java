@@ -72,4 +72,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     public Integer getHaloCoinByUId(@Param("userId") String userId) {
         return userProfileDao.getHaloCoinByUId(userId);
     }
+
+    @Override
+    public Integer updateCoinByUId(@Param("number") Integer number, @Param("userId") String userId) {
+        return userProfileDao.updateCoinByUId(number, userId);
+    }
 }
