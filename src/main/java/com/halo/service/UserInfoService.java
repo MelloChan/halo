@@ -66,6 +66,7 @@ public interface UserInfoService {
      *
      * @param part 头像图片资源
      * @param userId 用户id
+     * @exception IOException 图片异常
      * @return 头像外链
      */
     String updateAvatarById(Part part, String userId) throws IOException;

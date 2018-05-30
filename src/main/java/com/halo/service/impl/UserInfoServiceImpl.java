@@ -10,7 +10,6 @@ import com.halo.entity.UserRegistry;
 import com.halo.service.UserInfoService;
 import com.halo.util.DigestUtil;
 import com.halo.util.UploadUtil;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,12 +32,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     private QiNiu qiNiu;
 
     @Override
-    public Integer getIdByPhone(@Param("phone") String phone) {
+    public Integer getIdByPhone(String phone) {
         return userRegistryDao.getIdByPhone(phone);
     }
 
     @Override
-    public Integer verifyLoginInfo(@Param("phone") String phone, String password) {
+    public Integer verifyLoginInfo(String phone, String password) {
         UserRegistry userRegistry = userRegistryDao.getByPhone(phone);
         if (userRegistry != null && DigestUtil.verify(password, userRegistry.getSalt(), userRegistry.getPwd())) {
             return userRegistry.getId();
@@ -69,7 +68,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserProfileInfoDTO getUserProfileInfoByUId(@Param("userId") String userId) {
+    public UserProfileInfoDTO getUserProfileInfoByUId(String userId) {
         UserProfile userProfile = userProfileDao.getUserProfileInfoByUId(userId);
         return new UserProfileInfoDTO(
                 userProfile.getUsername(), userProfile.getAvatar(), userProfile.getSecurityLevel(), userProfile.getEmail(),
@@ -78,18 +77,18 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
     @Override
-    public Integer getHaloCoinByUId(@Param("userId") String userId) {
+    public Integer getHaloCoinByUId(String userId) {
         return userProfileDao.getHaloCoinByUId(userId);
     }
 
     @Override
-    public boolean updateCoinByUId(@Param("number") Integer number, @Param("userId") String userId) {
+    public boolean updateCoinByUId(Integer number, String userId) {
         return userProfileDao.updateCoinByUId(number, userId) != null;
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String updateAvatarById(Part part,String userId) throws IOException {
+    public String updateAvatarById(Part part, String userId) throws IOException {
         String imgUrl;
         try (BufferedInputStream in = new BufferedInputStream(part.getInputStream())) {
             int size = (int) part.getSize();
@@ -98,8 +97,8 @@ public class UserInfoServiceImpl implements UserInfoService {
             while ((i > 0)) {
                 i = in.read(buffer);
             }
-            imgUrl = UploadUtil.uploadToQiNiuYun(qiNiu,buffer);
-            userProfileDao.updateAvatarById(imgUrl,userId);
+            imgUrl = UploadUtil.uploadToQiNiuYun(qiNiu, buffer);
+            userProfileDao.updateAvatarById(imgUrl, userId);
         }
         return imgUrl;
     }
@@ -107,8 +106,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean updatePwdByUid(String newPwd, String userId) {
-        String newSalt= DigestUtil.generateSalt();
-        String password=DigestUtil.sha256(newSalt+newPwd);
-      return userRegistryDao.updatePwdByUId(newSalt,password,userId)!=null;
+        String newSalt = DigestUtil.generateSalt();
+        String password = DigestUtil.sha256(newSalt + newPwd);
+        return userRegistryDao.updatePwdByUId(newSalt, password, userId) != null;
     }
 }
