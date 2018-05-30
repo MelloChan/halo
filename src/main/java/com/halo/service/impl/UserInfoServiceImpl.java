@@ -82,6 +82,14 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public boolean verifyPwd(String pwd, String userId) {
+        UserRegistry userRegistry = userRegistryDao.getByUId(userId);
+        String password = userRegistry.getPwd();
+        String salt = userRegistry.getSalt();
+        return DigestUtil.sha256(pwd + salt).equals(password);
+    }
+
+    @Override
     public boolean updateCoinByUId(Integer number, String userId) {
         return userProfileDao.updateCoinByUId(number, userId) != null;
     }

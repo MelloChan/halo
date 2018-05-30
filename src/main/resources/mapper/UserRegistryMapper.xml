@@ -26,7 +26,13 @@
         FROM hl_user_registry
         WHERE phone = #{phone}
     </select>
-
+    <select id="">
+        SELECT
+            pwd,
+            salt
+        FROM hl_user_registry
+        WHERE id = #{userId}
+    </select>
     <insert id="insertUserRegistryInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO hl_user_registry (phone, pwd, salt)
         VALUES (#{phone}, #{pwd}, #{salt})

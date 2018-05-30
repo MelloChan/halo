@@ -61,8 +61,8 @@ public class UserRestApi extends BaseController {
 
 
     @PatchMapping("/{id}/updatePwd")
-    public Map<String, Object> updatePwdById(@PathVariable("id") @NotEmpty String id,
-                                             @RequestAttribute("uid") String uid, @RequestParam("oldPwd") @Size(min = 8, max = 16) String oldPwd,
+    public Map<String, Object> updatePwdById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,
+                                             @RequestParam("oldPwd") @Size(min = 8, max = 16) String oldPwd,
                                              @RequestParam("newPwd") @Size(min = 8, max = 16) String newPwd) {
 
         if (id.equals(uid) && !oldPwd.equals(newPwd)) {
@@ -71,7 +71,14 @@ public class UserRestApi extends BaseController {
         return rtnParam(40006, null);
     }
 
-
+    @GetMapping("/{id}/verifyPwd/{pwd}")
+    public Map<String,Object>verifyPwd(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,
+                                       @PathVariable("pwd")@Size(min = 8, max = 16) String pwd){
+        if(id.equals(uid)){
+            return rtnParam(0,ImmutableMap.of("msg",userInfoService.verifyPwd(pwd,uid)));
+        }
+        return rtnParam(40006, null);
+    }
     @PatchMapping("/{id}/updateEmail")
     public Map<String, Object> updateEmailById() {
         return rtnParam(40006, null);

@@ -26,7 +26,12 @@ public interface UserRegistryDao {
      */
     UserRegistry getByPhone(@Param("phone") String phone);
 
-
+    /**
+     * 通过id获取用户注册信息
+     * @param userId 用户id
+     * @return 用户盐与密码
+     */
+    UserRegistry getByUId(@Param("userId")String userId);
 
     /**
      * 插入用户注册信息

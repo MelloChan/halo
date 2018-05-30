@@ -28,13 +28,6 @@ public interface UserInfoService {
      */
     Integer verifyLoginInfo(String phone, String password);
 
-    /**
-     * 用户注册
-     *
-     * @param userRegisterInfoDTO 用户注册信息 手机号+密码+用户名
-     * @return 用户id
-     */
-    Integer insertUserInfo(UserRegisterInfoDTO userRegisterInfoDTO);
 
     /**
      * 通过用户Id获取用户信息
@@ -53,6 +46,22 @@ public interface UserInfoService {
     Integer getHaloCoinByUId(String userId);
 
     /**
+     * 验证用户密码
+     * @param pwd 用户密码
+     * @param userId 用户id
+     * @return 验证成功与否
+     */
+    boolean verifyPwd(String pwd,String userId);
+
+    /**
+     * 用户注册
+     *
+     * @param userRegisterInfoDTO 用户注册信息 手机号+密码+用户名
+     * @return 用户id
+     */
+    Integer insertUserInfo(UserRegisterInfoDTO userRegisterInfoDTO);
+
+    /**
      * 更新哈币
      *
      * @param number 更新的数值
@@ -64,10 +73,10 @@ public interface UserInfoService {
     /**
      * 更新头像
      *
-     * @param part 头像图片资源
+     * @param part   头像图片资源
      * @param userId 用户id
-     * @exception IOException 图片异常
      * @return 头像外链
+     * @throws IOException 图片异常
      */
     String updateAvatarById(Part part, String userId) throws IOException;
 
