@@ -56,4 +56,5 @@ public class AuthService {
     public boolean verifyCode(String phone, String code) {
         return code.equals(redisUtil.get(phone));
     }
+
 }

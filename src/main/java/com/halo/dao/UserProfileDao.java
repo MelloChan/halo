@@ -39,4 +39,12 @@ public interface UserProfileDao {
      * @return 返回影响条数
      */
     Integer updateCoinByUId(@Param("number")Integer number,@Param("userId")String userId);
+
+    /**
+     * 更新头像
+     * @param imgUrl 七牛云外链地址
+     * @param userId 用户id
+     * @return 影响条数
+     */
+    Integer updateAvatarById(@Param("imgUrl")String imgUrl,@Param("userId")String userId);
 }

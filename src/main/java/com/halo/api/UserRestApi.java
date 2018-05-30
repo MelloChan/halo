@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Part;
 import javax.validation.constraints.Size;
 import java.util.Map;
 
@@ -41,25 +42,33 @@ public class UserRestApi extends BaseController {
     }
 
     @PatchMapping("/{id}/coin")
-    public Map<String, Object> updateCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,@RequestParam @Size(min = 1, max = 100) Integer number) {
-        if(id.equals(uid)){
-            return rtnParam(0,ImmutableMap.of("msg",userInfoService.updateCoinByUId(number,uid)));
+    public Map<String, Object> updateCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestParam @Size(min = 1, max = 100) Integer number) {
+        if (id.equals(uid)) {
+            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateCoinByUId(number, uid)));
         }
         return rtnParam(40006, null);
     }
 
     @PatchMapping("/{id}/updateAvatar")
-    public Map<String, Object> updateAvatarById() {
-        return rtnParam(40006, null);
-    }
-
-    @PatchMapping("/{id}/updatePwd")
-    public Map<String, Object> updatePwdById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid) {
+    public Map<String, Object> updateAvatarById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestPart @NotEmpty Part part) {
         if (id.equals(uid)) {
 
         }
         return rtnParam(40006, null);
     }
+
+
+    @PatchMapping("/{id}/updatePwd")
+    public Map<String, Object> updatePwdById(@PathVariable("id") @NotEmpty String id,
+                                             @RequestAttribute("uid") String uid, @RequestParam("oldPwd") @Size(min = 8, max = 16) String oldPwd,
+                                             @RequestParam("newPwd") @Size(min = 8, max = 16) String newPwd) {
+
+        if (id.equals(uid)&&!oldPwd.equals(newPwd)) {
+            return rtnParam(0,ImmutableMap.of("msg",userInfoService.updatePwdByUid(newPwd,uid)));
+        }
+        return rtnParam(40006, null);
+    }
+
 
     @PatchMapping("/{id}/updateEmail")
     public Map<String, Object> updateEmailById() {

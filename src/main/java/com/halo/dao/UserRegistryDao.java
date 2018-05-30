@@ -26,6 +26,8 @@ public interface UserRegistryDao {
      */
     UserRegistry getByPhone(@Param("phone") String phone);
 
+
+
     /**
      * 插入用户注册信息
      *
@@ -34,5 +36,13 @@ public interface UserRegistryDao {
      */
     Integer insertUserRegistryInfo(UserRegistry userRegistry);
 
-
+    /**
+     * 更新密码
+     *
+     * @param salt 盐值
+     * @param userId 用户id
+     * @param newPwd  新密码
+     * @return 影响条数
+     */
+    Integer updatePwdByUId(@Param("salt") String salt, @Param("newPwd") String newPwd, @Param("userId") String userId);
 }

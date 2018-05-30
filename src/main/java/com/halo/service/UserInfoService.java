@@ -43,6 +43,7 @@ public interface UserInfoService {
 
     /**
      * 通过用户id获取用户哈币数值
+     *
      * @param userId 用户id
      * @return 哈币
      */
@@ -50,9 +51,28 @@ public interface UserInfoService {
 
     /**
      * 更新哈币
+     *
      * @param number 更新的数值
      * @param userId 用户ID
      * @return 返回影响条数
      */
-    Integer updateCoinByUId(Integer number,String userId);
+    boolean updateCoinByUId(Integer number, String userId);
+
+    /**
+     * 更新头像
+     *
+     * @param imgUrl 七牛云外链地址
+     * @param userId 用户id
+     * @return 头像外链
+     */
+    String updateAvatarById(String imgUrl, String userId);
+
+    /**
+     * 更新密码
+     *
+     * @param newPwd 新密码
+     * @param userId 用户id
+     * @return 更新成功否
+     */
+    boolean updatePwdByUid(String newPwd, String userId);
 }

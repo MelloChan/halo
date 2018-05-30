@@ -31,4 +31,10 @@
         INSERT INTO hl_user_registry (phone, pwd, salt)
         VALUES (#{phone}, #{pwd}, #{salt})
     </insert>
+
+    <update id="updatePwdByUId">
+        UPDATE hl_user_registry
+        SET salt = #{salt}, pwd = #{newPwd}, gmt_updated = now()
+        WHERE id = #{userId}
+    </update>
 </mapper>

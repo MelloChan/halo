@@ -68,13 +68,29 @@ public class UserInfoServiceImpl implements UserInfoService {
                 userProfile.getPhone(), userProfile.getPwdProtection());
     }
 
+
     @Override
     public Integer getHaloCoinByUId(@Param("userId") String userId) {
         return userProfileDao.getHaloCoinByUId(userId);
     }
 
     @Override
-    public Integer updateCoinByUId(@Param("number") Integer number, @Param("userId") String userId) {
-        return userProfileDao.updateCoinByUId(number, userId);
+    public boolean updateCoinByUId(@Param("number") Integer number, @Param("userId") String userId) {
+        return userProfileDao.updateCoinByUId(number, userId) != null;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String updateAvatarById(@Param("imgUrl") String imgUrl, @Param("userId") String userId) {
+//        UploadUtil.uploadToQiNiuYun()
+        return null;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean updatePwdByUid(String newPwd, String userId) {
+        String newSalt= DigestUtil.generateSalt();
+        String password=DigestUtil.sha256(newSalt+newPwd);
+      return userRegistryDao.updatePwdByUId(newSalt,password,userId)!=null;
     }
 }

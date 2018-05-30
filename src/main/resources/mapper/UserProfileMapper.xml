@@ -41,7 +41,12 @@
 
     <update id="updateCoinByUId">
         UPDATE hl_user_profile
-        SET hl_coin=#{number}
-        WHERE user_id=#{userId}
+        SET hl_coin = #{number}
+        WHERE user_id = #{userId}
+    </update>
+    <update id="updateAvatarById">
+        UPDATE hl_user_profile
+        SET avatar = #{imgUrl}
+        WHERE user_id = #{userId}
     </update>
 </mapper>
