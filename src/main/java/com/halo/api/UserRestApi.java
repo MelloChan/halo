@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Part;
 import javax.validation.constraints.Size;
+import java.io.IOException;
 import java.util.Map;
 
 
@@ -50,9 +51,10 @@ public class UserRestApi extends BaseController {
     }
 
     @PatchMapping("/{id}/updateAvatar")
-    public Map<String, Object> updateAvatarById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestPart @NotEmpty Part part) {
+    public Map<String, Object> updateAvatarById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestPart @NotEmpty Part part) throws IOException {
         if (id.equals(uid)) {
-
+            String avatarUrl = userInfoService.updateAvatarById(part, uid);
+            return rtnParam(0, ImmutableMap.of("avatarUrl", avatarUrl));
         }
         return rtnParam(40006, null);
     }
@@ -63,8 +65,8 @@ public class UserRestApi extends BaseController {
                                              @RequestAttribute("uid") String uid, @RequestParam("oldPwd") @Size(min = 8, max = 16) String oldPwd,
                                              @RequestParam("newPwd") @Size(min = 8, max = 16) String newPwd) {
 
-        if (id.equals(uid)&&!oldPwd.equals(newPwd)) {
-            return rtnParam(0,ImmutableMap.of("msg",userInfoService.updatePwdByUid(newPwd,uid)));
+        if (id.equals(uid) && !oldPwd.equals(newPwd)) {
+            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePwdByUid(newPwd, uid)));
         }
         return rtnParam(40006, null);
     }

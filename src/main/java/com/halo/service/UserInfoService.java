@@ -3,6 +3,9 @@ package com.halo.service;
 import com.halo.dto.UserProfileInfoDTO;
 import com.halo.dto.UserRegisterInfoDTO;
 
+import javax.servlet.http.Part;
+import java.io.IOException;
+
 /**
  * @author MelloChan
  * @date 2018/5/26
@@ -61,11 +64,11 @@ public interface UserInfoService {
     /**
      * 更新头像
      *
-     * @param imgUrl 七牛云外链地址
+     * @param part 头像图片资源
      * @param userId 用户id
      * @return 头像外链
      */
-    String updateAvatarById(String imgUrl, String userId);
+    String updateAvatarById(Part part, String userId) throws IOException;
 
     /**
      * 更新密码

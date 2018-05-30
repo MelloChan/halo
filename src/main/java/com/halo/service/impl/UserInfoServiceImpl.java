@@ -1,5 +1,6 @@
 package com.halo.service.impl;
 
+import com.halo.config.properties.QiNiu;
 import com.halo.dao.UserProfileDao;
 import com.halo.dao.UserRegistryDao;
 import com.halo.dto.UserProfileInfoDTO;
@@ -8,10 +9,15 @@ import com.halo.entity.UserProfile;
 import com.halo.entity.UserRegistry;
 import com.halo.service.UserInfoService;
 import com.halo.util.DigestUtil;
+import com.halo.util.UploadUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.Part;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 
 /**
  * @author MelloChan
@@ -23,6 +29,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserRegistryDao userRegistryDao;
     @Autowired
     private UserProfileDao userProfileDao;
+    @Autowired
+    private QiNiu qiNiu;
 
     @Override
     public Integer getIdByPhone(@Param("phone") String phone) {
@@ -81,9 +89,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String updateAvatarById(@Param("imgUrl") String imgUrl, @Param("userId") String userId) {
-//        UploadUtil.uploadToQiNiuYun()
-        return null;
+    public String updateAvatarById(Part part,String userId) throws IOException {
+        String imgUrl;
+        try (BufferedInputStream in = new BufferedInputStream(part.getInputStream())) {
+            int size = (int) part.getSize();
+            byte[] buffer = new byte[size];
+            int i = in.read(buffer);
+            while ((i > 0)) {
+                i = in.read(buffer);
+            }
+            imgUrl = UploadUtil.uploadToQiNiuYun(qiNiu,buffer);
+            userProfileDao.updateAvatarById(imgUrl,userId);
+        }
+        return imgUrl;
     }
 
     @Transactional(rollbackFor = Exception.class)
