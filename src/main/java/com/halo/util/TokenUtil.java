@@ -21,7 +21,7 @@ public class TokenUtil {
     private TokenUtil() {
     }
 
-    private static String SECRET = "DEMO:FAKE-SECRET";
+    private static final String SECRET = "halo-mobile-phone-qweasdoajfoangowqhbogonasdasdasdasdwqvzadas";
 
     /**
      * 创建jwt 过期时间60分钟

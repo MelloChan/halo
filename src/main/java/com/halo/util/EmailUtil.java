@@ -34,13 +34,13 @@ public class EmailUtil {
         sf.setTrustAllHosts(true);
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.ssl.socketFactory", sf);
-        //基于SSL的邮箱安全协议 163邮箱似乎不用？
         return Session.getInstance(props);
     }
 
     public static void sendEmail(Email config, String message, String destination) throws GeneralSecurityException, MessagingException {
         Session session = config();
         Message msg = new MimeMessage(session);
+        // 设置标题/内容/发送方
         msg.setSubject(new Date() + " 用户中心安全服务");
         msg.setText(message);
         msg.setFrom(new InternetAddress(config.getEmail()));
