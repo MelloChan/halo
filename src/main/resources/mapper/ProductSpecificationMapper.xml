@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.halo.dao.ProductSpecificationDao">
+    <cache/>
+    <resultMap id="ProductSpecificationResultMap" type="com.halo.entity.ProductSpecification">
+        <result column="id" property="id"/>
+        <result column="pro_id" property="proId"/>
+        <result column="specification" property="specification"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_updated" property="gmtUpdated"/>
+    </resultMap>
+    <parameterMap id="ProductSpecification" type="com.halo.entity.ProductSpecification"/>
+    <select id="getSpecificationByProId">
+        SELECT specification
+        FROM hl_product_specification
+        WHERE pro_id=#{proId}
+    </select>
+</mapper>

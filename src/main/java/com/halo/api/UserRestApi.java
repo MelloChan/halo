@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.Part;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -60,7 +62,7 @@ public class UserRestApi extends BaseController {
      * @param number 用户购买成功的哈币数
      */
     @PatchMapping("/{id}/coin")
-    public Map<String, Object> updateCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestParam @Size(min = 1, max = 100) Integer number) {
+    public Map<String, Object> updateCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestParam @Min(1)@Max(100) Integer number) {
         if (id.equals(uid)) {
             return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateCoinByUId(number, uid)));
         }

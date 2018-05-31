@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.halo.dao.ProductDao">
+    <cache/>
+    <resultMap id="ProductResultMap" type="com.halo.entity.Product">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="title" property="title"/>
+        <result column="price" property="price"/>
+        <result column="image" property="image"/>
+        <result column="stock" property="stock"/>
+        <result column="cate_id" property="cateId"/>
+        <result column="type_id" property="typeId"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_updated" property="gmtUpdated"/>
+    </resultMap>
+    <parameterMap id="Product" type="com.halo.entity.Product"/>
+    <select id="getItems" resultMap="ProductResultMap">
+        SELECT
+            id,
+            image,
+            name,
+            title,
+            price
+        FROM hl_product
+        LIMIT #{pageIndex},#{pageCount}
+    </select>
+</mapper>
