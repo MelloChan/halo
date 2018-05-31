@@ -22,14 +22,14 @@ public class ItemRestApi extends BaseController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping
+    @GetMapping("/")
     public Map<String, Object> getItems(@RequestParam("pageIndex")@Min(1) Integer pageIndex, @RequestParam("pageCount")@Min(1) Integer pageCount) {
 
         return rtnParam(0, ImmutableMap.of("items", itemService.getItems(pageIndex,pageCount)));
     }
 
-    @GetMapping("/{id}")
-    public Map<String, Object> getById(@PathVariable("id") @NotEmpty String id) {
-        return rtnParam(0, 0);
+    @GetMapping("/{proId}")
+    public Map<String, Object> getItemDetailById(@PathVariable("proId") @NotEmpty String proId) {
+        return rtnParam(0, ImmutableMap.of("itemDetail",itemService.getItemDetailByProId(proId)));
     }
 }

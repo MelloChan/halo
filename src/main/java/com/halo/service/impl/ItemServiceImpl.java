@@ -1,7 +1,10 @@
 package com.halo.service.impl;
 
 import com.halo.dao.ProductDao;
-import com.halo.dto.Item;
+import com.halo.dao.ProductDetailDao;
+import com.halo.dao.ProductSpecificationDao;
+import com.halo.dto.ItemDTO;
+import com.halo.dto.ItemDetailDTO;
 import com.halo.entity.Product;
 import com.halo.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +21,27 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private ProductSpecificationDao productSpecificationDao;
+    @Autowired
+    private ProductDetailDao productDetailDao;
 
     @Override
-    public List<Item> getItems(Integer pageIndex,Integer pageCount) {
+    public List<ItemDTO> getItems(Integer pageIndex,Integer pageCount) {
         Integer index=(pageIndex-1)*pageCount;
         List<Product> products = productDao.getItems(index,pageCount);
-        List<Item> items = new ArrayList<>();
-        Item item;
+        List<ItemDTO> items = new ArrayList<>();
+        ItemDTO item;
         for (Product product : products) {
-            item = new Item(product.getId(), product.getImage(), product.getName(), product.getTitle(),
+            item = new ItemDTO(product.getId(), product.getImage(), product.getName(), product.getTitle(),
                     product.getPrice());
             items.add(item);
         }
         return items;
+    }
+
+    @Override
+    public ItemDetailDTO getItemDetailByProId(String proId) {
+        return new ItemDetailDTO(productSpecificationDao.getSpecificationByProId(proId),productDetailDao.getDescriptionByProId(proId));
     }
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author MelloChan
  * @date 2018/5/16
  */
-public class Item implements Serializable {
+public class ItemDTO implements Serializable {
 
     private static final long serialVersionUID = -3486758677948381701L;
     private Integer proId;
@@ -16,6 +16,17 @@ public class Item implements Serializable {
     private String name;
     private String title;
     private Integer price;
+
+    public ItemDTO() {
+    }
+
+    public ItemDTO(Integer proId, String imgUrl, String name, String title, Integer price) {
+        this.proId = proId;
+        this.imgUrl = imgUrl;
+        this.name = name;
+        this.title = title;
+        this.price = price;
+    }
 
     public Integer getProId() {
         return proId;
@@ -30,14 +41,6 @@ public class Item implements Serializable {
     }
 
     public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public String getImg() {
-        return imgUrl;
-    }
-
-    public void setImg(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 

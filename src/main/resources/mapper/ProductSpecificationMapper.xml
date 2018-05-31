@@ -10,7 +10,7 @@
         <result column="gmt_updated" property="gmtUpdated"/>
     </resultMap>
     <parameterMap id="ProductSpecification" type="com.halo.entity.ProductSpecification"/>
-    <select id="getSpecificationByProId">
+    <select id="getSpecificationByProId" resultType="java.lang.String">
         SELECT specification
         FROM hl_product_specification
         WHERE pro_id=#{proId}

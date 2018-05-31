@@ -1,6 +1,7 @@
 package com.halo.service;
 
-import com.halo.dto.Item;
+import com.halo.dto.ItemDTO;
+import com.halo.dto.ItemDetailDTO;
 
 import java.util.List;
 
@@ -13,5 +14,12 @@ public interface ItemService {
      * 获取部分商品信息
      * @return 商品信息列表
      */
-    List<Item> getItems(Integer pageIndex,Integer pageCount);
+    List<ItemDTO> getItems(Integer pageIndex,Integer pageCount);
+
+    /**
+     * 获取商品详情页信息
+     * @param proId 商品id
+     * @return 商品详情
+     */
+    ItemDetailDTO getItemDetailByProId(String proId);
 }
