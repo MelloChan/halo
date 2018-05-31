@@ -130,4 +130,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     public boolean updatePhoneByUId(String phone, String userId) {
         return userRegistryDao.updatePhoneByUId(phone, userId) != null && userProfileDao.updatePhoneByUId(phone, userId) != null;
     }
+
+    @Override
+    public boolean updatePwdByPhone(String pwd, String phone) {
+        return userRegistryDao.updatePwdByPhone(pwd, phone) != null;
+    }
 }

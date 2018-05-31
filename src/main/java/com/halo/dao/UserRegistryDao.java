@@ -60,4 +60,12 @@ public interface UserRegistryDao {
      * @return 影响条数
      */
     Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") String userId);
+
+    /**
+     * 通过用户手机号更新密码
+     * @param pwd  用户密码
+     * @param phone 用户手机号
+     * @return 影响条数
+     */
+    Integer updatePwdByPhone(@Param("pwd")String pwd,@Param("phone")String phone);
 }

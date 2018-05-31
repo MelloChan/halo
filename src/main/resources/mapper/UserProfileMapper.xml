@@ -46,17 +46,17 @@
     </update>
     <update id="updateAvatarById">
         UPDATE hl_user_profile
-        SET avatar = #{imgUrl}
+        SET avatar = #{imgUrl}, gmt_updated = now()
         WHERE user_id = #{userId}
     </update>
     <update id="updateEmailById">
         UPDATE hl_user_profile
-        SET email = #{email}
+        SET email = #{email}, gmt_updated = now()
         WHERE user_id = #{userId}
     </update>
-    <update id="">
+    <update id="updatePhoneByUId">
         UPDATE hl_user_profile
-        SET phone = #{phone}
+        SET phone = #{phone}, gmt_updated = now()
         WHERE user_id = #{userId}
     </update>
 </mapper>

@@ -132,6 +132,10 @@ public class UserRestApi extends BaseController {
         return rtnParam(40006, null);
     }
 
+    /**
+     * 更新手机号
+     * 验证密码->验证旧手机->验证新手机
+     */
     @PatchMapping("/{id}/updatePhone")
     public Map<String, Object> updatePhoneById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,
                                                @RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 6, max = 6) String code) {
@@ -140,15 +144,4 @@ public class UserRestApi extends BaseController {
         }
         return rtnParam(40006, null);
     }
-
-    @PatchMapping("/{id}/updatePwdPro")
-    public Map<String, Object> updatePwdProById() {
-        return rtnParam(40006, null);
-    }
-
-    @PatchMapping("/{id}/resetPwd")
-    public Map<String, Object> resetPwdById() {
-        return rtnParam(40006, null);
-    }
-
 }

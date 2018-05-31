@@ -106,4 +106,11 @@ public interface UserInfoService {
      * @return 成功与否
      */
     boolean updatePhoneByUId(String phone,String userId);
+
+    /**
+     * 通过用户手机号更新密码
+     * @param pwd  用户密码
+     * @param phone 用户手机号
+     */
+    boolean updatePwdByPhone(String pwd,String phone);
 }

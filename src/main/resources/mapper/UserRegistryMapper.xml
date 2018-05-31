@@ -26,7 +26,7 @@
         FROM hl_user_registry
         WHERE phone = #{phone}
     </select>
-    <select id="">
+    <select id="getByUId">
         SELECT
             pwd,
             salt
@@ -44,9 +44,15 @@
         WHERE id = #{userId}
     </update>
 
-    <update id="">
+    <update id="updatePhoneByUId">
         UPDATE hl_user_registry
-        SET phone = #{phone}
+        SET phone = #{phone}, gmt_updated = now()
         WHERE id = #{userId}
+    </update>
+
+    <update id="updatePwdByPhone">
+        UPDATE hl_user_registry
+        SET salt = #{salt}, pwd = #{pwd}, gmt_updated = now()
+        WHERE phone = #{phone}
     </update>
 </mapper>

@@ -23,7 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/halo/auths")
 @Validated
-public class TokenRestApi extends BaseController {
+public class AuthRestApi extends BaseController {
 
     @Autowired
     private AuthService authService;
@@ -89,8 +89,27 @@ public class TokenRestApi extends BaseController {
             int uid = userInfoService.getIdByPhone(phone);
             String token = TokenUtil.createToken(uid);
             return rtnParam(0, ImmutableMap.of("access_token", token));
-        } else {
-            return rtnParam(40016, null);
         }
+        return rtnParam(40016, null);
     }
+
+
+    @PostMapping("/verifyCode")
+    public Map<String, Object> verifyCode(@RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 4, max = 4) String code) {
+        if (authService.verifyCode(phone, code)) {
+            return rtnParam(0, ImmutableMap.of("phone", phone));
+        }
+        return rtnParam(40016, null);
+    }
+
+    @PostMapping("/resetPwd")
+    public Map<String, Object> resetPwd(@RequestParam("phone") @Size(min = 11, max = 11) String phone,
+                                        @RequestParam("firstPwd") @Size(min = 8, max = 16) String firstPwd,
+                                        @RequestParam("secondPwd") @Size(min = 8, max = 16) String secondPwd) {
+        if (firstPwd.equals(secondPwd)) {
+            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePwdByPhone(firstPwd, phone)));
+        }
+        return rtnParam(40017, null);
+    }
+
 }

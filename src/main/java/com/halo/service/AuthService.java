@@ -84,6 +84,7 @@ public class AuthService {
 
     /**
      * 验证邮箱验证码是否正确
+     *
      * @param email 用户邮箱
      * @param code  邮箱验证码
      * @return 是否正确
