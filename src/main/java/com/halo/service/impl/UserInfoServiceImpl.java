@@ -97,7 +97,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String updateAvatarById(Part part, String userId) throws IOException {
+    public String updateAvatarByUId(Part part, String userId) throws IOException {
         String imgUrl;
         try (BufferedInputStream in = new BufferedInputStream(part.getInputStream())) {
             int size = (int) part.getSize();
@@ -114,7 +114,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean updatePwdByUid(String newPwd, String userId) {
+    public boolean updatePwdByUId(String newPwd, String userId) {
         String newSalt = DigestUtil.generateSalt();
         String password = DigestUtil.sha256(newSalt + newPwd);
         return userRegistryDao.updatePwdByUId(newSalt, password, userId) != null;
@@ -122,7 +122,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean updateEmailByUid(String email, String userId) {
+    public boolean updateEmailByUId(String email, String userId) {
         return userProfileDao.updateEmailById(email, userId) != null;
+    }
+
+    @Override
+    public boolean updatePhoneByUId(String phone, String userId) {
+        return userRegistryDao.updatePhoneByUId(phone, userId) != null && userProfileDao.updatePhoneByUId(phone, userId) != null;
     }
 }

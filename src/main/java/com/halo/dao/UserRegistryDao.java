@@ -28,10 +28,11 @@ public interface UserRegistryDao {
 
     /**
      * 通过id获取用户注册信息
+     *
      * @param userId 用户id
      * @return 用户盐与密码
      */
-    UserRegistry getByUId(@Param("userId")String userId);
+    UserRegistry getByUId(@Param("userId") String userId);
 
     /**
      * 插入用户注册信息
@@ -44,10 +45,19 @@ public interface UserRegistryDao {
     /**
      * 更新密码
      *
-     * @param salt 盐值
+     * @param salt   盐值
      * @param userId 用户id
-     * @param newPwd  新密码
+     * @param newPwd 新密码
      * @return 影响条数
      */
     Integer updatePwdByUId(@Param("salt") String salt, @Param("newPwd") String newPwd, @Param("userId") String userId);
+
+    /**
+     * 更新手机号
+     *
+     * @param phone  用户手机号
+     * @param userId 用户id
+     * @return 影响条数
+     */
+    Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") String userId);
 }

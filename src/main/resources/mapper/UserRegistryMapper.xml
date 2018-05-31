@@ -43,4 +43,10 @@
         SET salt = #{salt}, pwd = #{newPwd}, gmt_updated = now()
         WHERE id = #{userId}
     </update>
+
+    <update id="">
+        UPDATE hl_user_registry
+        SET phone = #{phone}
+        WHERE id = #{userId}
+    </update>
 </mapper>

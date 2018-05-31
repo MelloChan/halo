@@ -51,7 +51,12 @@
     </update>
     <update id="updateEmailById">
         UPDATE hl_user_profile
-        SET email=#{email}
-        WHERE user_id=#{userId}
+        SET email = #{email}
+        WHERE user_id = #{userId}
+    </update>
+    <update id="">
+        UPDATE hl_user_profile
+        SET phone = #{phone}
+        WHERE user_id = #{userId}
     </update>
 </mapper>

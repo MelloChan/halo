@@ -79,7 +79,7 @@ public interface UserInfoService {
      * @return 头像外链
      * @throws IOException 图片异常
      */
-    String updateAvatarById(Part part, String userId) throws IOException;
+    String updateAvatarByUId(Part part, String userId) throws IOException;
 
     /**
      * 更新密码
@@ -88,7 +88,7 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return 更新成功否
      */
-    boolean updatePwdByUid(String newPwd, String userId);
+    boolean updatePwdByUId(String newPwd, String userId);
 
     /**
      * 更新邮箱
@@ -97,6 +97,13 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return 成功与否
      */
-    boolean updateEmailByUid(String email, String userId);
+    boolean updateEmailByUId(String email, String userId);
 
+    /**
+     * 更新手机号
+     * @param phone 用户手机号
+     * @param userId 用户id
+     * @return 成功与否
+     */
+    boolean updatePhoneByUId(String phone,String userId);
 }

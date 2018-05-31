@@ -75,7 +75,7 @@ public class UserRestApi extends BaseController {
     @PatchMapping("/{id}/updateAvatar")
     public Map<String, Object> updateAvatarById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestPart @NotEmpty Part part) throws IOException {
         if (id.equals(uid)) {
-            String avatarUrl = userInfoService.updateAvatarById(part, uid);
+            String avatarUrl = userInfoService.updateAvatarByUId(part, uid);
             return rtnParam(0, ImmutableMap.of("avatarUrl", avatarUrl));
         }
         return rtnParam(40006, null);
@@ -90,7 +90,7 @@ public class UserRestApi extends BaseController {
                                              @RequestParam("newPwd") @Size(min = 8, max = 16) String newPwd) {
 
         if (id.equals(uid) && !oldPwd.equals(newPwd)) {
-            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePwdByUid(newPwd, uid)));
+            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePwdByUId(newPwd, uid)));
         }
         return rtnParam(40006, null);
     }
@@ -125,15 +125,19 @@ public class UserRestApi extends BaseController {
      */
     @PatchMapping("/{id}/updateEmail")
     public Map<String, Object> updateEmailById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,
-                                               @RequestParam("email") @Email String email, @RequestParam("code") @NotEmpty String code) {
+                                               @RequestParam("email") @Email String email, @RequestParam("code") @Size(min = 6, max = 6) String code) {
         if (id.equals(uid) && authService.verifyEmailCode(email, code)) {
-            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateEmailByUid(email, uid)));
+            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateEmailByUId(email, uid)));
         }
         return rtnParam(40006, null);
     }
 
     @PatchMapping("/{id}/updatePhone")
-    public Map<String, Object> updatePhoneById() {
+    public Map<String, Object> updatePhoneById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,
+                                               @RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 6, max = 6) String code) {
+        if (id.equals(uid) && authService.verifyCode(phone, code)) {
+            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePhoneByUId(phone, uid)));
+        }
         return rtnParam(40006, null);
     }
 
