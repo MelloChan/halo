@@ -47,11 +47,12 @@ public interface UserInfoService {
 
     /**
      * 验证用户密码
-     * @param pwd 用户密码
+     *
+     * @param pwd    用户密码
      * @param userId 用户id
      * @return 验证成功与否
      */
-    boolean verifyPwd(String pwd,String userId);
+    boolean verifyPwd(String pwd, String userId);
 
     /**
      * 用户注册
@@ -88,4 +89,14 @@ public interface UserInfoService {
      * @return 更新成功否
      */
     boolean updatePwdByUid(String newPwd, String userId);
+
+    /**
+     * 更新邮箱
+     *
+     * @param email  用户邮箱
+     * @param userId 用户id
+     * @return 成功与否
+     */
+    boolean updateEmailByUid(String email, String userId);
+
 }

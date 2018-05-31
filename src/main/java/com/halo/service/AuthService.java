@@ -1,11 +1,16 @@
 package com.halo.service;
 
+import com.halo.config.properties.Email;
 import com.halo.config.properties.Ucpaas;
 import com.halo.redis.RedisUtil;
+import com.halo.util.EmailUtil;
 import com.halo.util.SmsUtil;
 import com.halo.util.VerifyCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import java.security.GeneralSecurityException;
 
 /**
  * @author MelloChan
@@ -16,6 +21,8 @@ public class AuthService {
     @Autowired
     private Ucpaas ucpaas;
     @Autowired
+    private Email email;
+    @Autowired
     private UserInfoService userInfoService;
     @Autowired
     private RedisUtil redisUtil;
@@ -23,17 +30,35 @@ public class AuthService {
     /**
      * 发送短信验证码 本地验证码存入缓存 60s内过期
      *
-     * @param phone 用户手机号
+     * @param phone  用户手机号
      * @param tempId 短信模板Id
      * @return 发送成功否
      */
-    public boolean sendSmsCode(String phone,String tempId) {
+    public boolean sendSmsCode(String phone, String tempId) {
         String code = VerifyCodeGenerator.getFourVerifyCode();
         redisUtil.add(phone, 60L, code);
-        ucpaas=new Ucpaas(ucpaas.getSid(),ucpaas.getToken(),ucpaas.getAppid(),tempId,code,phone,ucpaas.getUrl());
+        ucpaas = new Ucpaas(ucpaas.getSid(), ucpaas.getToken(), ucpaas.getAppid(), tempId, code, phone, ucpaas.getUrl());
         String json = SmsUtil.sendSms(ucpaas);
         int okIdx = json.indexOf("OK");
         return "OK".equals(json.substring(okIdx, okIdx + 2));
+    }
+
+    /**
+     * 发送邮箱验证码 本地验证码输入缓存 30分钟过去
+     *
+     * @param destinationEmail 目的邮箱
+     * @throws GeneralSecurityException 安全异常
+     * @throws MessagingException       消息异常
+     */
+    public void sendEmail(String destinationEmail) throws GeneralSecurityException, MessagingException {
+        String code = VerifyCodeGenerator.getSixVerifyCode();
+        redisUtil.add(destinationEmail, 1800L, code);
+        String msg = "您好：\n" +
+                "感谢您使用Halo.服务。\n" +
+                "您正在进行Halo. 账号邮箱操作，请在30分钟内将此验证码：" + code + " 输入验证码输入框，以完成验证。\n" +
+                "此致\n" +
+                "Halo.科技";
+        EmailUtil.sendEmail(email, msg, destinationEmail);
     }
 
     /**
@@ -57,4 +82,13 @@ public class AuthService {
         return code.equals(redisUtil.get(phone));
     }
 
+    /**
+     * 验证邮箱验证码是否正确
+     * @param email 用户邮箱
+     * @param code  邮箱验证码
+     * @return 是否正确
+     */
+    public boolean verifyEmailCode(String email, String code) {
+        return code.equals(redisUtil.get(email));
+    }
 }

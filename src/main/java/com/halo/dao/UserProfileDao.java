@@ -44,7 +44,13 @@ public interface UserProfileDao {
      * 更新头像
      * @param imgUrl 七牛云外链地址
      * @param userId 用户id
-     * @return 影响条数
      */
-    Integer updateAvatarById(@Param("imgUrl")String imgUrl,@Param("userId")String userId);
+    void updateAvatarById(@Param("imgUrl")String imgUrl,@Param("userId")String userId);
+
+    /**
+     * 更新邮箱
+     * @param email 用户邮箱
+     * @param userId 用户id
+     */
+    Integer updateEmailById(@Param("email")String email,@Param("userId")String userId);
 }

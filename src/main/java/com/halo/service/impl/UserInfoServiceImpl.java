@@ -91,7 +91,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public boolean updateCoinByUId(Integer number, String userId) {
-        return userProfileDao.updateCoinByUId(number, userId) != null;
+        Integer sum = number + userProfileDao.getHaloCoinByUId(userId);
+        return userProfileDao.updateCoinByUId(sum, userId) != null;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -117,5 +118,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         String newSalt = DigestUtil.generateSalt();
         String password = DigestUtil.sha256(newSalt + newPwd);
         return userRegistryDao.updatePwdByUId(newSalt, password, userId) != null;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean updateEmailByUid(String email, String userId) {
+        return userProfileDao.updateEmailById(email, userId) != null;
     }
 }
