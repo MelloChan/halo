@@ -127,7 +127,7 @@ public class UserRestApi extends BaseController {
     public Map<String, Object> updateEmailById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid,
                                                @RequestParam("email") @Email String email, @RequestParam("code") @NotEmpty String code) {
         if (id.equals(uid) && authService.verifyEmailCode(email, code)) {
-
+            return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateEmailByUid(email, uid)));
         }
         return rtnParam(40006, null);
     }
