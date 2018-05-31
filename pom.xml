@@ -83,6 +83,13 @@
 			<artifactId>qiniu-java-sdk</artifactId>
 			<version>[7.2.0, 7.2.99]</version>
 		</dependency>
+		<!--email工具包-->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
