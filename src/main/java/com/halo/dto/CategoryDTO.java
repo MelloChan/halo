@@ -10,30 +10,30 @@ import java.util.List;
 public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 6032728683904816818L;
 
-    private List<String> category;
-    private List<String> brand;
+    private List<Category> categories;
+    private List<Brand> brands;
 
-    public List<String> getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(List<String> category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
-    public List<String> getBrand() {
-        return brand;
+    public List<Brand> getBrands() {
+        return brands;
     }
 
-    public void setBrand(List<String> brand) {
-        this.brand = brand;
+    public void setBrands(List<Brand> brands) {
+        this.brands = brands;
     }
 
     @Override
     public String toString() {
         return "CategoryDTO{" +
-                "category=" + category +
-                ", brand=" + brand +
+                "categories=" + categories +
+                ", brands=" + brands +
                 '}';
     }
 }

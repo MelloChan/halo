@@ -27,9 +27,36 @@ public class ItemServiceImpl implements ItemService {
     private ProductDetailDao productDetailDao;
 
     @Override
-    public List<ItemDTO> getItems(Integer pageIndex,Integer pageCount) {
-        Integer index=(pageIndex-1)*pageCount;
-        List<Product> products = productDao.getItems(index,pageCount);
+    public List<ItemDTO> getItems(Integer pageIndex, Integer pageCount) {
+        Integer index = (pageIndex - 1) * pageCount;
+        List<Product> products = productDao.getItems(index, pageCount);
+        return getItemList(products);
+    }
+
+    @Override
+    public ItemDetailDTO getItemDetailByProId(Integer proId) {
+        return new ItemDetailDTO(productSpecificationDao.getSpecificationByProId(proId), productDetailDao.getDescriptionByProId(proId));
+    }
+
+    @Override
+    public List<ItemDTO> getItemsByCateId(Integer cateId) {
+        List<Product> products = productDao.getItemsByCateId(cateId);
+        return getItemList(products);
+    }
+
+    @Override
+    public List<ItemDTO> getItemsByTypeId(Integer typeId) {
+        List<Product> products = productDao.getItemsByTypeId(typeId);
+        return getItemList(products);
+    }
+
+    @Override
+    public List<ItemDTO> getItemsByBrandId(Integer brandId) {
+        List<Product> products = productDao.getItemsByBrandId(brandId);
+        return getItemList(products);
+    }
+
+    private List<ItemDTO> getItemList(List<Product> products) {
         List<ItemDTO> items = new ArrayList<>();
         ItemDTO item;
         for (Product product : products) {
@@ -38,10 +65,5 @@ public class ItemServiceImpl implements ItemService {
             items.add(item);
         }
         return items;
-    }
-
-    @Override
-    public ItemDetailDTO getItemDetailByProId(String proId) {
-        return new ItemDetailDTO(productSpecificationDao.getSpecificationByProId(proId),productDetailDao.getDescriptionByProId(proId));
     }
 }

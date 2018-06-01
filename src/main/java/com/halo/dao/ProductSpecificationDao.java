@@ -9,5 +9,5 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface ProductSpecificationDao {
-    String getSpecificationByProId(@Param("proId")String proId);
+    String getSpecificationByProId(@Param("proId") Integer proId);
 }
