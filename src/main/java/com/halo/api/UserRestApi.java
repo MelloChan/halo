@@ -62,7 +62,7 @@ public class UserRestApi extends BaseController {
      * @param number 用户购买成功的哈币数
      */
     @PatchMapping("/{id}/coin")
-    public Map<String, Object> updateCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestParam @Min(1)@Max(100) Integer number) {
+    public Map<String, Object> updateCoinById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestParam @Min(1) @Max(100) Integer number) {
         if (id.equals(uid)) {
             return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateCoinByUId(number, uid)));
         }
@@ -75,7 +75,7 @@ public class UserRestApi extends BaseController {
      * @param part 头像数据
      */
     @PatchMapping("/{id}/updateAvatar")
-    public Map<String, Object> updateAvatarById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestPart @NotEmpty Part part) throws IOException {
+    public Map<String, Object> updateAvatarById(@PathVariable("id") @NotEmpty String id, @RequestAttribute("uid") String uid, @RequestPart("imgFile") @NotEmpty Part part) throws IOException {
         if (id.equals(uid)) {
             String avatarUrl = userInfoService.updateAvatarByUId(part, uid);
             return rtnParam(0, ImmutableMap.of("avatarUrl", avatarUrl));
