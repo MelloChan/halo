@@ -33,4 +33,14 @@ public interface ProductDao {
      * 通过品牌id查询商品
      */
     List<Product> getItemsByBrandId(@Param("brandId") Integer brandId);
+
+    /**
+     * 通过分类id与类型id查询
+     */
+    List<Product> getItemsByCateIdAndTypeId(@Param("cateId") Integer cateId, @Param("typeId") Integer typeId);
+
+    /**
+     * 通过分类di与品牌id查询
+     */
+    List<Product> getItemsByCateIdAndBrandId(@Param("cateId") Integer cateId, @Param("brandId") Integer brandId);
 }

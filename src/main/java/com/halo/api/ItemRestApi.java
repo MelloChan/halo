@@ -36,6 +36,18 @@ public class ItemRestApi extends BaseController {
         return rtnParam(0, ImmutableMap.of("items", itemService.getItemsByCateId(cateId)));
     }
 
+    @GetMapping("/{cateId}/cate/{typeId}/type")
+    public Map<String, Object> getItemsByCateIdAndTypeId(@PathVariable("cateId") @Min(1) Integer cateId,
+                                                         @PathVariable("typeId") @Min(1) Integer typeId) {
+        return rtnParam(0, ImmutableMap.of("items", itemService.getItemsByCateIdAndTypeId(cateId, typeId)));
+    }
+
+    @GetMapping("/{cateId}/cate/{brandId}/brand")
+    public Map<String, Object> getItemsByCateIdAndBrandId(@PathVariable("cateId") @Min(1) Integer cateId,
+                                                          @PathVariable("brandId") @Min(1) Integer brandId) {
+        return rtnParam(0, ImmutableMap.of("items", itemService.getItemsByCateIdAndBrandId(cateId, brandId)));
+    }
+
     @GetMapping("/{typeId}/type")
     public Map<String, Object> getItemsByTypeId(@PathVariable("typeId") @Min(1) Integer typeId) {
         return rtnParam(0, ImmutableMap.of("items", itemService.getItemsByTypeId(typeId)));

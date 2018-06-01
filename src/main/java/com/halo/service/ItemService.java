@@ -39,4 +39,14 @@ public interface ItemService {
      * 通过品牌id查询商品
      */
     List<ItemDTO> getItemsByBrandId(Integer brandId);
+
+    /**
+     * 通过分类id与类型id查询
+     */
+    List<ItemDTO> getItemsByCateIdAndTypeId(Integer cateId, Integer typeId);
+
+    /**
+     * 通过分类di与品牌id查询
+     */
+    List<ItemDTO> getItemsByCateIdAndBrandId(Integer cateId, Integer brandId);
 }

@@ -56,4 +56,24 @@
         FROM hl_product
         WHERE brand_id = #{brandId}
     </select>
+    <select id="getItemsByCateIdAndTypeId" resultMap="ProductResultMap">
+        SELECT
+            id,
+            image,
+            name,
+            title,
+            price
+        FROM hl_product
+        WHERE cate_id = #{cateId} AND type_id = #{typeId}
+    </select>
+    <select id="getItemsByCateIdAndBrandId" resultMap="ProductResultMap">
+        SELECT
+            id,
+            image,
+            name,
+            title,
+            price
+        FROM hl_product
+        WHERE cate_id = #{cateId} AND brand_id = #{brandId}
+    </select>
 </mapper>

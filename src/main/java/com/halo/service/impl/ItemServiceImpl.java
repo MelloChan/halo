@@ -56,6 +56,18 @@ public class ItemServiceImpl implements ItemService {
         return getItemList(products);
     }
 
+    @Override
+    public List<ItemDTO> getItemsByCateIdAndTypeId(Integer cateId, Integer typeId) {
+        List<Product> products = productDao.getItemsByCateIdAndTypeId(cateId, typeId);
+        return getItemList(products);
+    }
+
+    @Override
+    public List<ItemDTO> getItemsByCateIdAndBrandId(Integer cateId, Integer brandId) {
+        List<Product> products = productDao.getItemsByCateIdAndBrandId(cateId, brandId);
+        return getItemList(products);
+    }
+
     private List<ItemDTO> getItemList(List<Product> products) {
         List<ItemDTO> items = new ArrayList<>();
         ItemDTO item;
