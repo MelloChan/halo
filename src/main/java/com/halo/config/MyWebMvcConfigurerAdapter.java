@@ -31,7 +31,8 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/api/halo/auths/**")
                 .excludePathPatterns("/api/halo/registers/**")
                 .excludePathPatterns("/api/halo/items/**")
-                .excludePathPatterns("/api/halo/categorys/**");
+                .excludePathPatterns("/api/halo/categorys/**")
+                .excludePathPatterns("/api/halo/carts/**");
         super.addInterceptors(registry);
     }
 }
