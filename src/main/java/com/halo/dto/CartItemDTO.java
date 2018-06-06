@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author MelloChan
  * @date 2018/6/2
  */
-public class CartItemDTO implements Serializable {
+public class    CartItemDTO implements Serializable {
     private static final long serialVersionUID = 6966010392610826703L;
     @Min(1)
     private Integer id;

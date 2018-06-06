@@ -1,7 +1,6 @@
 package com.halo.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,13 +9,9 @@ import java.util.List;
  */
 public class CartDTO implements Serializable {
     private static final long serialVersionUID = 7998590239294856704L;
-    private List<CartItemDTO> carts;
+    private List<CartItemDTO>carts;
     private Integer totalNumber;
     private Integer totalPrice;
-
-    public CartDTO() {
-        this.carts = new ArrayList<>();
-    }
 
     public List<CartItemDTO> getCarts() {
         return carts;
