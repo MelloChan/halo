@@ -3,13 +3,14 @@ package com.halo.dto;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * @author MelloChan
  * @date 2018/5/27
  */
-public class UserRegisterInfoDTO {
-
+public class UserRegisterInfoDTO implements Serializable {
+    private static final long serialVersionUID = 5403963758408522704L;
     @NotEmpty(message = "手机号不能为空")
     @Size(min = 11, max = 11)
     private String phone;
