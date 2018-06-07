@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -26,21 +27,21 @@ public class CartRestApi extends BaseController {
     private CartService cartService;
 
     @GetMapping("/")
-    public Map<String, Object> getCart(@RequestHeader("access_token") String token, HttpServletRequest request) {
-
-        return rtnParam(0, ImmutableMap.of("cart", ""));
+    public Map<String, Object> getCart(HttpServletRequest request) throws UnsupportedEncodingException {
+        return rtnParam(0, ImmutableMap.of("cart", cartService.getCart(request)));
     }
 
     @PostMapping("/")
     public Map<String, Object> insertCartItem(@Valid @RequestBody CartItemDTO cartItemDTO,
                                               HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        System.out.println(cartItemDTO);
-        response.addCookie(cartService.insertCartItem(request.getHeader("access_token"), cartItemDTO, request));
+
+        Cookie cookie = cartService.insertCartItem(cartItemDTO, request);
+        response.addCookie(cookie);
         return rtnParam(0, ImmutableMap.of("msg", "success"));
     }
 
     @DeleteMapping("/")
-    public Map<String, Object> deleteCartItem(@RequestHeader("access_token") String token) {
+    public Map<String, Object> deleteCartItem(HttpServletRequest request) {
         return rtnParam(40018, null);
     }
 
