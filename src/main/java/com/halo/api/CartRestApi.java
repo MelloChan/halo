@@ -12,6 +12,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
@@ -41,12 +43,14 @@ public class CartRestApi extends BaseController {
     }
 
     @DeleteMapping("/")
-    public Map<String, Object> deleteCartItem(HttpServletRequest request) {
+    public Map<String, Object> deleteCartItem() {
         return rtnParam(40018, null);
     }
 
-    @PatchMapping("/")
-    public Map<String, Object> updateCartItem(@RequestHeader("access_token") String token) {
+    @PatchMapping("/{id}")
+    public Map<String, Object> updateCartItem(@PathVariable("id") Integer id, @RequestParam @Min(1) @Max(100) Integer quantity,
+                                              HttpServletRequest request) throws UnsupportedEncodingException {
+        cartService.updateCart(id, quantity, request);
         return rtnParam(40018, null);
     }
 }

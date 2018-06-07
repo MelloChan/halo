@@ -32,11 +32,10 @@ public class CartService {
     /**
      * 加入购物车
      *
-     * @param token       登录状态下的token
      * @param cartItemDTO 加入的购物车商品
      * @param request     请求流
      */
-    public Cookie insertCartItem(String token, CartItemDTO cartItemDTO,
+    public Cookie insertCartItem(CartItemDTO cartItemDTO,
                                  HttpServletRequest request) throws UnsupportedEncodingException {
         // 获取cookie的购物车信息
         CartDTO cartDTO = getCartDTOByCookie(request);
@@ -47,15 +46,16 @@ public class CartService {
         }
 
         // 将商品加入购物车
-        List<CartItemDTO> carts = addItem(cartDTO,cartItemDTO);
+        List<CartItemDTO> carts = addItem(cartDTO, cartItemDTO);
 
         // 更新购物车商品列表 商品总数 商品总价
         cartDTO.setCarts(carts);
         cartDTO.setTotalNumber(cartDTO.getTotalNumber() + 1);
         cartDTO.setTotalPrice(cartDTO.getTotalPrice() + cartItemDTO.getPrice());
 
+        String token = request.getHeader("access_token");
         // 保存购物车信息并且返回相应cookie
-        return saveCartAndGetCookie(token,cartDTO);
+        return saveCartAndGetCookie(token, cartDTO);
     }
 
     /**
@@ -78,20 +78,23 @@ public class CartService {
     }
 
     /**
-     *  购物车商品数不少于0 循环遍历是否有相同商品
+     * 购物车商品数不少于0 循环遍历是否有相同商品
      */
     private List<CartItemDTO> addItem(CartDTO cartDTO, CartItemDTO cartItemDTO) {
         List<CartItemDTO> carts = cartDTO.getCarts();
+        boolean flag = false;
         if (carts.size() > 0) {
             for (CartItemDTO cartItem : carts) {
                 if (cartItemDTO.getId().equals(cartItem.getId())) {
                     // 增加相同商品数量
                     cartItem.setAmount(cartItem.getAmount() + cartItemDTO.getAmount());
+                    flag = true;
                     break;
                 }
             }
-        } else {
-            // 新商品 直接添加到购物车
+        }
+        //  新商品 直接添加到购物车
+        if (!flag) {
             carts.add(cartItemDTO);
         }
         return carts;
@@ -119,13 +122,38 @@ public class CartService {
         }
         return cookie;
     }
-    public CartDTO getCart() {
 
-        return null;
+    /**
+     * 获取购物车信息
+     */
+    public CartDTO getCart(HttpServletRequest request) throws UnsupportedEncodingException {
+        CartDTO cartDTO;
+        String token = request.getHeader("access_token");
+        if (token != null) {
+            Map<String, Claim> claims = TokenUtil.verifyToken(token);
+            int id = claims.get("uid").asInt();
+            cartDTO = (CartDTO) redisUtil.get(String.valueOf(id));
+        } else {
+            cartDTO = getCartDTOByCookie(request);
+        }
+        return cartDTO;
     }
 
-    public boolean updateCart() {
-        return false;
+    public void updateCart(Integer id, Integer quantity, HttpServletRequest request) throws UnsupportedEncodingException {
+        CartDTO cartDTO = getCart(request);
+        List<CartItemDTO> carts = cartDTO.getCarts();
+        for (CartItemDTO item : carts) {
+            if (item.getId().equals(id)) {
+                cartDTO.setTotalPrice(cartDTO.getTotalPrice() - item.getAmount() * item.getPrice());
+                cartDTO.setTotalNumber(cartDTO.getTotalNumber() - item.getAmount());
+                item.setAmount(quantity);
+                cartDTO.setTotalPrice(cartDTO.getTotalPrice() + quantity * item.getPrice());
+                cartDTO.setTotalNumber(cartDTO.getTotalNumber() + quantity);
+                break;
+            }
+        }
+        String token = request.getHeader("access_token");
+        saveCartAndGetCookie(token, cartDTO);
     }
 
     public boolean deleteCart() {
