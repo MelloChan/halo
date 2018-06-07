@@ -42,15 +42,16 @@ public class CartRestApi extends BaseController {
         return rtnParam(0, ImmutableMap.of("msg", "success"));
     }
 
-    @DeleteMapping("/")
-    public Map<String, Object> deleteCartItem() {
-        return rtnParam(40018, null);
+    @DeleteMapping("/{id}")
+    public Map<String, Object> deleteCartItem(@PathVariable("id") Integer id, HttpServletRequest request) throws UnsupportedEncodingException {
+        cartService.deleteCart(id, request);
+        return rtnParam(0, ImmutableMap.of("msg", "success"));
     }
 
     @PatchMapping("/{id}")
     public Map<String, Object> updateCartItem(@PathVariable("id") Integer id, @RequestParam @Min(1) @Max(100) Integer quantity,
                                               HttpServletRequest request) throws UnsupportedEncodingException {
         cartService.updateCart(id, quantity, request);
-        return rtnParam(40018, null);
+        return rtnParam(0, ImmutableMap.of("msg", "success"));
     }
 }

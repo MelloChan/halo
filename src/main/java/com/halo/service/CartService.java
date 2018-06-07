@@ -118,7 +118,7 @@ public class CartService {
             LOGGER.info("cartJson:{}", cartJson);
             cookie = new Cookie("cart", URLEncoder.encode(cartJson, "utf-8"));
             cookie.setPath("/");
-            cookie.setMaxAge(24 * 60 * 60);
+            cookie.setMaxAge(12 * 60 * 60);
         }
         return cookie;
     }
@@ -139,6 +139,9 @@ public class CartService {
         return cartDTO;
     }
 
+    /**
+     * 更新(增加或减少)购物车某件商品的数量
+     */
     public void updateCart(Integer id, Integer quantity, HttpServletRequest request) throws UnsupportedEncodingException {
         CartDTO cartDTO = getCart(request);
         List<CartItemDTO> carts = cartDTO.getCarts();
@@ -156,7 +159,21 @@ public class CartService {
         saveCartAndGetCookie(token, cartDTO);
     }
 
-    public boolean deleteCart() {
-        return false;
+    /**
+     * 删除购物车中某件商品
+     */
+    public void deleteCart(Integer id, HttpServletRequest request) throws UnsupportedEncodingException {
+        CartDTO cartDTO = getCart(request);
+        List<CartItemDTO> carts = cartDTO.getCarts();
+        for (CartItemDTO item : carts) {
+            if (item.getId().equals(id)) {
+                cartDTO.setTotalNumber(cartDTO.getTotalNumber() - item.getAmount());
+                cartDTO.setTotalPrice(cartDTO.getTotalPrice() - item.getAmount() * item.getPrice());
+                carts.remove(item);
+                break;
+            }
+        }
+        String token = request.getHeader("access_token");
+        saveCartAndGetCookie(token, cartDTO);
     }
 }
