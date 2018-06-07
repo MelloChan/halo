@@ -1,6 +1,7 @@
 package com.halo.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,11 @@ public class CartDTO implements Serializable {
     private List<CartItemDTO>carts;
     private Integer totalNumber;
     private Integer totalPrice;
-
+    public CartDTO(){
+        this.carts=new ArrayList<>();
+        this.totalNumber=0;
+        this.totalPrice=0;
+    }
     public List<CartItemDTO> getCarts() {
         return carts;
     }
