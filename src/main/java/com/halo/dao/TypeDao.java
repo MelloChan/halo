@@ -1,6 +1,10 @@
 package com.halo.dao;
 
+import com.halo.entity.Type;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author MelloChan
@@ -8,4 +12,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TypeDao {
+    /**
+     * 根据分类id查找
+     */
+    List<Type>getTypeByCateId(@Param("cateId")Integer cateId);
 }

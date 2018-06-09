@@ -8,4 +8,9 @@
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_updated" property="gmtUpdated"/>
     </resultMap>
+    <parameterMap id="Category" type="com.halo.entity.Category"/>
+    <select id="getCate" resultMap="CategoryResultMap">
+        SELECT id,cate_name
+        FROM hl_category
+    </select>
 </mapper>

@@ -1,5 +1,8 @@
 package com.halo.dto;
 
+import com.halo.entity.Brand;
+import com.halo.entity.Type;
+
 import java.io.Serializable;
 import java.util.List;
 

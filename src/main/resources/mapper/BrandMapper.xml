@@ -9,4 +9,21 @@
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_updated" property="gmtUpdated"/>
     </resultMap>
+    <parameterMap id="Brand" type="com.halo.entity.Brand"/>
+
+    <select id="getBrand" resultMap="BrandResultMap">
+        SELECT
+            id,
+            brand_name
+        FROM hl_brand
+        LIMIT 0,7
+    </select>
+
+    <select id="getBrandByCateId" resultMap="BrandResultMap">
+        SELECT
+            id,
+            brand_name
+        FROM hl_brand
+        WHERE cate_id = #{cateId}
+    </select>
 </mapper>
