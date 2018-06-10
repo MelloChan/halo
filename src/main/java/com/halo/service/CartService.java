@@ -133,6 +133,10 @@ public class CartService {
             Map<String, Claim> claims = TokenUtil.verifyToken(token);
             int id = claims.get("uid").asInt();
             cartDTO = (CartDTO) redisUtil.get(String.valueOf(id));
+            if(cartDTO==null){
+                cartDTO = getCartDTOByCookie(request);
+                redisUtil.add(String.valueOf(id), cartDTO);
+            }
         } else {
             cartDTO = getCartDTOByCookie(request);
         }
