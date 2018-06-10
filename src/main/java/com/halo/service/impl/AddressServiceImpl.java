@@ -5,6 +5,7 @@ import com.halo.dto.AddressDTO;
 import com.halo.entity.UserAddress;
 import com.halo.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author MelloChan
  * @date 2018/6/10
  */
+@Service
 public class AddressServiceImpl implements AddressService {
     @Autowired
     private UserAddressDao userAddressDao;
