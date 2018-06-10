@@ -76,4 +76,9 @@
         FROM hl_product
         WHERE cate_id = #{cateId} AND brand_id = #{brandId}
     </select>
+    <update id="updateMinusStockByProId">
+        UPDATE hl_product
+        SET stock=stock-1
+        WHERE id=#{proId} AND stock>0
+    </update>
 </mapper>

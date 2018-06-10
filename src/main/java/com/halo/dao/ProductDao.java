@@ -43,4 +43,9 @@ public interface ProductDao {
      * 通过分类di与品牌id查询
      */
     List<Product> getItemsByCateIdAndBrandId(@Param("cateId") Integer cateId, @Param("brandId") Integer brandId);
+
+    /**
+     * 减库存
+     */
+    void updateMinusStockByProId(@Param("proId")Integer proId);
 }

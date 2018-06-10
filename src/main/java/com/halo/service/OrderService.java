@@ -5,4 +5,5 @@ package com.halo.service;
  * @date 2018/6/6
  */
 public interface OrderService {
+    String generateOrderId(Integer userId);
 }
