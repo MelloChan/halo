@@ -1,5 +1,6 @@
 package com.halo.dao;
 
+import com.halo.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -8,4 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface OrderDao {
+    /**
+     * 插入订单信息
+     */
+    void insertOrderInfo(Order order);
 }

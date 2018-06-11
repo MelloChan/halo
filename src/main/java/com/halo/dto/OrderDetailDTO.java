@@ -20,7 +20,7 @@ public class OrderDetailDTO implements Serializable{
     private List<OrderProductDTO>products;
     @Min(1)
     @Max(3)
-    private Integer payType;
+    private Short payType;
 
     public String getId() {
         return id;
@@ -46,11 +46,11 @@ public class OrderDetailDTO implements Serializable{
         this.products = products;
     }
 
-    public Integer getPayType() {
+    public Short getPayType() {
         return payType;
     }
 
-    public void setPayType(Integer payType) {
+    public void setPayType(Short payType) {
         this.payType = payType;
     }
 

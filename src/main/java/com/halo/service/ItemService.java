@@ -49,4 +49,6 @@ public interface ItemService {
      * 通过分类di与品牌id查询
      */
     List<ItemDTO> getItemsByCateIdAndBrandId(Integer cateId, Integer brandId);
+
+    Integer updateMinusStockByProId(Integer proId);
 }

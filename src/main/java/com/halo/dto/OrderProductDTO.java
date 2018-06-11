@@ -23,7 +23,7 @@ public class OrderProductDTO implements Serializable {
     @Min(1)
     private Integer total;
     @Min(1)
-    private Integer number;
+    private Short number;
 
     public Integer getProId() {
         return proId;
@@ -65,11 +65,11 @@ public class OrderProductDTO implements Serializable {
         this.total = total;
     }
 
-    public Integer getNumber() {
+    public Short getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(Short number) {
         this.number = number;
     }
 

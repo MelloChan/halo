@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -24,12 +26,15 @@ public class OrderRestApi extends BaseController {
     private OrderService orderService;
     @Autowired
     private AddressService addressService;
+
     @GetMapping("/")
     public Map<String, Object> generateOrder(@RequestAttribute("uid") Integer uid) {
-        return rtnParam(0, ImmutableMap.of("orderId",orderService.generateOrderId(uid),"address",addressService.getByUId(uid)));
+        return rtnParam(0, ImmutableMap.of("orderId", orderService.generateOrderId(uid), "address", addressService.getByUId(uid)));
     }
+
     @PostMapping("/")
-    public Map<String,Object>insertOrder(@RequestAttribute("uid") Integer uid,@Valid @RequestBody OrderDetailDTO orderDetailDTO){
-        return rtnParam(0,ImmutableMap.of("demo","demo"));
+    public Map<String, Object> insertOrder(@RequestAttribute("uid") Integer uid, @Valid @RequestBody OrderDetailDTO orderDetailDTO,
+                                           HttpServletRequest request) throws UnsupportedEncodingException {
+        return rtnParam(0, ImmutableMap.of("id", orderService.insertOrderInfo(uid, orderDetailDTO, request)));
     }
 }

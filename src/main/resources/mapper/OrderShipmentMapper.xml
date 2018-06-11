@@ -11,4 +11,8 @@
         <result column="gmt_updated" property="gmtUpdated"/>
     </resultMap>
     <parameterMap id="OrderShipment" type="com.halo.entity.OrderShipment"/>
+    <insert id="insertOrderShipmentInfo">
+        INSERT INTO hl_order_shipment (order_id, receiver_name, receiver_phone, receiver_address, gmt_create, gmt_updated)
+        VALUES (#{orderId}, #{receiverName}, #{receiverPhone}, #{receiverAddress}, now(), now())
+    </insert>
 </mapper>

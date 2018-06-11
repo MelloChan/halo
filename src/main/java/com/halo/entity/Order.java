@@ -20,6 +20,19 @@ public class Order implements Serializable {
     private Date gmtCreate;
     private Date gmtUpdated;
 
+    public Order() {
+
+    }
+
+    public Order(String id, Integer userId, Short payType, Short orderStatus, Integer orderAmount, Integer payAmount) {
+        this.id = id;
+        this.userId = userId;
+        this.payType = payType;
+        this.orderStatus = orderStatus;
+        this.orderAmount = orderAmount;
+        this.payAmount = payAmount;
+    }
+
     public String getId() {
         return id;
     }

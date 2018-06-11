@@ -17,6 +17,6 @@
     <parameterMap id="Order" type="com.halo.entity.Order"/>
     <insert id="insertOrderInfo">
         INSERT INTO hl_order (id, user_id, pay_type, order_status, order_amount, pay_amount, gmt_create, gmt_updated)
-        VALUES (#{id}, #{userId}, #{payType}, #{status}, #{price}, #{total}, now(), now())
+        VALUES (#{id}, #{userId}, #{payType}, #{orderStatus}, #{orderAmount}, #{payAmount}, now(), now())
     </insert>
 </mapper>

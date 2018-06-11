@@ -47,5 +47,5 @@ public interface ProductDao {
     /**
      * 减库存
      */
-    void updateMinusStockByProId(@Param("proId")Integer proId);
+    Integer updateMinusStockByProId(@Param("proId")Integer proId);
 }

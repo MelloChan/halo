@@ -19,6 +19,20 @@ public class OrderProduct implements Serializable {
     private Date gmtCreate;
     private Date gmtUpdated;
 
+    public OrderProduct() {
+
+    }
+
+    public OrderProduct(Integer proId, String orderId, String image, String title, Integer price, Integer totalFee, Short number) {
+        this.proId = proId;
+        this.orderId = orderId;
+        this.image = image;
+        this.title = title;
+        this.price = price;
+        this.totalFee = totalFee;
+        this.number = number;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -68,6 +68,11 @@ public class ItemServiceImpl implements ItemService {
         return getItemList(products);
     }
 
+    @Override
+    public Integer updateMinusStockByProId(Integer proId) {
+        return productDao.updateMinusStockByProId(proId);
+    }
+
     private List<ItemDTO> getItemList(List<Product> products) {
         List<ItemDTO> items = new ArrayList<>();
         ItemDTO item;

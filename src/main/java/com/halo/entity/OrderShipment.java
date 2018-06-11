@@ -16,6 +16,17 @@ public class OrderShipment implements Serializable {
     private Date gmtCreate;
     private Date gmtUpdated;
 
+    public OrderShipment() {
+
+    }
+
+    public OrderShipment(String orderId, String receiverName, String receiverPhone, String receiverAddress) {
+        this.orderId = orderId;
+        this.receiverName = receiverName;
+        this.receiverPhone = receiverPhone;
+        this.receiverAddress = receiverAddress;
+    }
+
     public Integer getId() {
         return id;
     }
