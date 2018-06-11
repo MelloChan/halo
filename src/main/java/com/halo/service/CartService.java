@@ -133,12 +133,12 @@ public class CartService {
             Map<String, Claim> claims = TokenUtil.verifyToken(token);
             int id = claims.get("uid").asInt();
             cartDTO = (CartDTO) redisUtil.get("cart:"+id);
-            if(cartDTO==null){
-                cartDTO = getCartDTOByCookie(request);
-                redisUtil.add("cart:"+id, cartDTO);
-            }
         } else {
             cartDTO = getCartDTOByCookie(request);
+        }
+        if(cartDTO==null){
+            LOGGER.info("当前购物车为空");
+            cartDTO=new CartDTO();
         }
         return cartDTO;
     }
