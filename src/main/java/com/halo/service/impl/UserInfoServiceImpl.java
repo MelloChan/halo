@@ -68,7 +68,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserProfileInfoDTO getUserProfileInfoByUId(String userId) {
+    public UserProfileInfoDTO getUserProfileInfoByUId(Integer userId) {
         UserProfile userProfile = userProfileDao.getUserProfileInfoByUId(userId);
         return new UserProfileInfoDTO(
                 userProfile.getUsername(), userProfile.getAvatar(), userProfile.getSecurityLevel(), userProfile.getEmail(),
@@ -77,12 +77,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
     @Override
-    public Integer getHaloCoinByUId(String userId) {
+    public Integer getHaloCoinByUId(Integer userId) {
         return userProfileDao.getHaloCoinByUId(userId);
     }
 
     @Override
-    public boolean verifyPwd(String pwd, String userId) {
+    public boolean verifyPwd(String pwd, Integer userId) {
         UserRegistry userRegistry = userRegistryDao.getByUId(userId);
         String password = userRegistry.getPwd();
         String salt = userRegistry.getSalt();
@@ -90,14 +90,14 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public boolean updateCoinByUId(Integer number, String userId) {
+    public boolean updateCoinByUId(Integer number, Integer userId) {
         Integer sum = number + userProfileDao.getHaloCoinByUId(userId);
         return userProfileDao.updateCoinByUId(sum, userId) != null;
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String updateAvatarByUId(Part part, String userId) throws IOException {
+    public String updateAvatarByUId(Part part, Integer userId) throws IOException {
         String imgUrl;
         try (BufferedInputStream in = new BufferedInputStream(part.getInputStream())) {
             int size = (int) part.getSize();
@@ -114,7 +114,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean updatePwdByUId(String newPwd, String userId) {
+    public boolean updatePwdByUId(String newPwd, Integer userId) {
         String newSalt = DigestUtil.generateSalt();
         String password = DigestUtil.sha256(newSalt + newPwd);
         return userRegistryDao.updatePwdByUId(newSalt, password, userId) != null;
@@ -122,12 +122,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean updateEmailByUId(String email, String userId) {
+    public boolean updateEmailByUId(String email, Integer userId) {
         return userProfileDao.updateEmailById(email, userId) != null;
     }
 
     @Override
-    public boolean updatePhoneByUId(String phone, String userId) {
+    public boolean updatePhoneByUId(String phone, Integer userId) {
         return userRegistryDao.updatePhoneByUId(phone, userId) != null && userProfileDao.updatePhoneByUId(phone, userId) != null;
     }
 

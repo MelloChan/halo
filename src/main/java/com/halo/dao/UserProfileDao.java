@@ -23,7 +23,7 @@ public interface UserProfileDao {
      * @param userId 用户注册时赋值的唯一id
      * @return 用户个人信息
      */
-    UserProfile getUserProfileInfoByUId(@Param("userId") String userId);
+    UserProfile getUserProfileInfoByUId(@Param("userId") Integer userId);
 
     /**
      * 通过用户id获取用户哈币数值
@@ -31,7 +31,7 @@ public interface UserProfileDao {
      * @param userId 用户id
      * @return 哈币
      */
-    Integer getHaloCoinByUId(@Param("userId") String userId);
+    Integer getHaloCoinByUId(@Param("userId") Integer userId);
 
     /**
      * 更新哈币
@@ -40,7 +40,7 @@ public interface UserProfileDao {
      * @param userId 用户ID
      * @return 返回影响条数
      */
-    Integer updateCoinByUId(@Param("number") Integer number, @Param("userId") String userId);
+    Integer updateCoinByUId(@Param("number") Integer number, @Param("userId") Integer userId);
 
     /**
      * 更新头像
@@ -48,7 +48,7 @@ public interface UserProfileDao {
      * @param imgUrl 七牛云外链地址
      * @param userId 用户id
      */
-    void updateAvatarById(@Param("imgUrl") String imgUrl, @Param("userId") String userId);
+    void updateAvatarById(@Param("imgUrl") String imgUrl, @Param("userId") Integer userId);
 
     /**
      * 更新邮箱
@@ -56,7 +56,7 @@ public interface UserProfileDao {
      * @param email  用户邮箱
      * @param userId 用户id
      */
-    Integer updateEmailById(@Param("email") String email, @Param("userId") String userId);
+    Integer updateEmailById(@Param("email") String email, @Param("userId") Integer userId);
 
     /**
      * 更新手机号
@@ -65,5 +65,5 @@ public interface UserProfileDao {
      * @param userId 用户id
      * @return 影响条数
      */
-    Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") String userId);
+    Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") Integer userId);
 }
