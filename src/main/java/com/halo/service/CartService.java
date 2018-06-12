@@ -137,7 +137,6 @@ public class CartService {
             cartDTO = getCartDTOByCookie(request);
         }
         if(cartDTO==null){
-            LOGGER.info("当前购物车为空");
             cartDTO=new CartDTO();
         }
         return cartDTO;
@@ -146,7 +145,7 @@ public class CartService {
     /**
      * 更新(增加或减少)购物车某件商品的数量
      */
-    public void updateCart(Integer id, Integer quantity, HttpServletRequest request) throws UnsupportedEncodingException {
+    public Cookie updateCart(Integer id, Integer quantity, HttpServletRequest request) throws UnsupportedEncodingException {
         CartDTO cartDTO = getCart(request);
         List<CartItemDTO> carts = cartDTO.getCarts();
         for (CartItemDTO item : carts) {
@@ -160,13 +159,13 @@ public class CartService {
             }
         }
         String token = request.getHeader("access_token");
-        saveCartAndGetCookie(token, cartDTO);
+        return saveCartAndGetCookie(token, cartDTO);
     }
 
     /**
      * 删除购物车中某件商品
      */
-    public void deleteCart(Integer id, HttpServletRequest request) throws UnsupportedEncodingException {
+    public Cookie deleteCart(Integer id, HttpServletRequest request) throws UnsupportedEncodingException {
         CartDTO cartDTO = getCart(request);
         List<CartItemDTO> carts = cartDTO.getCarts();
         for (CartItemDTO item : carts) {
@@ -178,7 +177,7 @@ public class CartService {
             }
         }
         String token = request.getHeader("access_token");
-        saveCartAndGetCookie(token, cartDTO);
+        return saveCartAndGetCookie(token, cartDTO);
     }
 
 }
