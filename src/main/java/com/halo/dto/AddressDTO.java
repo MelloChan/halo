@@ -1,5 +1,7 @@
 package com.halo.dto;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 
 /**
@@ -9,8 +11,11 @@ import java.io.Serializable;
 public class AddressDTO implements Serializable {
     private static final long serialVersionUID = -6933186620119081688L;
     private Integer id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String phone;
+    @NotEmpty
     private String address;
 
     public Integer getId() {

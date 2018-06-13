@@ -37,4 +37,15 @@ public class OrderRestApi extends BaseController {
                                            HttpServletRequest request) throws UnsupportedEncodingException {
         return rtnParam(0, ImmutableMap.of("id", orderService.insertOrderInfo(uid, orderDetailDTO, request)));
     }
+
+    @GetMapping("/products")
+    public Map<String, Object> getOrderProduct() {
+        return rtnParam(0, "");
+    }
+
+    @GetMapping("/{orderId}/products")
+    public Map<String, Object> getOrderProductByOrderId() {
+        return rtnParam(0, "");
+    }
+
 }

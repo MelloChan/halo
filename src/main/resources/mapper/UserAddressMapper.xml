@@ -12,8 +12,26 @@
     </resultMap>
     <parameterMap id="UserAddress" type="com.halo.entity.UserAddress"/>
     <select id="getByUId" resultMap="AddressResultMap">
-        SELECT id,user_name,user_phone,user_address
+        SELECT
+            id,
+            user_name,
+            user_phone,
+            user_address
         FROM hl_user_address
-        WHERE user_id=#{userId}
+        WHERE user_id = #{userId}
     </select>
+
+    <insert id="insertAddressInfo" useGeneratedKeys="true" keyColumn="id">
+        INSERT INTO hl_user_address (user_id, user_name, user_phone, user_address, gmt_create, gmt_updated)
+        VALUES (#{userId}, #{userName}, #{userPhone}, #{userAddress}, now(), now())
+    </insert>
+    <update id="updateAddressInfoByUIdAndId">
+        UPDATE hl_user_address
+        SET user_name = #{userName}, user_phone = #{userPhone}, user_address = #{userAddress}, gmt_updated = now()
+        WHERE user_id = #{userId} AND id = #{id}
+    </update>
+    <delete id="deleteAddressInfoByUIdAndId">
+        DELETE FROM hl_user_address
+        WHERE user_id = #{userId} AND id = #{id}
+    </delete>
 </mapper>

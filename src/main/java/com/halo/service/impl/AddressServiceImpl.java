@@ -18,13 +18,14 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
     @Autowired
     private UserAddressDao userAddressDao;
+
     @Override
     public List<AddressDTO> getByUId(Integer userId) {
-        List<UserAddress>userAddresses=userAddressDao.getByUId(userId);
-        List<AddressDTO>addressDTOS=new ArrayList<>();
+        List<UserAddress> userAddresses = userAddressDao.getByUId(userId);
+        List<AddressDTO> addressDTOS = new ArrayList<>();
         AddressDTO addressDTO;
-        for (UserAddress userAddress:userAddresses) {
-            addressDTO=new AddressDTO();
+        for (UserAddress userAddress : userAddresses) {
+            addressDTO = new AddressDTO();
             addressDTO.setId(userAddress.getId());
             addressDTO.setName(userAddress.getUserName());
             addressDTO.setPhone(userAddress.getUserPhone());
@@ -32,5 +33,31 @@ public class AddressServiceImpl implements AddressService {
             addressDTOS.add(addressDTO);
         }
         return addressDTOS;
+    }
+
+    @Override
+    public Integer insertAddressInfo(Integer userId, AddressDTO addressDTO) {
+        UserAddress userAddress = new UserAddress();
+        userAddress.setUserId(userId);
+        userAddress.setUserName(addressDTO.getName());
+        userAddress.setUserPhone(addressDTO.getPhone());
+        userAddress.setUserAddress(addressDTO.getAddress());
+        return userAddressDao.insertAddressInfo(userAddress);
+    }
+
+    @Override
+    public void updateAddressInfoById(Integer userId, AddressDTO addressDTO) {
+        UserAddress userAddress = new UserAddress();
+        userAddress.setId(addressDTO.getId());
+        userAddress.setUserId(userId);
+        userAddress.setUserName(addressDTO.getName());
+        userAddress.setUserPhone(addressDTO.getPhone());
+        userAddress.setUserAddress(addressDTO.getAddress());
+        userAddressDao.updateAddressInfoByUIdAndId(userAddress);
+    }
+
+    @Override
+    public void deleteAddressInfoById(Integer userId, Integer id) {
+        userAddressDao.deleteAddressInfoByUIdAndId(userId, id);
     }
 }
