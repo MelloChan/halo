@@ -76,6 +76,16 @@
         FROM hl_product
         WHERE cate_id = #{cateId} AND brand_id = #{brandId}
     </select>
+    <select id="searchItemByName" resultMap="ProductResultMap">
+        SELECT
+            id,
+            image,
+            name,
+            title,
+            price
+        FROM hl_product
+        name LIKE CONCAT('%',#{name},'%')
+    </select>
     <update id="updateMinusStockByProId">
         UPDATE hl_product
         SET stock=stock-1

@@ -50,5 +50,13 @@ public interface ItemService {
      */
     List<ItemDTO> getItemsByCateIdAndBrandId(Integer cateId, Integer brandId);
 
+    /**
+     * 通过名字模糊查找商品
+     */
+    List<ItemDTO> searchItemByName(String name);
+
+    /**
+     * 减库存
+     */
     Integer updateMinusStockByProId(Integer proId);
 }
