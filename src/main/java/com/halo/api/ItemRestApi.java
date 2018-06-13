@@ -59,7 +59,7 @@ public class ItemRestApi extends BaseController {
         return rtnParam(0, ImmutableMap.of("items", itemService.getItemsByBrandId(brandId)));
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/{name}/search")
     public Map<String,Object>searchItemByName(@PathVariable("name")@NotEmpty  String name){
         return rtnParam(0,ImmutableMap.of("items",itemService.searchItemByName(name)));
     }

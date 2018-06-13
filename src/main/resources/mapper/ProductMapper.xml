@@ -84,8 +84,9 @@
             title,
             price
         FROM hl_product
-        name LIKE CONCAT('%',#{name},'%')
+        WHERE position(#{name} in name)
     </select>
+
     <update id="updateMinusStockByProId">
         UPDATE hl_product
         SET stock=stock-1
