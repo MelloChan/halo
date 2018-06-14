@@ -33,6 +33,12 @@
         WHERE user_id = #{userId}
     </select>
 
+    <select id="getIdByUsername" resultType="java.lang.Integer">
+        SELECT id
+        FROM hl_user_profile
+        WHERE username = #{username}
+    </select>
+
     <insert id="insertUserProfileInfo">
         INSERT INTO hl_user_profile (user_id, username, phone)
         VALUES (#{userId}, #{username}, #{phone})

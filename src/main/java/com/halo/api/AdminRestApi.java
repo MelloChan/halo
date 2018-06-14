@@ -2,7 +2,6 @@ package com.halo.api;
 
 import com.google.common.collect.ImmutableMap;
 import com.halo.controller.BaseController;
-import com.halo.entity.Admin;
 import com.halo.service.AdminInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

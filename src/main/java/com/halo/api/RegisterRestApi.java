@@ -86,7 +86,8 @@ public class RegisterRestApi extends BaseController {
             return rtnParam(40013, null);
         }
         String phone = userRegisterInfoDTO.getPhone();
-        if (!authService.verifyPhone(phone)) {
+        String username = userRegisterInfoDTO.getUsername();
+        if (!authService.verifyPhone(phone) && !authService.verifyUsername(username)) {
             int uid = userInfoService.insertUserInfo(userRegisterInfoDTO);
             String token = TokenUtil.createToken(uid);
             return rtnParam(0, ImmutableMap.of("access_token", token));

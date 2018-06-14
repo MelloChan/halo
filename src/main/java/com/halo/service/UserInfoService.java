@@ -20,6 +20,14 @@ public interface UserInfoService {
     Integer getIdByPhone(String phone);
 
     /**
+     * 通过用户名查找id
+     *
+     * @param username 用户名
+     * @return 个人信息id
+     */
+    Integer getIdByUsername(String username);
+
+    /**
      * 验证用户手机号与密码
      *
      * @param phone    用户手机号
@@ -101,16 +109,18 @@ public interface UserInfoService {
 
     /**
      * 更新手机号
-     * @param phone 用户手机号
+     *
+     * @param phone  用户手机号
      * @param userId 用户id
      * @return 成功与否
      */
-    boolean updatePhoneByUId(String phone,Integer userId);
+    boolean updatePhoneByUId(String phone, Integer userId);
 
     /**
      * 通过用户手机号更新密码
-     * @param pwd  用户密码
+     *
+     * @param pwd   用户密码
      * @param phone 用户手机号
      */
-    boolean updatePwdByPhone(String pwd,String phone);
+    boolean updatePwdByPhone(String pwd, String phone);
 }

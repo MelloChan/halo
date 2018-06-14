@@ -65,10 +65,20 @@ public class AuthService {
      * 验证手机号码是否注册过
      *
      * @param phone 用户手机号
-     * @return 是否注册
+     * @return 是否注册过
      */
     public boolean verifyPhone(String phone) {
         return userInfoService.getIdByPhone(phone) != null;
+    }
+
+    /**
+     * 验证用户名是否被注册过
+     *
+     * @param username 用户名
+     * @return 是否已被使用
+     */
+    public boolean verifyUsername(String username) {
+        return userInfoService.getIdByUsername(username) != null;
     }
 
     /**
