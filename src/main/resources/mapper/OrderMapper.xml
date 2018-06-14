@@ -15,10 +15,19 @@
         <result column="gmt_updated" property="gmtUpdated"/>
     </resultMap>
     <parameterMap id="Order" type="com.halo.entity.Order"/>
+
     <insert id="insertOrderInfo">
         INSERT INTO hl_order (id, user_id, pay_type, order_status, order_amount, pay_amount, gmt_create, gmt_updated)
         VALUES (#{id}, #{userId}, #{payType}, #{orderStatus}, #{orderAmount}, #{payAmount}, now(), now())
     </insert>
 
-
+    <select id="getIdByUId" resultMap="OrderResultMap">
+        SELECT
+            id,
+            order_status,
+            pay_amount,
+            gmt_create
+        FROM hl_order
+        WHERE user_id = #{userId}
+    </select>
 </mapper>

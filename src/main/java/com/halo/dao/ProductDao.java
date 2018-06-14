@@ -47,6 +47,10 @@ public interface ProductDao {
     List<Product> getItemsByCateIdAndBrandId(@Param("cateId") Integer cateId, @Param("brandId") Integer brandId);
 
     /**
+     * 通过名字模糊查找商品
+     */
+    List<Product> searchItemByName(@Param("name")String name);
+    /**
      * 减库存
      */
     Integer updateMinusStockByProId(@Param("proId")Integer proId);

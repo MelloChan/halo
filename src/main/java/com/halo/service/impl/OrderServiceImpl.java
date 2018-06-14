@@ -5,6 +5,7 @@ import com.halo.dao.OrderProductDao;
 import com.halo.dao.OrderShipmentDao;
 import com.halo.dto.OrderDetailDTO;
 import com.halo.dto.OrderProductDTO;
+import com.halo.dto.OrderProductListDTO;
 import com.halo.dto.ReceiverInfoDTO;
 import com.halo.entity.Order;
 import com.halo.entity.OrderProduct;
@@ -80,6 +81,16 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order(orderId, userId, payType, (short) 1, total, total);
         orderDao.insertOrderInfo(order);
         return orderId;
+    }
+
+    @Override
+    public List<OrderProductListDTO> getOrderProductListByUserId(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<OrderDetailDTO> getOrderByOrderId(String orderId) {
+        return null;
     }
 
     private boolean checkStock(int proId) {

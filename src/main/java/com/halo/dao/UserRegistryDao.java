@@ -32,7 +32,7 @@ public interface UserRegistryDao {
      * @param userId 用户id
      * @return 用户盐与密码
      */
-    UserRegistry getByUId(@Param("userId") String userId);
+    UserRegistry getByUId(@Param("userId") Integer userId);
 
     /**
      * 插入用户注册信息
@@ -50,7 +50,7 @@ public interface UserRegistryDao {
      * @param newPwd 新密码
      * @return 影响条数
      */
-    Integer updatePwdByUId(@Param("salt") String salt, @Param("newPwd") String newPwd, @Param("userId") String userId);
+    Integer updatePwdByUId(@Param("salt") String salt, @Param("newPwd") String newPwd, @Param("userId") Integer userId);
 
     /**
      * 更新手机号
@@ -59,7 +59,7 @@ public interface UserRegistryDao {
      * @param userId 用户id
      * @return 影响条数
      */
-    Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") String userId);
+    Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") Integer userId);
 
     /**
      * 通过用户手机号更新密码

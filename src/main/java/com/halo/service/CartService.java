@@ -109,7 +109,7 @@ public class CartService {
         if (token != null) {
             Map<String, Claim> claims = TokenUtil.verifyToken(token);
             int id = claims.get("uid").asInt();
-            redisUtil.add("cart:"+id, cartDTO);
+            redisUtil.add("cart:" + id, cartDTO);
             cookie = new Cookie("cart", null);
             cookie.setPath("/");
             cookie.setMaxAge(0);
@@ -132,12 +132,15 @@ public class CartService {
         if (token != null) {
             Map<String, Claim> claims = TokenUtil.verifyToken(token);
             int id = claims.get("uid").asInt();
-            cartDTO = (CartDTO) redisUtil.get("cart:"+id);
+            cartDTO = (CartDTO) redisUtil.get("cart:" + id);
+            if (cartDTO == null) {
+                cartDTO = getCartDTOByCookie(request);
+            }
         } else {
             cartDTO = getCartDTOByCookie(request);
         }
-        if(cartDTO==null){
-            cartDTO=new CartDTO();
+        if (cartDTO == null) {
+            cartDTO = new CartDTO();
         }
         return cartDTO;
     }

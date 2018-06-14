@@ -3,6 +3,7 @@ package com.halo.api;
 import com.google.common.collect.ImmutableMap;
 import com.halo.controller.BaseController;
 import com.halo.service.ItemService;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -56,5 +57,10 @@ public class ItemRestApi extends BaseController {
     @GetMapping("/{brandId}/brand")
     public Map<String, Object> getItemsByBrandId(@PathVariable("brandId") @Min(1) Integer brandId) {
         return rtnParam(0, ImmutableMap.of("items", itemService.getItemsByBrandId(brandId)));
+    }
+
+    @GetMapping("/{name}/search")
+    public Map<String,Object>searchItemByName(@PathVariable("name")@NotEmpty  String name){
+        return rtnParam(0,ImmutableMap.of("items",itemService.searchItemByName(name)));
     }
 }

@@ -21,9 +21,9 @@ public class OrderProductDTO implements Serializable {
     @Min(1)
     private Integer price;
     @Min(1)
-    private Integer total;
-    @Min(1)
     private Short number;
+    @Min(1)
+    private Integer total;
 
     public Integer getProId() {
         return proId;
@@ -57,14 +57,6 @@ public class OrderProductDTO implements Serializable {
         this.price = price;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
     public Short getNumber() {
         return number;
     }
@@ -73,6 +65,15 @@ public class OrderProductDTO implements Serializable {
         this.number = number;
     }
 
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+
     @Override
     public String toString() {
         return "OrderProductDTO{" +
@@ -80,8 +81,8 @@ public class OrderProductDTO implements Serializable {
                 ", imgUrl='" + imgUrl + '\'' +
                 ", title='" + title + '\'' +
                 ", price=" + price +
-                ", total=" + total +
                 ", number=" + number +
+                ", total=" + total +
                 '}';
     }
 }

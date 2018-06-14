@@ -35,7 +35,7 @@ public interface UserInfoService {
      * @param userId 用户注册时赋值的唯一id
      * @return 用户个人信息
      */
-    UserProfileInfoDTO getUserProfileInfoByUId(String userId);
+    UserProfileInfoDTO getUserProfileInfoByUId(Integer userId);
 
     /**
      * 通过用户id获取用户哈币数值
@@ -43,7 +43,7 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return 哈币
      */
-    Integer getHaloCoinByUId(String userId);
+    Integer getHaloCoinByUId(Integer userId);
 
     /**
      * 验证用户密码
@@ -52,7 +52,7 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return 验证成功与否
      */
-    boolean verifyPwd(String pwd, String userId);
+    boolean verifyPwd(String pwd, Integer userId);
 
     /**
      * 用户注册
@@ -69,7 +69,7 @@ public interface UserInfoService {
      * @param userId 用户ID
      * @return 返回影响条数
      */
-    boolean updateCoinByUId(Integer number, String userId);
+    boolean updateCoinByUId(Integer number, Integer userId);
 
     /**
      * 更新头像
@@ -79,7 +79,7 @@ public interface UserInfoService {
      * @return 头像外链
      * @throws IOException 图片异常
      */
-    String updateAvatarByUId(Part part, String userId) throws IOException;
+    String updateAvatarByUId(Part part, Integer userId) throws IOException;
 
     /**
      * 更新密码
@@ -88,7 +88,7 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return 更新成功否
      */
-    boolean updatePwdByUId(String newPwd, String userId);
+    boolean updatePwdByUId(String newPwd, Integer userId);
 
     /**
      * 更新邮箱
@@ -97,7 +97,7 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return 成功与否
      */
-    boolean updateEmailByUId(String email, String userId);
+    boolean updateEmailByUId(String email, Integer userId);
 
     /**
      * 更新手机号
@@ -105,7 +105,7 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return 成功与否
      */
-    boolean updatePhoneByUId(String phone,String userId);
+    boolean updatePhoneByUId(String phone,Integer userId);
 
     /**
      * 通过用户手机号更新密码

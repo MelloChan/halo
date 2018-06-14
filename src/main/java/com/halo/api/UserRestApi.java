@@ -37,7 +37,7 @@ public class UserRestApi extends BaseController {
      * 获取单个用户信息
      */
     @GetMapping("/")
-    public Map<String, Object> getById(@RequestAttribute("uid") String uid) {
+    public Map<String, Object> getById(@RequestAttribute("uid") Integer uid) {
         return rtnParam(0, ImmutableMap.of("userinfo", userInfoService.getUserProfileInfoByUId(uid)));
     }
 
@@ -45,7 +45,7 @@ public class UserRestApi extends BaseController {
      * 获取用户哈币信息
      */
     @GetMapping("/coin")
-    public Map<String, Object> getCoinById(@RequestAttribute("uid") String uid) {
+    public Map<String, Object> getCoinById(@RequestAttribute("uid") Integer uid) {
         return rtnParam(0, ImmutableMap.of("coin", userInfoService.getHaloCoinByUId(uid)));
     }
 
@@ -55,7 +55,7 @@ public class UserRestApi extends BaseController {
      * @param number 用户购买成功的哈币数
      */
     @PatchMapping("/coin")
-    public Map<String, Object> updateCoinById(@RequestAttribute("uid") String uid, @RequestParam @Min(1) @Max(100) Integer number) {
+    public Map<String, Object> updateCoinById(@RequestAttribute("uid") Integer uid, @RequestParam @Min(1) @Max(100) Integer number) {
         return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateCoinByUId(number, uid)));
     }
 
@@ -65,7 +65,7 @@ public class UserRestApi extends BaseController {
      * @param part 头像数据
      */
     @PatchMapping("/updateAvatar")
-    public Map<String, Object> updateAvatarById(@RequestAttribute("uid") String uid, @RequestPart("imgFile") @NotEmpty Part part) throws IOException {
+    public Map<String, Object> updateAvatarById(@RequestAttribute("uid") Integer uid, @RequestPart("imgFile") @NotEmpty Part part) throws IOException {
         String avatarUrl = userInfoService.updateAvatarByUId(part, uid);
         return rtnParam(0, ImmutableMap.of("avatarUrl", avatarUrl));
     }
@@ -74,7 +74,7 @@ public class UserRestApi extends BaseController {
      * 更新密码 需要先验证手机->验证手机验证码
      */
     @PatchMapping("/updatePwd")
-    public Map<String, Object> updatePwdById(@RequestAttribute("uid") String uid, @RequestParam("oldPwd") @Size(min = 8, max = 16) String oldPwd,
+    public Map<String, Object> updatePwdById(@RequestAttribute("uid") Integer uid, @RequestParam("oldPwd") @Size(min = 8, max = 16) String oldPwd,
                                              @RequestParam("newPwd") @Size(min = 8, max = 16) String newPwd) {
         if (!oldPwd.equals(newPwd)) {
             return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePwdByUId(newPwd, uid)));
@@ -86,7 +86,7 @@ public class UserRestApi extends BaseController {
      * 个人中心针对更新邮箱或手机时的密码验证
      */
     @GetMapping("/verifyPwd/{pwd}")
-    public Map<String, Object> verifyPwd(@RequestAttribute("uid") String uid,
+    public Map<String, Object> verifyPwd(@RequestAttribute("uid") Integer uid,
                                          @PathVariable("pwd") @Size(min = 8, max = 16) String pwd) {
         return rtnParam(0, ImmutableMap.of("msg", userInfoService.verifyPwd(pwd, uid)));
     }
@@ -104,7 +104,7 @@ public class UserRestApi extends BaseController {
      * 更新邮箱
      */
     @PatchMapping("/updateEmail")
-    public Map<String, Object> updateEmailById(@RequestAttribute("uid") String uid,
+    public Map<String, Object> updateEmailById(@RequestAttribute("uid") Integer uid,
                                                @RequestParam("email") @Email String email, @RequestParam("code") @Size(min = 6, max = 6) String code) {
         if (authService.verifyEmailCode(email, code)) {
             return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateEmailByUId(email, uid)));
@@ -117,7 +117,7 @@ public class UserRestApi extends BaseController {
      * 验证密码->验证旧手机->验证新手机
      */
     @PatchMapping("/updatePhone")
-    public Map<String, Object> updatePhoneById(@RequestAttribute("uid") String uid,
+    public Map<String, Object> updatePhoneById(@RequestAttribute("uid") Integer uid,
                                                @RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 6, max = 6) String code) {
         if (authService.verifyCode(phone, code)) {
             return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePhoneByUId(phone, uid)));

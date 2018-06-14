@@ -14,8 +14,38 @@
         <result column="gmt_updated" property="gmtUpdated"/>
     </resultMap>
     <parameterMap id="OrderProduct" type="com.halo.entity.OrderProduct"/>
+
+    <select id="getOrderProductByOrderIds" resultMap="OrderProductResultMap">
+        SELECT
+        image,
+        title,
+        price,
+        total_fee,
+        number,
+        gmt_create
+        FROM hl_order_product
+        WHERE order_id IN
+        <foreach item="orderId" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </select>
+
+    <select id="getOrderPorductByOrderId" resultMap="OrderProductResultMap">
+        SELECT
+            image,
+            title,
+            price,
+            total_fee,
+            number,
+            gmt_create
+        FROM hl_order_product
+        WHERE order_id = #{orderId}
+    </select>
+
     <insert id="insertOrderProductInfo">
         INSERT INTO hl_order_product (pro_id, order_id, image, title, price, total_fee, number, gmt_create, gmt_updated)
         VALUES (#{proId}, #{orderId}, #{image}, #{title}, #{price}, #{totalFee}, #{number}, now(), now())
     </insert>
+
 </mapper>

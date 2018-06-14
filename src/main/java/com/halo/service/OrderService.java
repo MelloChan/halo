@@ -1,9 +1,11 @@
 package com.halo.service;
 
 import com.halo.dto.OrderDetailDTO;
+import com.halo.dto.OrderProductListDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * @author MelloChan
@@ -18,5 +20,15 @@ public interface OrderService {
     /**
      * 插入订单信息
      */
-    String insertOrderInfo(Integer userId,OrderDetailDTO orderDetailDTO,HttpServletRequest request) throws UnsupportedEncodingException;
+    String insertOrderInfo(Integer userId, OrderDetailDTO orderDetailDTO, HttpServletRequest request) throws UnsupportedEncodingException;
+
+    /**
+     * 获取用户订单商品列表
+     */
+    List<OrderProductListDTO> getOrderProductListByUserId(Integer userId);
+
+    /**
+     * 通过订单id获取订单详情
+     */
+    List<OrderDetailDTO> getOrderByOrderId(String orderId);
 }

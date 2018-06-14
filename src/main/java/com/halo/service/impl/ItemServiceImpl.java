@@ -69,6 +69,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<ItemDTO> searchItemByName(String name) {
+        List<Product> products=productDao.searchItemByName(name);
+        return getItemList(products);
+    }
+
+    @Override
     public Integer updateMinusStockByProId(Integer proId) {
         return productDao.updateMinusStockByProId(proId);
     }
