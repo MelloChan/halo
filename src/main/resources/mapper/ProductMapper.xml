@@ -81,4 +81,91 @@
         SET stock=stock-1
         WHERE id=#{proId} AND stock>0
     </update>
+    <delete id="deleteProductById">
+        DELETE FROM hl_product
+        WHERE id = #{id}
+    </delete>
+    <delete id="deleteProductDetailById">
+        DELETE FROM hl_product_detail
+        WHERE pro_id = #{id}
+    </delete>
+    <delete id="deleteProductImageById">
+        DELETE FROM hl_product_image
+        WHERE pro_id = #{id}
+    </delete>
+    <delete id="deleteMultiProductsById" parameterType="java.util.ArrayList">
+        DELETE FROM hl_product
+        WHERE id IN
+        <foreach collection="array" separator="," open="(" close=")" item="idItem">
+            #{idItem}
+        </foreach>
+    </delete>
+    <delete id="deleteMultiProductDetailsById" parameterType="java.util.ArrayList">
+        DELETE FROM hl_product_detail
+        WHERE pro_id IN
+        <foreach collection="array" separator="," open="(" close=")" item="idItem">
+            #{idItem}
+        </foreach>
+    </delete>
+    <delete id="deleteMultiProductImagesById" parameterType="java.util.ArrayList">
+        DELETE FROM hl_product_image
+        WHERE pro_id IN
+        <foreach collection="array" separator="," open="(" close=")" item="idItem">
+            #{idItem}
+        </foreach>
+    </delete>
+    <update id="updateProductInfoById">
+        UPDATE hl_product
+        SET name = #{name}, stock = stock + #{num}, price = #{price}, gmt_updated = now()
+        WHERE id = #{id}
+    </update>
+    <select id="getStockById" resultType="java.lang.Integer">
+        SELECT
+            stock
+        FROM hl_product
+        WHERE id = #{id}
+    </select>
+
+    <resultMap id="ItemInfoResultMap" type="com.halo.dto.ItemInfoDTO">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="price" property="price"/>
+        <result column="stock" property="stock"/>
+        <result column="type_name" property="typeName"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_updated" property="gmtUpdated"/>
+    </resultMap>
+    <parameterMap id="ItemInfo" type="com.halo.dto.ItemInfoDTO"/>
+    <select id="getItemsInfo" resultMap="ItemInfoResultMap">
+        SELECT
+            hl_product.id,
+            name,
+            description,
+            price,
+            stock,
+            type_name,
+            hl_product.gmt_create,
+            hl_product.gmt_updated
+        FROM hl_product, hl_product_detail, hl_type
+        WHERE hl_product.id=pro_id AND type_id=hl_type.id
+        LIMIT #{pageIndex}, #{pageCount}
+    </select>
+    <select id="getItemsInfoByTypeAndName" resultMap="ItemInfoResultMap">
+        SELECT
+            hl_product.id,
+            name,
+            description,
+            price,
+            stock,
+            type_name,
+            hl_product.gmt_create,
+            hl_product.gmt_updated
+        FROM hl_product, hl_product_detail, hl_type
+        WHERE hl_product.id=pro_id AND type_id=hl_type.id AND position(#{type} IN type_name)
+            <if test="name != null">
+                AND position(#{name} IN name)
+            </if>
+        LIMIT #{pageIndex}, #{pageCount}
+    </select>
 </mapper>

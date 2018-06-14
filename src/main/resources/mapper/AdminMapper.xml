@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.halo.dao.AdminDao">
+    <resultMap id="AdminResultMap" type="com.halo.entity.Admin">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="pwd" property="pwd"/>
+        <result column="salt" property="salt"/>
+        <result column="email" property="email"/>
+        <result column="gmtCreate" property="gmtCreate"/>
+        <result column="gmtUpdate" property="gmtUpdate"/>
+    </resultMap>
+    <parameterMap id="Admin" type="com.halo.entity.Admin"/>
+    <select id="getAdminInfoByUsername" resultMap="AdminResultMap">
+        SELECT
+            id,
+            pwd,
+            salt,
+            email
+        FROM hl_admin
+        WHERE username = #{username}
+    </select>
+    <insert id="insertAdminInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO hl_admin(username, pwd, salt, email, gmt_create, gmt_updated)
+        VALUE(#{username}, #{pwd}, #{salt}, #{email}, now(), now())
+    </insert>
+</mapper>
