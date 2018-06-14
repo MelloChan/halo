@@ -18,12 +18,12 @@ public interface OrderProductDao {
     void insertOrderProductInfo(OrderProduct orderProduct);
 
     /**
-     * 获取订单商品
+     * 通过订单id列表获取订单商品
      */
-    List<OrderProduct> getOrderProduct();
+    List<OrderProduct> getOrderProductByOrderIds(List<String> ids);
 
     /**
      * 根据订单id获取订单商品
      */
-    List<OrderProduct>getOrderProductByOrderId(@Param("orderId")String orderId);
+    List<OrderProduct> getOrderProductByOrderId(@Param("orderId") String orderId);
 }
