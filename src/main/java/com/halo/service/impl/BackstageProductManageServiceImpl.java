@@ -53,7 +53,6 @@ public class BackstageProductManageServiceImpl implements BackstageProductManage
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public List<ItemInfoDTO> getItemsForBackstageByTypeAndName(String type, String name, Integer pageIndex, Integer pageCount) {
         pageIndex = (pageIndex - 1) * pageCount;
         return productDao.getItemsInfoByTypeAndName(type, name, pageIndex, pageCount);

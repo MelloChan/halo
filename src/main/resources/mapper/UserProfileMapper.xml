@@ -64,4 +64,34 @@
         SET phone = #{phone}, gmt_updated = now()
         WHERE user_id = #{userId}
     </update>
+    <select id="getUsersProfile" resultMap="UserProfileResultMap">
+        SELECT
+            user_id,
+            username,
+            security_level,
+            email,
+            phone,
+            gmt_create,
+            gmt_updated
+        FROM hl_user_profile
+    </select>
+    <delete id="deleteUsersProfile" parameterType="java.util.ArrayList">
+        DELETE FROM hl_user_profile
+        WHERE user_id IN
+        <foreach collection="array" item="idItem" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+    <select id="getUserProfileByUId" resultMap="UserProfileResultMap">
+        SELECT
+            user_id,
+            username,
+            security_level,
+            email,
+            phone,
+            gmt_create,
+            gmt_updated
+        FROM hl_user_profile
+        WHERE user_id = #{uid}
+    </select>
 </mapper>

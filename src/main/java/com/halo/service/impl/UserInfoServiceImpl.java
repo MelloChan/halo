@@ -3,6 +3,7 @@ package com.halo.service.impl;
 import com.halo.config.properties.QiNiu;
 import com.halo.dao.UserProfileDao;
 import com.halo.dao.UserRegistryDao;
+import com.halo.dto.BackstageUserProfileDTO;
 import com.halo.dto.UserProfileInfoDTO;
 import com.halo.dto.UserRegisterInfoDTO;
 import com.halo.entity.UserProfile;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.Part;
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author MelloChan
@@ -139,5 +142,43 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public boolean updatePwdByPhone(String pwd, String phone) {
         return userRegistryDao.updatePwdByPhone(pwd, phone) != null;
+    }
+
+    @Override
+    public List<BackstageUserProfileDTO> getUsersProfile() {
+        List<UserProfile> userProfileList = userProfileDao.getUsersProfile();
+        List<BackstageUserProfileDTO> backstageUserProfileDTOList = new ArrayList<>();
+        BackstageUserProfileDTO b = null;
+        for(UserProfile u : userProfileList){
+            b = new BackstageUserProfileDTO(
+                    u.getUserId(),
+                    u.getUsername(),
+                    u.getSecurityLevel(),
+                    u.getEmail(),
+                    u.getPhone(),
+                    u.getGmtCreate(),
+                    u.getGmtUpdated());
+            backstageUserProfileDTOList.add(b);
+        }
+        return backstageUserProfileDTOList;
+    }
+
+    @Override
+    public void deleteUsersProfile(ArrayList<Integer> idList) {
+        userProfileDao.deleteUsersProfile(idList);
+    }
+
+    @Override
+    public BackstageUserProfileDTO getUserProfileByUId(Integer uid) {
+        UserProfile userProfile = userProfileDao.getUserProfileByUId(uid);
+        return new BackstageUserProfileDTO(
+                userProfile.getUserId(),
+                userProfile.getUsername(),
+                userProfile.getSecurityLevel(),
+                userProfile.getEmail(),
+                userProfile.getPhone(),
+                userProfile.getGmtCreate(),
+                userProfile.getGmtUpdated()
+        );
     }
 }

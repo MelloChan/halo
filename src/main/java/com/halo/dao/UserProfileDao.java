@@ -4,6 +4,9 @@ import com.halo.entity.UserProfile;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author MelloChan
  * @date 2018/5/27
@@ -74,4 +77,23 @@ public interface UserProfileDao {
      * @return 影响条数
      */
     Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") Integer userId);
+
+    /**
+     * 获取所有用户的个人信息
+     * @return 所有用户的个人信息
+     */
+    List<UserProfile> getUsersProfile();
+
+    /**
+     * 删除指定用户
+     * @param idList 用户id列表
+     */
+    void deleteUsersProfile(ArrayList<Integer> idList);
+
+    /**
+     * 获取指定用户的个人信息
+     * @param uid 用户id
+     * @return 返回指定用户的个人信息
+     */
+    UserProfile getUserProfileByUId(@Param("uid") Integer uid);
 }
