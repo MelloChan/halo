@@ -23,7 +23,7 @@ import java.util.Map;
 public class BackstageProductManageRestApi extends BaseController{
 
     @Autowired
-    BackstageProductManageService backstageProductManageService;
+    private BackstageProductManageService backstageProductManageService;
 
     @GetMapping("/")
     public Map<String, Object> getItems(@RequestParam("pageIndex") @Min(1) Integer pageIndex,
@@ -34,7 +34,7 @@ public class BackstageProductManageRestApi extends BaseController{
     @DeleteMapping("/{id}")
     public Map<String, Object> deleteItem(@PathVariable("id") @Min(1) Integer id){
         backstageProductManageService.deleteProduct(id);
-        return rtnParam(0, ImmutableMap.of("msg", new String("商品删除成功")));
+        return rtnParam(0, ImmutableMap.of("msg", "商品删除成功"));
     }
 
     @DeleteMapping("/{ids}/multi")
@@ -42,26 +42,27 @@ public class BackstageProductManageRestApi extends BaseController{
         String[] idStr=ids.split(",");
         ArrayList<Integer> idList = new ArrayList<>();
         for(String s : idStr){
+            s = s.trim();
             idList.add(Integer.valueOf(s));
         }
         backstageProductManageService.deleteMultiProducts(idList);
-        return rtnParam(0, ImmutableMap.of("msg", new String("多个商品删除成功")));
+        return rtnParam(0, ImmutableMap.of("msg", "多个商品删除成功"));
     }
 
-    @PatchMapping("/name")
-    public Map<String, Object> updateNameById(@RequestParam("id") @Min(1) Integer id,
-                                              @RequestParam("name") @NotEmpty String name,
-                                              @RequestParam("num") Integer num,
-                                              @RequestParam("price") @Min(0) Integer price){
+    @PatchMapping("/productInfoByPId")
+    public Map<String, Object> updateProductInfoByPId(@RequestParam("id") @Min(1) Integer id,
+                                                      @RequestParam("name") @NotEmpty String name,
+                                                      @RequestParam("num") Integer num,
+                                                      @RequestParam("price") @Min(0) Integer price){
         backstageProductManageService.updateProductInfoByPid(id, name, num, price);
-        return rtnParam(0, ImmutableMap.of("msg", new String("更新成功")));
+        return rtnParam(0, ImmutableMap.of("msg", "更新成功"));
     }
 
     @GetMapping("/typeAndName")
     public Map<String, Object> getItemsInfoByTypeAndName(@RequestParam("type") @NotNull String type,
-                                                  @RequestParam("name") @NotNull String name,
-                                                  @RequestParam("pageIndex") @Min(1) Integer pageIndex,
-                                                  @RequestParam("pageCount") @Min(1) Integer pageCount){
+                                                         @RequestParam("name") @NotNull String name,
+                                                         @RequestParam("pageIndex") @Min(1) Integer pageIndex,
+                                                         @RequestParam("pageCount") @Min(1) Integer pageCount){
         return rtnParam(0, ImmutableMap.of("items", backstageProductManageService.getItemsForBackstageByTypeAndName(type, name, pageIndex, pageCount)));
     }
 

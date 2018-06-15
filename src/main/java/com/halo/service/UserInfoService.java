@@ -1,10 +1,13 @@
 package com.halo.service;
 
+import com.halo.dto.BackstageUserProfileDTO;
 import com.halo.dto.UserProfileInfoDTO;
 import com.halo.dto.UserRegisterInfoDTO;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author MelloChan
@@ -109,18 +112,34 @@ public interface UserInfoService {
 
     /**
      * 更新手机号
-     *
-     * @param phone  用户手机号
+     * @param phone 用户手机号
      * @param userId 用户id
      * @return 成功与否
      */
-    boolean updatePhoneByUId(String phone, Integer userId);
+    boolean updatePhoneByUId(String phone,Integer userId);
 
     /**
      * 通过用户手机号更新密码
-     *
-     * @param pwd   用户密码
+     * @param pwd  用户密码
      * @param phone 用户手机号
      */
-    boolean updatePwdByPhone(String pwd, String phone);
+    boolean updatePwdByPhone(String pwd,String phone);
+
+    /**
+     * 获取所有用户的信息
+     */
+    List<BackstageUserProfileDTO> getUsersProfile();
+
+    /**
+     * 后台删除指定用户信息
+     * @param idList 用户id列表
+     */
+    void deleteUsersProfile(ArrayList<Integer> idList);
+
+    /**
+     * 获取指定用户的信息
+     * @param uid 用户id
+     * @return 返回指定用户的信息
+     */
+    BackstageUserProfileDTO getUserProfileByUId(Integer uid);
 }
