@@ -21,7 +21,7 @@
         VALUES (#{id}, #{userId}, #{payType}, #{orderStatus}, #{orderAmount}, #{payAmount}, now(), now())
     </insert>
 
-    <select id="getIdByUId" resultMap="OrderResultMap">
+    <select id="getByUId" resultMap="OrderResultMap">
         SELECT
             id,
             order_status,

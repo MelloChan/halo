@@ -86,7 +86,32 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderProductListDTO> getOrderProductListByUserId(Integer userId) {
-        return null;
+        List<OrderProductListDTO> orderProductListDTOS = new ArrayList<>();
+        OrderProductListDTO orderProductListDTO;
+        OrderProductDTO orderProductDTO;
+        List<Order> orders = orderDao.getByUId(userId);
+        List<OrderProduct> orderProducts;
+        List<OrderProductDTO> orderProductDTOS = new ArrayList<>();
+        for (Order order : orders) {
+            orderProductListDTO = new OrderProductListDTO();
+            orderProductListDTO.setId(order.getId());
+            orderProductListDTO.setGmtUpdated(order.getGmtUpdated());
+            orderProductListDTO.setPrice(order.getPayAmount());
+            orderProductListDTO.setStatus(order.getOrderStatus());
+            orderProducts = orderProductDao.getOrderProductByOrderId(order.getId());
+            for (OrderProduct orderProduct : orderProducts) {
+                orderProductDTO = new OrderProductDTO();
+                orderProductDTO.setTitle(orderProduct.getTitle());
+                orderProductDTO.setProId(orderProduct.getProId());
+                orderProductDTO.setPrice(orderProduct.getPrice());
+                orderProductDTO.setNumber(orderProduct.getNumber());
+                orderProductDTO.setTotal(orderProduct.getTotalFee());
+                orderProductDTOS.add(orderProductDTO);
+            }
+            orderProductListDTO.setProducts(orderProductDTOS);
+            orderProductListDTOS.add(orderProductListDTO);
+        }
+        return orderProductListDTOS;
     }
 
     @Override

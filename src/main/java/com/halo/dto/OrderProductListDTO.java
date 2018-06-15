@@ -14,7 +14,7 @@ public class OrderProductListDTO implements Serializable {
     private Date gmtUpdated;
     private List<OrderProductDTO>products;
     private Integer price;
-    private String status;
+    private Short status;
 
     public String getId() {
         return id;
@@ -48,11 +48,11 @@ public class OrderProductListDTO implements Serializable {
         this.price = price;
     }
 
-    public String getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Short status) {
         this.status = status;
     }
 
