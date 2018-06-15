@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,8 +90,39 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDetailDTO> getOrderByOrderId(String orderId) {
-        return null;
+    public OrderDetailDTO getOrderByOrderId(String orderId) {
+        OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+        orderDetailDTO.setId(orderId);
+
+        // 设置配送地址
+        OrderShipment orderShipment = orderShipmentDao.getOrderShipmentByOrderId(orderId);
+        ReceiverInfoDTO receiverInfoDTO = new ReceiverInfoDTO();
+        receiverInfoDTO.setName(orderShipment.getReceiverName());
+        receiverInfoDTO.setPhone(orderShipment.getReceiverPhone());
+        receiverInfoDTO.setAddress(orderShipment.getReceiverAddress());
+        orderDetailDTO.setReceiver(receiverInfoDTO);
+
+        // 配置订单商品信息
+        List<OrderProduct> orderProducts = orderProductDao.getOrderProductByOrderId(orderId);
+        List<OrderProductDTO> orderProductDTOS = new ArrayList<>();
+        OrderProductDTO orderProductDTO;
+        for (OrderProduct product : orderProducts) {
+            orderProductDTO = new OrderProductDTO();
+            orderProductDTO.setImgUrl(product.getImage());
+            orderProductDTO.setNumber(product.getNumber());
+            orderProductDTO.setPrice(product.getPrice());
+            orderProductDTO.setProId(product.getProId());
+            orderProductDTO.setTitle(product.getTitle());
+            orderProductDTOS.add(orderProductDTO);
+        }
+        orderDetailDTO.setProducts(orderProductDTOS);
+
+        return orderDetailDTO;
+    }
+
+    @Override
+    public Short getStatusByOrderId(String orderId) {
+        return orderDao.getStatusByOrderId(orderId);
     }
 
     private boolean checkStock(int proId) {

@@ -21,4 +21,9 @@ public interface OrderDao {
      * 根据用户id获取用户的所有订单部分信息
      */
     List<Order> getIdByUId(@Param("userId") Integer userId);
+
+    /**
+     * 根据订单id获取订单状态
+     */
+    Short getStatusByOrderId(@Param("orderId")String orderId);
 }

@@ -44,8 +44,9 @@ public class OrderRestApi extends BaseController {
     }
 
     @GetMapping("/{orderId}/products")
-    public Map<String, Object> getOrderProductByOrderId() {
-        return rtnParam(0, "");
+    public Map<String, Object> getOrderProductByOrderId(@PathVariable("orderId") String orderId) {
+        return rtnParam(0, ImmutableMap.of(
+                "status", orderService.getStatusByOrderId(orderId), "orderDetail", orderService.getOrderByOrderId(orderId)));
     }
 
 }

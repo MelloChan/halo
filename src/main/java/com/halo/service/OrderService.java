@@ -30,5 +30,10 @@ public interface OrderService {
     /**
      * 通过订单id获取订单详情
      */
-    List<OrderDetailDTO> getOrderByOrderId(String orderId);
+    OrderDetailDTO getOrderByOrderId(String orderId);
+
+    /**
+     * 根据订单id获取支付状态
+     */
+    Short getStatusByOrderId(String orderId);
 }
