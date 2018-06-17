@@ -5,7 +5,6 @@ import com.halo.controller.BaseController;
 import com.halo.service.AuthService;
 import com.halo.service.UserInfoService;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +64,10 @@ public class UserRestApi extends BaseController {
      * @param part 头像数据
      */
     @PostMapping("/avatar")
-    public Map<String, Object> updateAvatarById(@RequestAttribute("uid") Integer uid, @RequestPart("imgFile") @NotEmpty Part part) throws IOException {
+    public Map<String, Object> updateAvatarById(@RequestAttribute("uid") Integer uid, @RequestPart("imgFile") Part part) throws IOException {
+        if (null == part) {
+            return rtnParam(40010, null);
+        }
         String avatarUrl = userInfoService.updateAvatarByUId(part, uid);
         return rtnParam(0, ImmutableMap.of("avatarUrl", avatarUrl));
     }
