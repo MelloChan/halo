@@ -64,7 +64,7 @@ public class UserRestApi extends BaseController {
      *
      * @param part 头像数据
      */
-    @PatchMapping("/avatar")
+    @PutMapping("/avatar")
     public Map<String, Object> updateAvatarById(@RequestAttribute("uid") Integer uid, @RequestPart("imgFile") @NotEmpty Part part) throws IOException {
         String avatarUrl = userInfoService.updateAvatarByUId(part, uid);
         return rtnParam(0, ImmutableMap.of("avatarUrl", avatarUrl));
