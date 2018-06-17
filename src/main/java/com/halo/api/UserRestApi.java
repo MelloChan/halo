@@ -64,7 +64,7 @@ public class UserRestApi extends BaseController {
      *
      * @param part 头像数据
      */
-    @PatchMapping("/updateAvatar")
+    @PatchMapping("/avatar")
     public Map<String, Object> updateAvatarById(@RequestAttribute("uid") Integer uid, @RequestPart("imgFile") @NotEmpty Part part) throws IOException {
         String avatarUrl = userInfoService.updateAvatarByUId(part, uid);
         return rtnParam(0, ImmutableMap.of("avatarUrl", avatarUrl));
@@ -73,7 +73,7 @@ public class UserRestApi extends BaseController {
     /**
      * 更新密码 需要先验证手机->验证手机验证码
      */
-    @PatchMapping("/updatePwd")
+    @PatchMapping("/pwd")
     public Map<String, Object> updatePwdById(@RequestAttribute("uid") Integer uid, @RequestParam("oldPwd") @Size(min = 8, max = 16) String oldPwd,
                                              @RequestParam("newPwd") @Size(min = 8, max = 16) String newPwd) {
         if (!oldPwd.equals(newPwd)) {
@@ -103,7 +103,7 @@ public class UserRestApi extends BaseController {
     /**
      * 更新邮箱
      */
-    @PatchMapping("/updateEmail")
+    @PatchMapping("/email")
     public Map<String, Object> updateEmailById(@RequestAttribute("uid") Integer uid,
                                                @RequestParam("email") @Email String email, @RequestParam("code") @Size(min = 6, max = 6) String code) {
         if (authService.verifyEmailCode(email, code)) {
@@ -116,7 +116,7 @@ public class UserRestApi extends BaseController {
      * 更新手机号
      * 验证密码->验证旧手机->验证新手机
      */
-    @PatchMapping("/updatePhone")
+    @PatchMapping("/phone")
     public Map<String, Object> updatePhoneById(@RequestAttribute("uid") Integer uid,
                                                @RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 6, max = 6) String code) {
         if (authService.verifyCode(phone, code)) {
