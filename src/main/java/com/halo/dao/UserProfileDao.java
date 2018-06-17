@@ -78,11 +78,14 @@ public interface UserProfileDao {
      */
     Integer updatePhoneByUId(@Param("phone") String phone, @Param("userId") Integer userId);
 
+
     /**
-     * 获取所有用户的个人信息
+     ** 获取所有用户的个人信息
+     * @param pageIndex 第几页
+     * @param pageCount 一页显示的数据量
      * @return 所有用户的个人信息
      */
-    List<UserProfile> getUsersProfile();
+    List<UserProfile> getUsersProfile(@Param("pageIndex") Integer pageIndex, @Param("pageCount") Integer pageCount);
 
     /**
      * 删除指定用户
@@ -96,4 +99,10 @@ public interface UserProfileDao {
      * @return 返回指定用户的个人信息
      */
     UserProfile getUserProfileByUId(@Param("uid") Integer uid);
+
+    /**
+     * 获取数据库中用户数量
+     * @return 返回用户数
+     */
+    Integer getNumOfUsers();
 }

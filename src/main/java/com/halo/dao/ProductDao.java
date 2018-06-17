@@ -107,4 +107,13 @@ public interface ProductDao {
     List<ItemInfoDTO> getItemsInfoByTypeAndName(@Param("type") String type, @Param("name") String name, @Param("pageIndex") Integer paeIndex,
                                          @Param("pageCount") Integer pageCount);
 
+    /**
+     * 获取无库存商品数
+     */
+    Integer getNumOfZeroStock();
+
+    /**
+     * @return 获取数据库中商品数
+     */
+    Integer getNumOfProducts();
 }

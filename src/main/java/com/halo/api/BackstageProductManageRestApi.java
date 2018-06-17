@@ -3,6 +3,7 @@ package com.halo.api;
 import com.google.common.collect.ImmutableMap;
 import com.halo.controller.BaseController;
 import com.halo.service.BackstageProductManageService;
+import org.apache.ibatis.annotations.Param;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +25,11 @@ public class BackstageProductManageRestApi extends BaseController{
 
     @Autowired
     private BackstageProductManageService backstageProductManageService;
+
+    @GetMapping("/page")
+    public Map<String, Object> getNumOfPages(@Param("pageCount") @Min(1) Integer pageCount){
+        return rtnParam(0, ImmutableMap.of("pages", backstageProductManageService.getNumOfPage(pageCount)));
+    }
 
     @GetMapping("/")
     public Map<String, Object> getItems(@RequestParam("pageIndex") @Min(1) Integer pageIndex,

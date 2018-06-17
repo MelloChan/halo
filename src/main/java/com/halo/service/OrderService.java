@@ -36,4 +36,26 @@ public interface OrderService {
      * 根据订单id获取支付状态
      */
     Short getStatusByOrderId(String orderId);
+
+    /**
+     * 获取所有订单详情
+     */
+    List<OrderProductListDTO> getOrders(Integer pageIndex, Integer pageCount);
+
+    /**
+     * 通过状态筛选订单
+     */
+    List<OrderProductListDTO> getOrdersByStatus(Short status, Integer pageIndex, Integer pageCount);
+
+    /**
+     * 通过订单id更改订单状态
+     */
+    void updateOrderStatusById(String id, Short status);
+
+    /**
+     * 获取订单页数
+     * @param pageCount 一页显示的订单数
+     * @return 订单页数
+     */
+    Integer getNumOfPages(Integer pageCount);
 }

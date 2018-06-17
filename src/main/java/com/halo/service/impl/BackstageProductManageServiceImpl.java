@@ -58,4 +58,9 @@ public class BackstageProductManageServiceImpl implements BackstageProductManage
         return productDao.getItemsInfoByTypeAndName(type, name, pageIndex, pageCount);
     }
 
+    @Override
+    public Integer getNumOfPage(Integer pageCount) {
+        return (productDao.getNumOfProducts()+pageCount-1) / pageCount;
+    }
+
 }

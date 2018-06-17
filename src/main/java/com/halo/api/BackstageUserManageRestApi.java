@@ -22,9 +22,14 @@ public class BackstageUserManageRestApi extends BaseController{
     @Autowired
     private UserInfoService userInfoService;
 
+    @GetMapping("/page")
+    public Map<String, Object> getNumOfPages(@RequestParam("pageCount") Integer pageCount){
+        return rtnParam(0, ImmutableMap.of("pages", userInfoService.getNumOfPages(pageCount)));
+    }
+
     @GetMapping("/getUsers")
-    public Map<String, Object> getUsers(){
-        return rtnParam(0, ImmutableMap.of("users", userInfoService.getUsersProfile()));
+    public Map<String, Object> getUsers(@RequestParam("pageIndex") Integer pageIndex, @RequestParam("pageCount") Integer pageCount){
+        return rtnParam(0, ImmutableMap.of("users", userInfoService.getUsersProfile(pageIndex, pageCount)));
     }
 
     @GetMapping("/{uid}")

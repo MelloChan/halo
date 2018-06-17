@@ -145,10 +145,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<BackstageUserProfileDTO> getUsersProfile() {
-        List<UserProfile> userProfileList = userProfileDao.getUsersProfile();
+    public List<BackstageUserProfileDTO> getUsersProfile(Integer pageIndex, Integer pageCount) {
+        pageIndex = (pageIndex - 1) * pageCount;
+        List<UserProfile> userProfileList = userProfileDao.getUsersProfile(pageIndex, pageCount);
         List<BackstageUserProfileDTO> backstageUserProfileDTOList = new ArrayList<>();
-        BackstageUserProfileDTO b = null;
+        BackstageUserProfileDTO b;
         for(UserProfile u : userProfileList){
             b = new BackstageUserProfileDTO(
                     u.getUserId(),
@@ -164,6 +165,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteUsersProfile(ArrayList<Integer> idList) {
         userProfileDao.deleteUsersProfile(idList);
     }
@@ -180,5 +182,10 @@ public class UserInfoServiceImpl implements UserInfoService {
                 userProfile.getGmtCreate(),
                 userProfile.getGmtUpdated()
         );
+    }
+
+    @Override
+    public Integer getNumOfPages(Integer pageCount) {
+        return (userProfileDao.getNumOfUsers()+pageCount-1) / pageCount;
     }
 }

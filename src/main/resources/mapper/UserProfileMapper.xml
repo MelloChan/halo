@@ -74,6 +74,7 @@
             gmt_create,
             gmt_updated
         FROM hl_user_profile
+        LIMIT #{pageIndex}, #{pageCount}
     </select>
     <delete id="deleteUsersProfile" parameterType="java.util.ArrayList">
         DELETE FROM hl_user_profile
@@ -93,5 +94,9 @@
             gmt_updated
         FROM hl_user_profile
         WHERE user_id = #{uid}
+    </select>
+    <select id="getNumOfUsers" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM hl_user_profile
     </select>
 </mapper>

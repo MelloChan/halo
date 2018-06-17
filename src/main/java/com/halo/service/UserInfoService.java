@@ -128,7 +128,7 @@ public interface UserInfoService {
     /**
      * 获取所有用户的信息
      */
-    List<BackstageUserProfileDTO> getUsersProfile();
+    List<BackstageUserProfileDTO> getUsersProfile(Integer pageIndex, Integer pageCount);
 
     /**
      * 后台删除指定用户信息
@@ -142,4 +142,10 @@ public interface UserInfoService {
      * @return 返回指定用户的信息
      */
     BackstageUserProfileDTO getUserProfileByUId(Integer uid);
+
+    /**
+     * @param pageCount 一页显示数据量
+     * @return 返回10个/页的页数
+     */
+    Integer getNumOfPages(Integer pageCount);
 }

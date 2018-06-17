@@ -131,10 +131,18 @@
         WHERE id = #{id}
     </update>
     <select id="getStockById" resultType="java.lang.Integer">
-        SELECT
-            stock
+        SELECT stock
         FROM hl_product
         WHERE id = #{id}
+    </select>
+    <select id="getNumOfZeroStock" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM hl_product
+        WHERE stock = 0
+    </select>
+    <select id="getNumOfProducts" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM hl_product
     </select>
 
     <resultMap id="ItemInfoResultMap" type="com.halo.dto.ItemInfoDTO">

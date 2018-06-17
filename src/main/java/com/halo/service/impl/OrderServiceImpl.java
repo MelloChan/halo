@@ -150,6 +150,29 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.getStatusByOrderId(orderId);
     }
 
+    @Override
+    public List<OrderProductListDTO> getOrders(Integer pageIndex, Integer pageCount) {
+        pageIndex = (pageIndex - 1) * pageCount;
+        return orderDao.getOrders(pageIndex, pageCount);
+    }
+
+    @Override
+    public List<OrderProductListDTO> getOrdersByStatus(Short status, Integer pageIndex, Integer pageCount) {
+        pageIndex = (pageIndex - 1) * pageCount;
+        return orderDao.getOrdersByStatus(status, pageIndex, pageCount);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateOrderStatusById(String id, Short status) {
+        orderDao.updateOrderStatusById(id, status);
+    }
+
+    @Override
+    public Integer getNumOfPages(Integer pageCount) {
+        return (orderDao.getNumOfOrder()+pageCount-1)/pageCount;
+    }
+
     private boolean checkStock(int proId) {
         return itemService.updateMinusStockByProId(proId) > 0;
     }

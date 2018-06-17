@@ -50,4 +50,10 @@ public interface BackstageProductManageService {
      */
     List<ItemInfoDTO> getItemsForBackstageByTypeAndName(String type, String name, Integer pageIndex, Integer pageCount);
 
+    /**
+     * 获取商品页数
+     * @param pageCount 一页显示的商品数
+     * @return 商品页数
+     */
+    Integer getNumOfPage(Integer pageCount);
 }
