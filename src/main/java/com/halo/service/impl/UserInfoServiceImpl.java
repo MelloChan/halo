@@ -124,7 +124,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public boolean updatePwdByUId(String newPwd, Integer userId) {
         String newSalt = DigestUtil.generateSalt();
-        String password = DigestUtil.sha256(newSalt + newPwd);
+        String password = DigestUtil.sha256(newPwd + newSalt);
         return userRegistryDao.updatePwdByUId(newSalt, password, userId) != null;
     }
 
@@ -150,7 +150,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         List<UserProfile> userProfileList = userProfileDao.getUsersProfile(pageIndex, pageCount);
         List<BackstageUserProfileDTO> backstageUserProfileDTOList = new ArrayList<>();
         BackstageUserProfileDTO b;
-        for(UserProfile u : userProfileList){
+        for (UserProfile u : userProfileList) {
             b = new BackstageUserProfileDTO(
                     u.getUserId(),
                     u.getUsername(),
@@ -186,6 +186,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public Integer getNumOfPages(Integer pageCount) {
-        return (userProfileDao.getNumOfUsers()+pageCount-1) / pageCount;
+        return (userProfileDao.getNumOfUsers() + pageCount - 1) / pageCount;
     }
 }
