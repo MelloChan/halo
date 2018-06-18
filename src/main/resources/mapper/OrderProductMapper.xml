@@ -43,7 +43,7 @@
         WHERE order_id = #{orderId}
     </select>
 
-    <insert id="insertOrderProductInfo">
+    <insert id="insertOrderProductInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO hl_order_product (pro_id, order_id, image, title, price, total_fee, number, gmt_create, gmt_updated)
         VALUES (#{proId}, #{orderId}, #{image}, #{title}, #{price}, #{totalFee}, #{number}, now(), now())
     </insert>

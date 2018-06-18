@@ -12,7 +12,7 @@
     </resultMap>
     <parameterMap id="OrderShipment" type="com.halo.entity.OrderShipment"/>
 
-    <insert id="insertOrderShipmentInfo">
+    <insert id="insertOrderShipmentInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO hl_order_shipment (order_id, receiver_name, receiver_phone, receiver_address, gmt_create, gmt_updated)
         VALUES (#{orderId}, #{receiverName}, #{receiverPhone}, #{receiverAddress}, now(), now())
     </insert>
