@@ -90,11 +90,14 @@ public class UserRestApi extends BaseController {
     @GetMapping("/verifyPwd/{pwd}")
     public Map<String, Object> verifyPwd(@RequestAttribute("uid") Integer uid,
                                          @PathVariable("pwd") @Size(min = 8, max = 16) String pwd) {
-        return rtnParam(0, ImmutableMap.of("msg", userInfoService.verifyPwd(pwd, uid)));
+        if (userInfoService.verifyPwd(pwd, uid)) {
+            return rtnParam(0, ImmutableMap.of("msg", true));
+        }
+        return rtnParam(40015, null);
     }
 
     /**
-     * 验证邮箱验证码
+     * 请求发送邮箱验证码
      */
     @GetMapping("/requestEmailVerify")
     public Map<String, Object> requestEmailVerify(@RequestParam @Email String email) throws GeneralSecurityException, MessagingException {
@@ -116,14 +119,15 @@ public class UserRestApi extends BaseController {
 
     /**
      * 更新手机号
-     * 验证密码->验证旧手机->验证新手机
+     * 验证密码->验证旧手机(调用登录模块的请求验证码接口)->验证新手机(调用注册模块的请求验证码接口)
      */
     @PatchMapping("/phone")
     public Map<String, Object> updatePhoneById(@RequestAttribute("uid") Integer uid,
-                                               @RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 6, max = 6) String code) {
-        if (authService.verifyCode(phone, code)) {
+                                               @RequestParam("phone") @Size(min = 11, max = 11) String phone, @RequestParam("code") @Size(min = 4, max = 4) String code) {
+        // 手机号应当未注册过
+        if (!authService.verifyPhone(phone) && authService.verifyCode(phone, code)) {
             return rtnParam(0, ImmutableMap.of("msg", userInfoService.updatePhoneByUId(phone, uid)));
         }
-        return rtnParam(40006, null);
+        return rtnParam(40017, null);
     }
 }
