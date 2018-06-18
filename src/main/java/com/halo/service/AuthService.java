@@ -82,6 +82,16 @@ public class AuthService {
     }
 
     /**
+     * 验证邮箱是否被绑定
+     *
+     * @param email 邮箱
+     * @return 是否已被绑定
+     */
+    public boolean verifyEmail(String email) {
+        return userInfoService.getIdByEmail(email) != null;
+    }
+
+    /**
      * 验证手机验证码是否正确
      *
      * @param phone 用户手机号

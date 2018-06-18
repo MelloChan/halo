@@ -45,6 +45,14 @@ public interface UserProfileDao {
     Integer getIdByUsername(@Param("username") String username);
 
     /**
+     * 通过邮箱查询用户id
+     *
+     * @param email 用户邮箱
+     * @return 用户个人信息id
+     */
+    Integer getIdByEmail(@Param("email") String email);
+
+    /**
      * 更新哈币
      *
      * @param number 更新的数值
@@ -80,7 +88,8 @@ public interface UserProfileDao {
 
 
     /**
-     ** 获取所有用户的个人信息
+     * * 获取所有用户的个人信息
+     *
      * @param pageIndex 第几页
      * @param pageCount 一页显示的数据量
      * @return 所有用户的个人信息
@@ -89,12 +98,14 @@ public interface UserProfileDao {
 
     /**
      * 删除指定用户
+     *
      * @param idList 用户id列表
      */
     void deleteUsersProfile(ArrayList<Integer> idList);
 
     /**
      * 获取指定用户的个人信息
+     *
      * @param uid 用户id
      * @return 返回指定用户的个人信息
      */
@@ -102,6 +113,7 @@ public interface UserProfileDao {
 
     /**
      * 获取数据库中用户数量
+     *
      * @return 返回用户数
      */
     Integer getNumOfUsers();

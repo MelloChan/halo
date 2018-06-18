@@ -31,6 +31,14 @@ public interface UserInfoService {
     Integer getIdByUsername(String username);
 
     /**
+     * 通过用户邮箱查找id
+     *
+     * @param email 用户邮箱
+     * @return 个人信息id
+     */
+    Integer getIdByEmail(String email);
+
+    /**
      * 验证用户手机号与密码
      *
      * @param phone    用户手机号
@@ -112,18 +120,20 @@ public interface UserInfoService {
 
     /**
      * 更新手机号
-     * @param phone 用户手机号
+     *
+     * @param phone  用户手机号
      * @param userId 用户id
      * @return 成功与否
      */
-    boolean updatePhoneByUId(String phone,Integer userId);
+    boolean updatePhoneByUId(String phone, Integer userId);
 
     /**
      * 通过用户手机号更新密码
-     * @param pwd  用户密码
+     *
+     * @param pwd   用户密码
      * @param phone 用户手机号
      */
-    boolean updatePwdByPhone(String pwd,String phone);
+    boolean updatePwdByPhone(String pwd, String phone);
 
     /**
      * 获取所有用户的信息
@@ -132,12 +142,14 @@ public interface UserInfoService {
 
     /**
      * 后台删除指定用户信息
+     *
      * @param idList 用户id列表
      */
     void deleteUsersProfile(ArrayList<Integer> idList);
 
     /**
      * 获取指定用户的信息
+     *
      * @param uid 用户id
      * @return 返回指定用户的信息
      */

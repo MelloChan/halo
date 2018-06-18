@@ -97,12 +97,15 @@ public class UserRestApi extends BaseController {
     }
 
     /**
-     * 请求发送邮箱验证码
+     * 请求发送邮箱(未被绑定)验证码
      */
     @GetMapping("/requestEmailVerify")
     public Map<String, Object> requestEmailVerify(@RequestParam @Email String email) throws GeneralSecurityException, MessagingException {
-        authService.sendEmail(email);
-        return rtnParam(0, ImmutableMap.of("email", email));
+        if(!authService.verifyEmail(email)){
+            authService.sendEmail(email);
+            return rtnParam(0, ImmutableMap.of("email", email));
+        }
+        return rtnParam(40017, null);
     }
 
     /**
@@ -111,7 +114,7 @@ public class UserRestApi extends BaseController {
     @PatchMapping("/email")
     public Map<String, Object> updateEmailById(@RequestAttribute("uid") Integer uid,
                                                @RequestParam("email") @Email String email, @RequestParam("code") @Size(min = 6, max = 6) String code) {
-        if (authService.verifyEmailCode(email, code)) {
+        if (!authService.verifyEmail(email) && authService.verifyEmailCode(email, code)) {
             return rtnParam(0, ImmutableMap.of("msg", userInfoService.updateEmailByUId(email, uid)));
         }
         return rtnParam(40006, null);
@@ -119,7 +122,7 @@ public class UserRestApi extends BaseController {
 
     /**
      * 更新手机号
-     * 验证密码->验证旧手机(调用登录模块的请求验证码接口)->验证新手机(调用注册模块的请求验证码接口)
+     * 验证密码->验证旧手机->验证新手机
      */
     @PatchMapping("/phone")
     public Map<String, Object> updatePhoneById(@RequestAttribute("uid") Integer uid,

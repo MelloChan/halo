@@ -45,6 +45,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public Integer getIdByEmail(String email) {
+        return userProfileDao.getIdByEmail(email);
+    }
+
+    @Override
     public Integer verifyLoginInfo(String phone, String password) {
         UserRegistry userRegistry = userRegistryDao.getByPhone(phone);
         if (userRegistry != null && DigestUtil.verify(password, userRegistry.getSalt(), userRegistry.getPwd())) {
