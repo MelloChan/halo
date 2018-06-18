@@ -22,7 +22,7 @@ public class ItemRestApi extends BaseController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/")
+    @GetMapping
     public Map<String, Object> getItems(@RequestParam("pageIndex") @Min(1) Integer pageIndex, @RequestParam("pageCount") @Min(1) Integer pageCount) {
         return rtnParam(0, ImmutableMap.of("items", itemService.getItems(pageIndex, pageCount)));
     }
@@ -59,8 +59,8 @@ public class ItemRestApi extends BaseController {
         return rtnParam(0, ImmutableMap.of("items", itemService.getItemsByBrandId(brandId)));
     }
 
-    @GetMapping("/{name}/search")
-    public Map<String,Object>searchItemByName(@PathVariable("name")@NotEmpty  String name){
-        return rtnParam(0,ImmutableMap.of("items",itemService.searchItemByName(name)));
+    @GetMapping("/search")
+    public Map<String, Object> searchItemByName(@RequestParam @NotEmpty String name) {
+        return rtnParam(0, ImmutableMap.of("items", itemService.searchItemByName(name)));
     }
 }
