@@ -12,16 +12,16 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "halo")
 @PropertySource("classpath:email.properties")
 public class Email {
-    private String stmp;
+    private String smtp;
     private String email;
     private String password;
 
-    public String getStmp() {
-        return stmp;
+    public String getSmtp() {
+        return smtp;
     }
 
-    public void setStmp(String stmp) {
-        this.stmp = stmp;
+    public void setSmtp(String smtp) {
+        this.smtp = smtp;
     }
 
     public String getEmail() {
@@ -43,7 +43,7 @@ public class Email {
     @Override
     public String toString() {
         return "Email{" +
-                "stmp='" + stmp + '\'' +
+                "smtp='" + smtp + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

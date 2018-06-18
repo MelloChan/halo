@@ -45,7 +45,7 @@ public class EmailUtil {
         msg.setText(message);
         msg.setFrom(new InternetAddress(config.getEmail()));
         Transport transport = session.getTransport();
-        transport.connect(config.getStmp(), config.getEmail(), config.getPassword());
+        transport.connect(config.getSmtp(), config.getEmail(), config.getPassword());
         transport.sendMessage(msg, new Address[]{new InternetAddress(destination)});
         transport.close();
     }

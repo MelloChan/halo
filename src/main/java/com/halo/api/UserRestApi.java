@@ -96,8 +96,8 @@ public class UserRestApi extends BaseController {
     /**
      * 验证邮箱验证码
      */
-    @GetMapping("/requestEmailVerify/{email}")
-    public Map<String, Object> requestEmailVerify(@PathVariable("email") @Email String email) throws GeneralSecurityException, MessagingException {
+    @GetMapping("/requestEmailVerify")
+    public Map<String, Object> requestEmailVerify(@RequestParam @Email String email) throws GeneralSecurityException, MessagingException {
         authService.sendEmail(email);
         return rtnParam(0, ImmutableMap.of("email", email));
     }
