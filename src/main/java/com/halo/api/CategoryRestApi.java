@@ -27,7 +27,7 @@ public class CategoryRestApi extends BaseController {
     }
     @GetMapping("/{cateId}")
     public Map<String, Object> getCateByCateId(@PathVariable("cateId") @Min(1) Integer cateId) {
-        return rtnParam(0,ImmutableMap.of("errorCode",0,"data",categoryService.getCateByCateId(cateId)));
+        return ImmutableMap.of("errorCode",0,"data",categoryService.getCateByCateId(cateId));
     }
 
 }
