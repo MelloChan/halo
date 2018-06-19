@@ -29,6 +29,10 @@ public interface OrderDao {
     Short getStatusByOrderId(@Param("orderId")String orderId);
 
     /**
+     * 根据订单id获取订单支付类型
+     */
+    Short getPayTypeByOrderId(@Param("orderId")String orderId);
+    /**
      * 返回所有订单详情
      */
     List<OrderProductListDTO> getOrders(@Param("pageIndex") Integer pageIndex,

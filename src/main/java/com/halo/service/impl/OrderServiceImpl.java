@@ -69,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
             } else {
                 return product.getTitle();
             }
-            total += product.getPrice();
+            total += product.getPrice() * product.getNumber();
         }
 
         // 保存配送信息
@@ -90,7 +90,11 @@ public class OrderServiceImpl implements OrderService {
         OrderProductListDTO orderProductListDTO;
         OrderProductDTO orderProductDTO;
         List<Order> orders = orderDao.getByUId(userId);
-        List<OrderProduct> orderProducts;
+        List<String> ids = new ArrayList<>();
+        for (Order order : orders) {
+            ids.add(order.getId());
+        }
+        List<OrderProduct> orderProducts = orderProductDao.getOrderProductByOrderIds(ids);
         List<OrderProductDTO> orderProductDTOS = new ArrayList<>();
         for (Order order : orders) {
             orderProductListDTO = new OrderProductListDTO();
@@ -98,7 +102,6 @@ public class OrderServiceImpl implements OrderService {
             orderProductListDTO.setGmtUpdated(order.getGmtUpdated());
             orderProductListDTO.setPrice(order.getPayAmount());
             orderProductListDTO.setStatus(order.getOrderStatus());
-            orderProducts = orderProductDao.getOrderProductByOrderId(order.getId());
             for (OrderProduct orderProduct : orderProducts) {
                 orderProductDTO = new OrderProductDTO();
                 orderProductDTO.setTitle(orderProduct.getTitle());
@@ -106,6 +109,7 @@ public class OrderServiceImpl implements OrderService {
                 orderProductDTO.setPrice(orderProduct.getPrice());
                 orderProductDTO.setNumber(orderProduct.getNumber());
                 orderProductDTO.setTotal(orderProduct.getTotalFee());
+                orderProductDTO.setImgUrl(orderProduct.getImage());
                 orderProductDTOS.add(orderProductDTO);
             }
             orderProductListDTO.setProducts(orderProductDTOS);
@@ -138,10 +142,11 @@ public class OrderServiceImpl implements OrderService {
             orderProductDTO.setPrice(product.getPrice());
             orderProductDTO.setProId(product.getProId());
             orderProductDTO.setTitle(product.getTitle());
+            orderProductDTO.setTotal(product.getTotalFee());
             orderProductDTOS.add(orderProductDTO);
         }
         orderDetailDTO.setProducts(orderProductDTOS);
-
+        orderDetailDTO.setPayType(orderDao.getPayTypeByOrderId(orderId));
         return orderDetailDTO;
     }
 
@@ -170,7 +175,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Integer getNumOfPages(Integer pageCount) {
-        return (orderDao.getNumOfOrder()+pageCount-1)/pageCount;
+        return (orderDao.getNumOfOrder() + pageCount - 1) / pageCount;
     }
 
     private boolean checkStock(int proId) {

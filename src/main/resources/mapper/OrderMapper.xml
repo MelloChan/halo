@@ -26,7 +26,7 @@
             id,
             order_status,
             pay_amount,
-            gmt_create
+            gmt_updated
         FROM hl_order
         WHERE user_id = #{userId}
     </select>
@@ -36,7 +36,11 @@
         FROM hl_order
         WHERE id = #{orderId}
     </select>
-
+    <select id="getPayTypeByOrderId" resultType="java.lang.Short">
+        SELECT pay_type
+        FROM hl_order
+        WHERE id = #{orderId}
+    </select>
     <select id="getNumOfOrder" resultType="java.lang.Integer">
         SELECT count(id) AS totalOrder
         FROM hl_order
@@ -47,25 +51,25 @@
         FROM hl_order
         WHERE order_status = 2
     </select>
-    
+
     <select id="getTotalTurnOver" resultType="java.lang.Integer">
         SELECT sum(order_amount)
         FROM hl_order
         WHERE order_status = 4
     </select>
-    
+
     <select id="getMeiZuSales" resultType="java.lang.Integer">
         SELECT count(hl_order_product.id)
         FROM hl_order_product, hl_order
         WHERE hl_order.id = order_id AND title LIKE '%魅族%' AND
-              1>TIMESTAMPDIFF(MONTH, hl_order_product.gmt_updated, now()) AND order_status = 4
+              1 > TIMESTAMPDIFF(MONTH, hl_order_product.gmt_updated, now()) AND order_status = 4
     </select>
 
     <select id="getMeiLanSales" resultType="java.lang.Integer">
         SELECT count(hl_order_product.id)
         FROM hl_order_product, hl_order
         WHERE hl_order.id = order_id AND title LIKE '%魅蓝%' AND
-              1>TIMESTAMPDIFF(MONTH, hl_order_product.gmt_updated, now()) AND order_id = 4
+              1 > TIMESTAMPDIFF(MONTH, hl_order_product.gmt_updated, now()) AND order_id = 4
     </select>
 
 

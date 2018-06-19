@@ -17,12 +17,13 @@
 
     <select id="getOrderProductByOrderIds" resultMap="OrderProductResultMap">
         SELECT
+        pro_id,
         image,
         title,
         price,
         total_fee,
         number,
-        gmt_create
+        gmt_updated
         FROM hl_order_product
         WHERE order_id IN
         <foreach item="orderId" index="index" collection="list"
@@ -31,14 +32,15 @@
         </foreach>
     </select>
 
-    <select id="getOrderPorductByOrderId" resultMap="OrderProductResultMap">
+    <select id="getOrderProductByOrderId" resultMap="OrderProductResultMap">
         SELECT
+            pro_id,
             image,
             title,
             price,
             total_fee,
             number,
-            gmt_create
+            gmt_updated
         FROM hl_order_product
         WHERE order_id = #{orderId}
     </select>
