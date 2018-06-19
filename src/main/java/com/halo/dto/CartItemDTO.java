@@ -14,16 +14,11 @@ public class    CartItemDTO implements Serializable {
     @Min(1)
     private Integer id;
     @NotEmpty
-    private String name;
+    private String imgUrl;
     @NotEmpty
-    private String title;
+    private String description;
     @Min(1)
     private Integer price;
-    private String version;
-    private String nettype;
-    @NotEmpty
-    private String color;
-    private String rom;
     @Min(1)
     private Integer amount;
 
@@ -35,20 +30,20 @@ public class    CartItemDTO implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getPrice() {
@@ -57,38 +52,6 @@ public class    CartItemDTO implements Serializable {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public String getNettype() {
-        return nettype;
-    }
-
-    public void setNettype(String nettype) {
-        this.nettype = nettype;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getRom() {
-        return rom;
-    }
-
-    public void setRom(String rom) {
-        this.rom = rom;
     }
 
     public Integer getAmount() {
@@ -101,15 +64,11 @@ public class    CartItemDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CartDTO{" +
+        return "CartItemDTO{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", title='" + title + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
-                ", version='" + version + '\'' +
-                ", nettype='" + nettype + '\'' +
-                ", color='" + color + '\'' +
-                ", rom='" + rom + '\'' +
                 ", amount=" + amount +
                 '}';
     }
