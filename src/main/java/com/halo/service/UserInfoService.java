@@ -6,7 +6,6 @@ import com.halo.dto.UserRegisterInfoDTO;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -145,7 +144,7 @@ public interface UserInfoService {
      *
      * @param idList 用户id列表
      */
-    void deleteUsersProfile(ArrayList<Integer> idList);
+    void deleteUsersProfile(List<Integer> idList);
 
     /**
      * 获取指定用户的信息

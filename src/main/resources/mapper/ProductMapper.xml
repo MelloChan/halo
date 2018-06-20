@@ -104,24 +104,35 @@
         DELETE FROM hl_product_image
         WHERE pro_id = #{id}
     </delete>
-    <delete id="deleteMultiProductsById" parameterType="java.util.ArrayList">
+    <delete id="deleteProductSpecificationById">
+        DELETE FROM hl_product_specification
+        WHERE pro_id = #{id}
+    </delete>
+    <delete id="deleteMultiProductsById" parameterType="java.util.List">
         DELETE FROM hl_product
         WHERE id IN
-        <foreach collection="array" separator="," open="(" close=")" item="idItem">
+        <foreach collection="list" separator="," open="(" close=")" item="idItem">
             #{idItem}
         </foreach>
     </delete>
-    <delete id="deleteMultiProductDetailsById" parameterType="java.util.ArrayList">
+    <delete id="deleteMultiProductDetailsById" parameterType="java.util.List">
         DELETE FROM hl_product_detail
         WHERE pro_id IN
-        <foreach collection="array" separator="," open="(" close=")" item="idItem">
+        <foreach collection="list" separator="," open="(" close=")" item="idItem">
             #{idItem}
         </foreach>
     </delete>
-    <delete id="deleteMultiProductImagesById" parameterType="java.util.ArrayList">
+    <delete id="deleteMultiProductImagesById" parameterType="java.util.List">
         DELETE FROM hl_product_image
         WHERE pro_id IN
-        <foreach collection="array" separator="," open="(" close=")" item="idItem">
+        <foreach collection="list" separator="," open="(" close=")" item="idItem">
+            #{idItem}
+        </foreach>
+    </delete>
+    <delete id="deleteMultiProductSpecificationById" parameterType="java.util.List">
+        DELETE FROM hl_product_specification
+        WHERE pro_id IN
+        <foreach collection="list" open="(" separator="," close=")" item="idItem">
             #{idItem}
         </foreach>
     </delete>

@@ -1,6 +1,7 @@
 package com.halo.service.impl;
 
 import com.halo.config.properties.QiNiu;
+import com.halo.dao.UserAddressDao;
 import com.halo.dao.UserProfileDao;
 import com.halo.dao.UserRegistryDao;
 import com.halo.dto.BackstageUserProfileDTO;
@@ -31,6 +32,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserRegistryDao userRegistryDao;
     @Autowired
     private UserProfileDao userProfileDao;
+    @Autowired
+    private UserAddressDao userAddressDao;
     @Autowired
     private QiNiu qiNiu;
 
@@ -171,8 +174,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteUsersProfile(ArrayList<Integer> idList) {
+    public void deleteUsersProfile(List<Integer> idList) {
         userProfileDao.deleteUsersProfile(idList);
+        userRegistryDao.deleteUsersRegistry(idList);
+        userAddressDao.deleteUsersAddress(idList);
     }
 
     @Override

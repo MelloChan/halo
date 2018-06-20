@@ -1,6 +1,7 @@
 package com.halo.service;
 
 import com.halo.dto.OrderDetailDTO;
+import com.halo.dto.OrderListDTO;
 import com.halo.dto.OrderProductListDTO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,12 +41,12 @@ public interface OrderService {
     /**
      * 获取所有订单详情
      */
-    List<OrderProductListDTO> getOrders(Integer pageIndex, Integer pageCount);
+    List<OrderListDTO> getOrders(Integer pageIndex, Integer pageCount);
 
     /**
      * 通过状态筛选订单
      */
-    List<OrderProductListDTO> getOrdersByStatus(Short status, Integer pageIndex, Integer pageCount);
+    List<OrderListDTO> getOrdersByStatus(Short status, Integer pageIndex, Integer pageCount);
 
     /**
      * 通过订单id更改订单状态

@@ -87,10 +87,10 @@
         LIMIT #{pageIndex}, #{pageCount}
     </select>
 
-    <delete id="deleteUsersProfile" parameterType="java.util.ArrayList">
+    <delete id="deleteUsersProfile" parameterType="java.util.List">
         DELETE FROM hl_user_profile
         WHERE user_id IN
-        <foreach collection="array" item="idItem" open="(" separator="," close=")">
+        <foreach collection="list" item="idItem" open="(" separator="," close=")">
             #{idItem}
         </foreach>
     </delete>

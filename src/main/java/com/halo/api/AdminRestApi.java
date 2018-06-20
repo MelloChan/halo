@@ -3,6 +3,7 @@ package com.halo.api;
 import com.google.common.collect.ImmutableMap;
 import com.halo.controller.BaseController;
 import com.halo.service.AdminInfoService;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Map;
 
@@ -36,7 +38,7 @@ public class AdminRestApi extends BaseController{
     }
 
     @PostMapping("/loginByPwd")
-    public Map<String, Object> loginByPwd(@RequestParam("username") String username, @RequestParam("password") @Size(min = 8, max = 16) String password){
+    public Map<String, Object> loginByPwd(@RequestParam("username") @NotEmpty String username, @RequestParam("password") @Size(min = 8, max = 16) String password){
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         if(adminInfoService.verify(username, password)){

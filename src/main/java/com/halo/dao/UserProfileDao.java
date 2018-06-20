@@ -4,7 +4,6 @@ import com.halo.entity.UserProfile;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -101,7 +100,7 @@ public interface UserProfileDao {
      *
      * @param idList 用户id列表
      */
-    void deleteUsersProfile(ArrayList<Integer> idList);
+    void deleteUsersProfile(List<Integer> idList);
 
     /**
      * 获取指定用户的个人信息

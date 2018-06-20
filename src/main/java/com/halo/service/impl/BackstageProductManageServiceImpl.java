@@ -31,14 +31,16 @@ public class BackstageProductManageServiceImpl implements BackstageProductManage
         productDao.deleteProductById(id);
         productDao.deleteProductDetailById(id);
         productDao.deleteProductImageById(id);
+        productDao.deleteProductSpecificationById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteMultiProducts(ArrayList<Integer> idList) {
+    public void deleteMultiProducts(List<Integer> idList) {
         productDao.deleteMultiProductsById(idList);
         productDao.deleteMultiProductDetailsById(idList);
         productDao.deleteMultiProductImagesById(idList);
+        productDao.deleteMultiProductSpecificationById(idList);
     }
 
     @Override
