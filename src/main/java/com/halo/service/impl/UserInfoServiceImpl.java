@@ -68,7 +68,8 @@ public class UserInfoServiceImpl implements UserInfoService {
         String pwd = DigestUtil.sha256(userRegisterInfoDTO.getPwd() + salt);
         userRegistry.setPwd(pwd);
         userRegistry.setSalt(salt);
-        Integer uid = userRegistryDao.insertUserRegistryInfo(userRegistry);
+        userRegistryDao.insertUserRegistryInfo(userRegistry);
+        Integer uid = userRegistry.getId();
 
         // 插入个人信息
         UserProfile userProfile = new UserProfile();

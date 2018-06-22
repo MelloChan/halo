@@ -32,7 +32,7 @@
         FROM hl_user_registry
         WHERE id = #{userId}
     </select>
-    <insert id="insertUserRegistryInfo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertUserRegistryInfo" useGeneratedKeys="true" keyProperty="id" parameterType="com.halo.entity.UserRegistry">
         INSERT INTO hl_user_registry (phone, pwd, salt)
         VALUES (#{phone}, #{pwd}, #{salt})
     </insert>

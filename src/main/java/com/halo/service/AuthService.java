@@ -39,8 +39,9 @@ public class AuthService {
         redisUtil.add(phone, 60L, code);
         ucpaas = new Ucpaas(ucpaas.getSid(), ucpaas.getToken(), ucpaas.getAppid(), tempId, code, phone, ucpaas.getUrl());
         String json = SmsUtil.sendSms(ucpaas);
+        System.out.println(json);
         int okIdx = json.indexOf("OK");
-        return "OK".equals(json.substring(okIdx, okIdx + 2));
+        return okIdx >= 0;
     }
 
     /**
