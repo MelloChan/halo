@@ -3,10 +3,7 @@ package com.halo.service.impl;
 import com.halo.dao.OrderDao;
 import com.halo.dao.OrderProductDao;
 import com.halo.dao.OrderShipmentDao;
-import com.halo.dto.OrderDetailDTO;
-import com.halo.dto.OrderProductDTO;
-import com.halo.dto.OrderProductListDTO;
-import com.halo.dto.ReceiverInfoDTO;
+import com.halo.dto.*;
 import com.halo.entity.Order;
 import com.halo.entity.OrderProduct;
 import com.halo.entity.OrderShipment;
@@ -156,13 +153,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderProductListDTO> getOrders(Integer pageIndex, Integer pageCount) {
+    public List<OrderListDTO> getOrders(Integer pageIndex, Integer pageCount) {
         pageIndex = (pageIndex - 1) * pageCount;
         return orderDao.getOrders(pageIndex, pageCount);
     }
 
     @Override
-    public List<OrderProductListDTO> getOrdersByStatus(Short status, Integer pageIndex, Integer pageCount) {
+    public List<OrderListDTO> getOrdersByStatus(Short status, Integer pageIndex, Integer pageCount) {
         pageIndex = (pageIndex - 1) * pageCount;
         return orderDao.getOrdersByStatus(status, pageIndex, pageCount);
     }

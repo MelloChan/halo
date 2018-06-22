@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,33 +22,33 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/halo/backstage/productmanage")
 @Validated
-public class BackstageProductManageRestApi extends BaseController{
+public class BackstageProductManageRestApi extends BaseController {
 
     @Autowired
     private BackstageProductManageService backstageProductManageService;
 
     @GetMapping("/page")
-    public Map<String, Object> getNumOfPages(@Param("pageCount") @Min(1) Integer pageCount){
+    public Map<String, Object> getNumOfPages(@Param("pageCount") @Min(1) Integer pageCount) {
         return rtnParam(0, ImmutableMap.of("pages", backstageProductManageService.getNumOfPage(pageCount)));
     }
 
     @GetMapping("/")
     public Map<String, Object> getItems(@RequestParam("pageIndex") @Min(1) Integer pageIndex,
-                                        @RequestParam("pageCount") @Min(1) Integer pageCount){
+                                        @RequestParam("pageCount") @Min(1) Integer pageCount) {
         return rtnParam(0, ImmutableMap.of("items", backstageProductManageService.getItemsForBackstage(pageIndex, pageCount)));
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Object> deleteItem(@PathVariable("id") @Min(1) Integer id){
+    public Map<String, Object> deleteItem(@PathVariable("id") @Min(1) Integer id) {
         backstageProductManageService.deleteProduct(id);
         return rtnParam(0, ImmutableMap.of("msg", "商品删除成功"));
     }
 
     @DeleteMapping("/{ids}/multi")
-    public Map<String, Object> deleteMultiItems(@PathVariable("ids")String ids){
-        String[] idStr=ids.split(",");
-        ArrayList<Integer> idList = new ArrayList<>();
-        for(String s : idStr){
+    public Map<String, Object> deleteMultiItems(@PathVariable("ids") String ids) {
+        String[] idStr = ids.split(",");
+        List<Integer> idList = new ArrayList<>();
+        for (String s : idStr) {
             s = s.trim();
             idList.add(Integer.valueOf(s));
         }
@@ -58,17 +59,17 @@ public class BackstageProductManageRestApi extends BaseController{
     @PatchMapping("/productInfoByPId")
     public Map<String, Object> updateProductInfoByPId(@RequestParam("id") @Min(1) Integer id,
                                                       @RequestParam("name") @NotEmpty String name,
-                                                      @RequestParam("num") Integer num,
-                                                      @RequestParam("price") @Min(0) Integer price){
+                                                      @RequestParam(value = "num", defaultValue = "0") Integer num,
+                                                      @RequestParam("price") @Min(0) Integer price) {
         backstageProductManageService.updateProductInfoByPid(id, name, num, price);
         return rtnParam(0, ImmutableMap.of("msg", "更新成功"));
     }
 
     @GetMapping("/typeAndName")
-    public Map<String, Object> getItemsInfoByTypeAndName(@RequestParam("type") @NotNull String type,
-                                                         @RequestParam("name") @NotNull String name,
+    public Map<String, Object> getItemsInfoByTypeAndName(@RequestParam("type") @NotEmpty String type,
+                                                         @RequestParam("name") @NotEmpty String name,
                                                          @RequestParam("pageIndex") @Min(1) Integer pageIndex,
-                                                         @RequestParam("pageCount") @Min(1) Integer pageCount){
+                                                         @RequestParam("pageCount") @Min(1) Integer pageCount) {
         return rtnParam(0, ImmutableMap.of("items", backstageProductManageService.getItemsForBackstageByTypeAndName(type, name, pageIndex, pageCount)));
     }
 

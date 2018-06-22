@@ -29,7 +29,7 @@ public interface BackstageProductManageService {
      * 后台删除指定的多个商品所有相关信息
      * @param idList 多个商品id
      */
-    void deleteMultiProducts(ArrayList<Integer> idList);
+    void deleteMultiProducts(List<Integer> idList);
 
 
     /**

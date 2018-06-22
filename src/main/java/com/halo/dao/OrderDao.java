@@ -1,5 +1,6 @@
 package com.halo.dao;
 
+import com.halo.dto.OrderListDTO;
 import com.halo.dto.OrderProductListDTO;
 import com.halo.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
@@ -35,13 +36,13 @@ public interface OrderDao {
     /**
      * 返回所有订单详情
      */
-    List<OrderProductListDTO> getOrders(@Param("pageIndex") Integer pageIndex,
-                                        @Param("pageCount") Integer pageCount);
+    List<OrderListDTO> getOrders(@Param("pageIndex") Integer pageIndex,
+                                 @Param("pageCount") Integer pageCount);
 
     /**
      * 通过状态筛选订单
      */
-    List<OrderProductListDTO> getOrdersByStatus(@Param("status") Short status,
+    List<OrderListDTO> getOrdersByStatus(@Param("status") Short status,
                                                 @Param("pageIndex") Integer pageIndex,
                                                 @Param("pageCount") Integer pageCount);
 

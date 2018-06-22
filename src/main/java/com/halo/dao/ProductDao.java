@@ -66,7 +66,7 @@ public interface ProductDao {
     void deleteProductById(@Param("id") Integer id);
 
     /**
-     * 后台删除指定商品的详细描述
+     * 后台删除指定商品的详细描述（图片）
      */
     void deleteProductDetailById(@Param("id") Integer id);
 
@@ -76,19 +76,29 @@ public interface ProductDao {
     void deleteProductImageById(@Param("id") Integer id);
 
     /**
-     * 删除多个商品信息
+     * 后台删除指定商品的详细描述（文字）
      */
-    void deleteMultiProductsById(ArrayList<Integer> idList);
+    void deleteProductSpecificationById(@Param("id") Integer id);
 
     /**
-     * 删除多个商品相应的详细描述
+     * 删除多个商品信息
      */
-    void deleteMultiProductDetailsById(ArrayList<Integer> idList);
+    void deleteMultiProductsById(List<Integer> idList);
+
+    /**
+     * 删除多个商品相应的详细描述（图片）
+     */
+    void deleteMultiProductDetailsById(List<Integer> idList);
 
     /**
      * 删除多个商品相应的图片
      */
-    void deleteMultiProductImagesById(ArrayList<Integer> idList);
+    void deleteMultiProductImagesById(List<Integer> idList);
+
+    /**
+     * 删除多个商品相应的详细描述（文字）
+     */
+    void deleteMultiProductSpecificationById(List<Integer> idList);
 
     /**
      * 更改商品信息

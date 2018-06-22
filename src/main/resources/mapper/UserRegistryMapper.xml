@@ -54,4 +54,12 @@
         SET salt = #{salt}, pwd = #{pwd}, gmt_updated = now()
         WHERE phone = #{phone}
     </update>
+
+    <delete id="deleteUsersRegistry" parameterType="java.util.List">
+        DELETE FROM hl_user_registry
+        WHERE id IN
+        <foreach collection="list" item="idItem" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
 </mapper>

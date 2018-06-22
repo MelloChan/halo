@@ -4,6 +4,8 @@ import com.halo.entity.UserRegistry;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @author MelloChan
  * @date 2018/5/26
@@ -68,4 +70,10 @@ public interface UserRegistryDao {
      * @return 影响条数
      */
     Integer updatePwdByPhone(@Param("pwd")String pwd,@Param("phone")String phone);
+
+    /**
+     * 通过用户id删除用户信息
+     * @param idList id列表
+     */
+    void deleteUsersRegistry(List<Integer> idList);
 }

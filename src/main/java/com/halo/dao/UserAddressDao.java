@@ -31,4 +31,10 @@ public interface UserAddressDao {
      * 通过地址id与用户id删除地址信息
      */
     void deleteAddressInfoByUIdAndId(@Param("userId") Integer userId,@Param("id") Integer id);
+
+    /**
+     * 通过用户id删除地址
+     * @param idList id列表
+     */
+    void deleteUsersAddress(List<Integer> idList);
 }

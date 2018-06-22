@@ -34,4 +34,11 @@
         DELETE FROM hl_user_address
         WHERE user_id = #{userId} AND id = #{id}
     </delete>
+    <delete id="deleteUsersAddress" parameterType="java.util.List">
+        DELETE FROM hl_user_address
+        WHERE user_id IN
+        <foreach collection="list" item="idItem" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
 </mapper>
