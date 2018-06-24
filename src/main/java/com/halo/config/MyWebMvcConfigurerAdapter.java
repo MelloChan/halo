@@ -18,12 +18,16 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     public TokenVerifyInterceptor tokenVerifyInterceptor() {
         return new TokenVerifyInterceptor();
     }
+
     @Bean
-    public SessionVerifyInterceptor sessionVerifyInterceptor() { return new SessionVerifyInterceptor(); }
+    public SessionVerifyInterceptor sessionVerifyInterceptor() {
+        return new SessionVerifyInterceptor();
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
+        registry.addMapping("/**")
+                .allowedMethods("*");
         super.addCorsMappings(registry);
     }
 
