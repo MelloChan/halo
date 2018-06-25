@@ -88,7 +88,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserProfileInfoDTO getUserProfileInfoByUId(Integer userId) {
         UserProfile userProfile = userProfileDao.getUserProfileInfoByUId(userId);
         return new UserProfileInfoDTO(
-                userProfile.getUsername(), userProfile.getAvatar(), userProfile.getSecurityLevel(), userProfile.getEmail(),
+                userProfile.getUsername(), "//" + userProfile.getAvatar(), userProfile.getSecurityLevel(), userProfile.getEmail(),
                 userProfile.getPhone(), userProfile.getPwdProtection());
     }
 
@@ -126,7 +126,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             imgUrl = UploadUtil.uploadToQiNiuYun(qiNiu, buffer);
             userProfileDao.updateAvatarById(imgUrl, userId);
         }
-        return imgUrl;
+        return "//" + imgUrl;
     }
 
     @Transactional(rollbackFor = Exception.class)
