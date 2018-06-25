@@ -67,7 +67,7 @@ public class CartService {
         // 获取cookie是否有cart信息
         if (null != cookies && cookies.length > 0) {
             for (Cookie cookie : cookies) {
-                if ("cart".equals(URLDecoder.decode(cookie.getName(), "utf-8"))) {
+                if ("cart" .equals(URLDecoder.decode(cookie.getName(), "utf-8"))) {
                     String cartJson = URLDecoder.decode(cookie.getValue(), "utf-8");
                     cartDTO = (CartDTO) GsonUtil.jsonToObject(cartJson, CartDTO.class);
                     break;
@@ -106,8 +106,8 @@ public class CartService {
      */
     private Cookie saveCartAndGetCookie(String token, CartDTO cartDTO) throws UnsupportedEncodingException {
         Cookie cookie;
-        if (token != null) {
-            Map<String, Claim> claims = TokenUtil.verifyToken(token);
+        Map<String, Claim> claims = TokenUtil.verifyToken(token);
+        if (claims != null) {
             int id = claims.get("uid").asInt();
             redisUtil.add("cart:" + id, cartDTO);
             cookie = new Cookie("cart", null);
@@ -129,8 +129,8 @@ public class CartService {
     public CartDTO getCart(HttpServletRequest request) throws UnsupportedEncodingException {
         CartDTO cartDTO;
         String token = request.getHeader("access_token");
-        if (token != null) {
-            Map<String, Claim> claims = TokenUtil.verifyToken(token);
+        Map<String, Claim> claims = TokenUtil.verifyToken(token);
+        if (claims != null) {
             int id = claims.get("uid").asInt();
             cartDTO = (CartDTO) redisUtil.get("cart:" + id);
             if (cartDTO == null) {
