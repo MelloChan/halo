@@ -52,7 +52,7 @@
 
     <update id="updateCoinByUId">
         UPDATE hl_user_profile
-        SET hl_coin = hl_coin + #{number}, gmt_updated = now()
+        SET hl_coin = #{number}, gmt_updated = now()
         WHERE user_id = #{userId}
     </update>
 
