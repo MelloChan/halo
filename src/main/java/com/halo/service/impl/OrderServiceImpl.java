@@ -91,6 +91,9 @@ public class OrderServiceImpl implements OrderService {
         for (Order order : orders) {
             ids.add(order.getId());
         }
+        if (ids.size() <= 0) {
+            return orderProductListDTOS;
+        }
         List<OrderProduct> orderProducts = orderProductDao.getOrderProductByOrderIds(ids);
         List<OrderProductDTO> orderProductDTOS = new ArrayList<>();
         for (Order order : orders) {
