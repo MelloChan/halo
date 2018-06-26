@@ -39,21 +39,24 @@ public class CartService {
                                  HttpServletRequest request) throws UnsupportedEncodingException {
         // 获取cookie的购物车信息
         CartDTO cartDTO = getCartDTOByCookie(request);
-
+        String token = request.getHeader("access_token");
+        Map<String, Claim> claims = TokenUtil.verifyToken(token);
         // 购物车为空 初始化购物车
-        if (null == cartDTO) {
+        if (null == claims && null == cartDTO) {
+            cartDTO = new CartDTO();
+        } else if (null != claims) {
+            int id = claims.get("uid").asInt();
+            cartDTO = (CartDTO) redisUtil.get("cart:" + id);
+        } else {
             cartDTO = new CartDTO();
         }
-
         // 将商品加入购物车
         List<CartItemDTO> carts = addItem(cartDTO, cartItemDTO);
-
         // 更新购物车商品列表 商品总数 商品总价
         cartDTO.setCarts(carts);
         cartDTO.setTotalNumber(cartDTO.getTotalNumber() + 1);
         cartDTO.setTotalPrice(cartDTO.getTotalPrice() + cartItemDTO.getPrice());
-
-        String token = request.getHeader("access_token");
+        ;
         // 保存购物车信息并且返回相应cookie
         return saveCartAndGetCookie(token, cartDTO);
     }
@@ -115,7 +118,6 @@ public class CartService {
             cookie.setMaxAge(0);
         } else {
             String cartJson = GsonUtil.toJsonString(cartDTO);
-            LOGGER.info("cartJson:{}", cartJson);
             cookie = new Cookie("cart", URLEncoder.encode(cartJson, "utf-8"));
             cookie.setPath("/");
             cookie.setMaxAge(12 * 60 * 60);

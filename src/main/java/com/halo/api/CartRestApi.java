@@ -36,7 +36,6 @@ public class CartRestApi extends BaseController {
     @PostMapping("/")
     public Map<String, Object> insertCartItem(@Valid @RequestBody CartItemDTO cartItemDTO,
                                               HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-
         Cookie cookie = cartService.insertCartItem(cartItemDTO, request);
         response.addCookie(cookie);
         return rtnParam(0, ImmutableMap.of("msg", "success"));
@@ -51,7 +50,7 @@ public class CartRestApi extends BaseController {
 
     @PatchMapping("/{id}")
     public Map<String, Object> updateCartItem(@PathVariable("id") Integer id, @RequestParam @Min(1) @Max(100) Integer quantity,
-                                              HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+                                              HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         response.addCookie(cartService.updateCart(id, quantity, request));
         return rtnParam(0, ImmutableMap.of("msg", "success"));
     }

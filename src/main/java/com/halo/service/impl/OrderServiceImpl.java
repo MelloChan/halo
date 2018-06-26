@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
             } else {
                 return product.getTitle();
             }
-            total += product.getPrice() * product.getNumber();
+            total += product.getTotal();
         }
 
         // 保存配送信息
