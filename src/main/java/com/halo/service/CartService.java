@@ -38,13 +38,13 @@ public class CartService {
         CartDTO cartDTO = getCartDTOByCookie(request);
         String token = request.getHeader("access_token");
         Map<String, Claim> claims = TokenUtil.verifyToken(token);
-        // 购物车为空 初始化购物车
-        if (null == claims && null == cartDTO) {
-            cartDTO = new CartDTO();
-        } else if (null != claims) {
+        if (null != claims) {
             int id = claims.get("uid").asInt();
             cartDTO = (CartDTO) redisUtil.get("cart:" + id);
-        } else {
+        }
+
+        // 购物车为空 初始化购物车
+        if (cartDTO == null) {
             cartDTO = new CartDTO();
         }
         // 将商品加入购物车
