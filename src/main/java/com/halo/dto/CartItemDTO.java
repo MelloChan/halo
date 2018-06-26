@@ -9,25 +9,25 @@ import java.io.Serializable;
  * @author MelloChan
  * @date 2018/6/2
  */
-public class    CartItemDTO implements Serializable {
+public class CartItemDTO implements Serializable {
     private static final long serialVersionUID = 6966010392610826703L;
     @Min(1)
-    private Integer id;
+    private Integer proId;
     @NotEmpty
     private String imgUrl;
     @NotEmpty
-    private String description;
+    private String title;
     @Min(1)
     private Integer price;
     @Min(1)
-    private Integer amount;
+    private Integer number;
 
-    public Integer getId() {
-        return id;
+    public Integer getProId() {
+        return proId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer proId) {
+        this.proId = proId;
     }
 
     public String getImgUrl() {
@@ -38,12 +38,24 @@ public class    CartItemDTO implements Serializable {
         this.imgUrl = imgUrl;
     }
 
-    public String getDescription() {
-        return description;
+    public void setProId(Integer proId) {
+        this.proId = proId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public Integer getPrice() {
@@ -54,22 +66,14 @@ public class    CartItemDTO implements Serializable {
         this.price = price;
     }
 
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
     @Override
     public String toString() {
         return "CartItemDTO{" +
-                "id=" + id +
+                "proId=" + proId +
                 ", imgUrl='" + imgUrl + '\'' +
-                ", description='" + description + '\'' +
+                ", title='" + title + '\'' +
                 ", price=" + price +
-                ", amount=" + amount +
+                ", number=" + number +
                 '}';
     }
 }

@@ -6,8 +6,6 @@ import com.halo.dto.CartItemDTO;
 import com.halo.redis.RedisUtil;
 import com.halo.util.GsonUtil;
 import com.halo.util.TokenUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +23,6 @@ import java.util.Map;
  */
 @Service
 public class CartService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CartService.class);
     @Autowired
     private RedisUtil redisUtil;
 
@@ -56,7 +53,6 @@ public class CartService {
         cartDTO.setCarts(carts);
         cartDTO.setTotalNumber(cartDTO.getTotalNumber() + 1);
         cartDTO.setTotalPrice(cartDTO.getTotalPrice() + cartItemDTO.getPrice());
-        ;
         // 保存购物车信息并且返回相应cookie
         return saveCartAndGetCookie(token, cartDTO);
     }
@@ -88,9 +84,9 @@ public class CartService {
         boolean flag = false;
         if (carts.size() > 0) {
             for (CartItemDTO cartItem : carts) {
-                if (cartItemDTO.getId().equals(cartItem.getId())) {
+                if (cartItemDTO.getProId().equals(cartItem.getProId())) {
                     // 增加相同商品数量
-                    cartItem.setAmount(cartItem.getAmount() + cartItemDTO.getAmount());
+                    cartItem.setNumber(cartItem.getNumber() + cartItemDTO.getNumber());
                     flag = true;
                     break;
                 }
@@ -154,10 +150,10 @@ public class CartService {
         CartDTO cartDTO = getCart(request);
         List<CartItemDTO> carts = cartDTO.getCarts();
         for (CartItemDTO item : carts) {
-            if (item.getId().equals(id)) {
-                cartDTO.setTotalPrice(cartDTO.getTotalPrice() - item.getAmount() * item.getPrice());
-                cartDTO.setTotalNumber(cartDTO.getTotalNumber() - item.getAmount());
-                item.setAmount(quantity);
+            if (item.getProId().equals(id)) {
+                cartDTO.setTotalPrice(cartDTO.getTotalPrice() - item.getNumber() * item.getPrice());
+                cartDTO.setTotalNumber(cartDTO.getTotalNumber() - item.getNumber());
+                item.setNumber(quantity);
                 cartDTO.setTotalPrice(cartDTO.getTotalPrice() + quantity * item.getPrice());
                 cartDTO.setTotalNumber(cartDTO.getTotalNumber() + quantity);
                 break;
@@ -174,9 +170,9 @@ public class CartService {
         CartDTO cartDTO = getCart(request);
         List<CartItemDTO> carts = cartDTO.getCarts();
         for (CartItemDTO item : carts) {
-            if (item.getId().equals(id)) {
-                cartDTO.setTotalNumber(cartDTO.getTotalNumber() - item.getAmount());
-                cartDTO.setTotalPrice(cartDTO.getTotalPrice() - item.getAmount() * item.getPrice());
+            if (item.getProId().equals(id)) {
+                cartDTO.setTotalNumber(cartDTO.getTotalNumber() - item.getNumber());
+                cartDTO.setTotalPrice(cartDTO.getTotalPrice() - item.getNumber() * item.getPrice());
                 carts.remove(item);
                 break;
             }
