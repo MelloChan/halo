@@ -1,5 +1,10 @@
 ## Halo手机商城服务端
 
+- [eureka-server]()：服务注册中心     
+- [halo-gateway]()：统一网关    
+- [halo-api]()：Remote-API    
+- [halo-server]()：服务提供方      
+
 ### Halo手机商城前端
 
 - [Halo](https://github.com/tozlam/Halo.)
